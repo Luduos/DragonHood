@@ -10,22 +10,23 @@ public class MyClientBehaviour : MonoBehaviour {
     [SerializeField]
     private Text DebugText;
 
+    [SerializeField]
+    private PlayerLogic Player;
 
     private bool isHost;
     public bool IsHost { get { return isHost; } set { isHost = value; } }
 
     public NetworkClient Client;
 
+    public class ClickedPuzzleMessage : MessageBase
+    {
+
+    }
 
     public class MyMsgType
     {
-        public static short ClassTaken = MsgType.Highest + 1;
+        public static short ChooseClass = MsgType.Highest + 1;
     };
-
-    public class ClassTakenMessage : MessageBase
-    {
-        public uint ClassID;
-    }
 
     public void SetClient(NetworkClient client, bool isHost)
     {
@@ -34,11 +35,11 @@ public class MyClientBehaviour : MonoBehaviour {
         Client.RegisterHandler(MsgType.Connect, OnConnected);
         Client.RegisterHandler(MsgType.Error, OnError);
         Client.RegisterHandler(MsgType.Disconnect, OnDisconnect);
-
+        Client.RegisterHandler(MyMsgType.ChooseClass, OnChooseClass);
 
         if (IsHost)
         {
-            //NetworkServer.RegisterHandler(MyMsgType.POIVote, OnPOIVote);
+            //NetworkServer.RegisterHandler(MyMsgType.ChooseClass, OnPOIVote);
         }
         else
         {
@@ -51,17 +52,17 @@ public class MyClientBehaviour : MonoBehaviour {
     /// <summary>
     /// Called by Button
     /// </summary>
-    public void HostStartsVote()
+    public void HostStartsClassDecision()
     {
         if (IsHost)
         {
-            //NetworkServer.SendToAll(MyMsgType.StartVote, new EmptyMessage());
+            NetworkServer.SendToAll(MyMsgType.ChooseClass, new EmptyMessage());
         }
     }
 
-    private void OnStartVoting(NetworkMessage netMsg)
+    private void OnChooseClass(NetworkMessage netMsg)
     {
-        Debug.Log("It's voting time!");
+        Player.OnChooseClass();
     }
 
     private void OnError(NetworkMessage msg)
