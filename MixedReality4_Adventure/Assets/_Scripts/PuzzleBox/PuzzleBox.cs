@@ -59,6 +59,15 @@ public class PuzzleBox : MonoBehaviour {
                 BoxFaces[ID - 1].OnRegisterNetworkCorrectTouch();
                 CheckOppositeSide(ID);
             }
+            else
+            {
+                // Only check if correct, otherwise ignore
+                int oppositeID = ID % 2 == 0 ? ID - 1 : ID + 1;
+                if (BoxFaces[oppositeID - 1].WasCorrectlyTouched)
+                {
+                    OnCorrectlyTouchedOppositeSides(ID);
+                }
+            }
         }
         else
         {
