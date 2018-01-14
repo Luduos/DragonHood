@@ -2154,10 +2154,6 @@ Prefab:
       propertyPath: clientBehaviour
       value: 
       objectReference: {fileID: 296984638}
-    - target: {fileID: 1360042234225152, guid: 7af97e339f58a244ab923be42e78063d, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7af97e339f58a244ab923be42e78063d, type: 2}
   m_IsPrefabParent: 0
