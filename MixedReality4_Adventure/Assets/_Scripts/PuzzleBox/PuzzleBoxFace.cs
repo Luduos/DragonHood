@@ -9,9 +9,14 @@ public class PuzzleBoxFace : MonoBehaviour {
     public UnityAction<PuzzleBoxFace> OnCorrectTouchDetected;
 
     [SerializeField]
+    private int id;
+
+    [SerializeField]
     private int touchCount;
 
-    public int TouchCount { get { return touchCount; } }
+    //public int TouchCount { get { return touchCount; } }
+
+    public int ID { get { return id; } }
 
     [SerializeField]
     private Texture2D puzzleMasterIcon;
@@ -41,15 +46,28 @@ public class PuzzleBoxFace : MonoBehaviour {
         if (Application.isEditor && Input.anyKey)
         {
             OnCorrectTouchCount();
-        }else if (Input.touchCount == touchCount && !WasCorrectlyTouched)
+        }else if (!WasCorrectlyTouched)
+        {
+            StartCoroutine(TollerantTouchCheck());
+        } 
+    }
+
+    private IEnumerator TollerantTouchCheck()
+    {
+        float elapsedTime = 0.0f;
+        float tollerance = 0.25f;
+        while(elapsedTime < tollerance)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        if (Input.touchCount == touchCount && !WasCorrectlyTouched)
         {
             OnCorrectTouchCount();
-        }else if(Input.touchCount != touchCount && !WasCorrectlyTouched)
-        {
-            StartCoroutine(OnWrongTouchCount());
-        }
 
-        
+        }
+        else if (Input.touchCount != touchCount && !WasCorrectlyTouched)
+            StartCoroutine(OnWrongTouchCount());
     }
 
     private void OnCorrectTouchCount()

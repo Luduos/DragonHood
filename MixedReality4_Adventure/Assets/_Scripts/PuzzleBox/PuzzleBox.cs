@@ -34,6 +34,19 @@ public class PuzzleBox : MonoBehaviour {
         }
 	}
 
+    private void Update()
+    {
+        // cheatsydoodles
+        if (Application.isEditor && Input.GetKeyDown(KeyCode.Space))
+        {
+            foreach (PuzzleBoxFace face in BoxFaces)
+            {
+                face.OnFinalizeCorrectTouch();
+                CheckForPuzzleCompletion();
+            }
+        }
+    }
+
     void OnPuzzleBoxFaceWasCorrectlyTouched(PuzzleBoxFace touchedFace)
     {
         if (!PuzzleBoxIsSolved)
@@ -42,7 +55,7 @@ public class PuzzleBox : MonoBehaviour {
             {
                 IsWaiting = true;
                 touchedFace.OnRegisterNetworkCorrectTouch();
-                clientBehaviour.ClientTouchedBoxFace(touchedFace.TouchCount);
+                clientBehaviour.ClientTouchedBoxFace(touchedFace.ID);
             }
         }
     }
@@ -80,7 +93,7 @@ public class PuzzleBox : MonoBehaviour {
     {
         foreach (PuzzleBoxFace face in BoxFaces)
         {
-            if(face.TouchCount != ID)
+            if(face.ID != ID)
             {
                 if(face.WasCorrectlyTouched && !face.WasFinalized)
                 {

@@ -17,8 +17,11 @@ public class PlayerLogic : MonoBehaviour {
 
     public PlayerClassType ClassType { get; set; }
 
+    public bool HasFeather { get; set; }
+
 	// Use this for initialization
 	void Start () {
+        HasFeather = false;
         ClassType = PlayerClassType.NotChosen;
         ClassDecisionUI.gameObject.SetActive(false);
         UpdateClassAbilities();
@@ -63,5 +66,5 @@ public enum PlayerClassType
 {
     NotChosen,
     PuzzleMaster,
-    Figher
+    Fighter
 }

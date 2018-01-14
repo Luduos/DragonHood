@@ -69,9 +69,10 @@ public class MyClientBehaviour : MonoBehaviour {
         }
     }
 
-    // Using the touchCount as face ID
+    // Using the following IDs:
     // 1 and 2 lie opposite to each other and
     // 3 and 4 lie opposite to each other
+    // 5 is on top
     public void ClientTouchedBoxFace(int ID)
     {
         ClickedPuzzleMessage msg = new ClickedPuzzleMessage();

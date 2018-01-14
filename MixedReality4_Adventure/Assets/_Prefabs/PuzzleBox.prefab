@@ -155,6 +155,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4660404260177302}
+  - component: {fileID: 114108394690729374}
+  - component: {fileID: 65842318217242968}
   m_Layer: 0
   m_Name: Loot
   m_TagString: Untagged
@@ -800,7 +802,7 @@ Transform:
   m_GameObject: {fileID: 1962906013097748}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4569698140413020}
   - {fileID: 4660404260177302}
@@ -1894,6 +1896,18 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65842318217242968
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1360042234225152}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.6, y: 0.1, z: 0.9}
+  m_Center: {x: 0.25, y: 0, z: -0.2}
 --- !u!95 &95539927092047842
 Animator:
   serializedVersion: 3
@@ -1911,6 +1925,22 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114108394690729374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1360042234225152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d49359005e5f6d419a0775b4d2392c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InfoDisplay: {fileID: 0}
+  WeaponIconDisplay: {fileID: 0}
+  WeaponIcon: {fileID: 21300000, guid: db33c834c0e2e3b42a621d91717b1b52, type: 3}
+  Player: {fileID: 0}
+  Mesh: {fileID: 1435415186948508}
 --- !u!114 &114168224985263902
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1922,6 +1952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6aaed72d8fd8642bf4011ede98b59e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 3
   touchCount: 3
   puzzleMasterIcon: {fileID: 2800000, guid: e758d3538a0cfdc42a5734ac422fe26d, type: 3}
   image: {fileID: 2800000, guid: c34d2765de7a9664c9cf307e428ffbe9, type: 3}
@@ -1936,6 +1967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6aaed72d8fd8642bf4011ede98b59e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 5
   touchCount: 5
   puzzleMasterIcon: {fileID: 2800000, guid: e758d3538a0cfdc42a5734ac422fe26d, type: 3}
   image: {fileID: 2800000, guid: d78a983c1fab104438e85af662dd21ad, type: 3}
@@ -1950,6 +1982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6aaed72d8fd8642bf4011ede98b59e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 1
   touchCount: 1
   puzzleMasterIcon: {fileID: 2800000, guid: e758d3538a0cfdc42a5734ac422fe26d, type: 3}
   image: {fileID: 2800000, guid: 1774d0b5a572d6b44b2509ee4dd2fa50, type: 3}
@@ -1964,6 +1997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6aaed72d8fd8642bf4011ede98b59e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 2
   touchCount: 2
   puzzleMasterIcon: {fileID: 2800000, guid: e758d3538a0cfdc42a5734ac422fe26d, type: 3}
   image: {fileID: 2800000, guid: fb684c886b7c0844dac81ddf24796593, type: 3}
@@ -1998,6 +2032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6aaed72d8fd8642bf4011ede98b59e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 4
   touchCount: 4
   puzzleMasterIcon: {fileID: 2800000, guid: e758d3538a0cfdc42a5734ac422fe26d, type: 3}
   image: {fileID: 2800000, guid: 1fe59cdb7f4a3034f975307008027edc, type: 3}
