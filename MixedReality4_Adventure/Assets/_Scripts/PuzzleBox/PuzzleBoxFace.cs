@@ -37,9 +37,10 @@ public class PuzzleBoxFace : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        Debug.Log("Test " + touchCount);
-        Debug.Log("Number of touches: " + Input.touchCount);
-        if(Input.touchCount == touchCount && !WasCorrectlyTouched)
+        if (Application.isEditor && Input.anyKey)
+        {
+            OnCorrectTouchCount();
+        }else if (Input.touchCount == touchCount && !WasCorrectlyTouched)
         {
             OnCorrectTouchCount();
         }else if(Input.touchCount != touchCount && !WasCorrectlyTouched)
@@ -47,17 +48,12 @@ public class PuzzleBoxFace : MonoBehaviour {
             StartCoroutine(OnWrongTouchCount());
         }
 
-        if (Application.isEditor && Input.anyKey)
-        {
-            OnCorrectTouchCount();
-        }
+        
     }
 
     private void OnCorrectTouchCount()
     {
-        //WasCorrectlyTouched = true;
-        //faceMaterial.color = WaitingColor;
-
+        Debug.Log("Correct: " + touchCount);
         if (null != OnCorrectTouchDetected)
         {
             OnCorrectTouchDetected.Invoke(this);
@@ -66,6 +62,7 @@ public class PuzzleBoxFace : MonoBehaviour {
 
     public IEnumerator OnWrongTouchCount()
     {
+        Debug.Log("Wrong: " + touchCount);
         WasCorrectlyTouched = false;
         float elapsedTime = 0.0f;
         float allertedTime = 0.5f;
@@ -90,12 +87,18 @@ public class PuzzleBoxFace : MonoBehaviour {
 
     public void OnRegisterNetworkCorrectTouch()
     {
-        WasCorrectlyTouched = true;
-        faceMaterial.color = WaitingColor;
+        Debug.Log("Network: " + touchCount);
+        if (!WasCorrectlyTouched)
+        {
+            WasCorrectlyTouched = true;
+            faceMaterial.color = WaitingColor;
+        }
+        
     }
 
     public void OnFinalizeCorrectTouch()
     {
+        Debug.Log("Finalize: " + touchCount);
         WasCorrectlyTouched = true;
         faceMaterial.color = CorrectColor;
     }

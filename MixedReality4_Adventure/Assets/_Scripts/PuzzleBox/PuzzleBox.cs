@@ -16,14 +16,12 @@ public class PuzzleBox : MonoBehaviour {
     [SerializeField]
     private PuzzleBoxFace[] BoxFaces;
 
-    private PuzzleBoxFace IsWaitingForOppositeTouch = null;
+    private bool IsWaiting;
 
     [SerializeField]
     private MyClientBehaviour clientBehaviour;
 
     public bool PuzzleBoxIsSolved { get; private set; }
-
-    public bool IsWaiting { get; private set; }
 
 	// Use this for initialization
 	void Start () {
@@ -40,10 +38,10 @@ public class PuzzleBox : MonoBehaviour {
     {
         if (!PuzzleBoxIsSolved)
         {
-            if (!IsWaiting)
+            if (!IsWaiting && !touchedFace.WasCorrectlyTouched)
             {
-                CheckOppositeSide(touchedFace.TouchCount);
                 IsWaiting = true;
+                touchedFace.OnRegisterNetworkCorrectTouch();
                 clientBehaviour.ClientTouchedBoxFace(touchedFace.TouchCount);
             }
         }
@@ -51,15 +49,20 @@ public class PuzzleBox : MonoBehaviour {
 
     public void OnRegisteredNetworkPuzzleTouch(int ID)
     {
-        BoxFaces[ID - 1].OnRegisterNetworkCorrectTouch();
-        if (!IsWaiting)
+        if (ID == 5)
         {
-            IsWaitingForOppositeTouch = BoxFaces[ID - 1];
+            OnCorrectlyTouchedOppositeSides(ID);
+        }else if (IsWaiting)
+        {
+            if(!BoxFaces[ID - 1].WasCorrectlyTouched)
+            {
+                BoxFaces[ID - 1].OnRegisterNetworkCorrectTouch();
+                CheckOppositeSide(ID);
+            }
         }
         else
         {
-            CheckOppositeSide(ID);
-            IsWaiting = false;
+            BoxFaces[ID - 1].OnRegisterNetworkCorrectTouch();
         }
     }
 
@@ -67,45 +70,47 @@ public class PuzzleBox : MonoBehaviour {
     // more suffisticated right now. Sorry future me :/ :*
     private void CheckOppositeSide(int touchedID)
     {
-        if(null != IsWaitingForOppositeTouch)
+        // we check if we have a 2 or a 4 - if yes, give back a (2-1)=1/(4-1)=3, else the other way round
+        int oppositeID = touchedID % 2 == 0 ? touchedID - 1 : touchedID + 1;
+        if (BoxFaces[oppositeID - 1].WasCorrectlyTouched)
         {
-            // the top side (which we define to have a touchcount of 5) doesn't need a partner
-            if(IsWaitingForOppositeTouch.TouchCount < 5)
-            {
-                // we check if we have a 2 or a 4 - if yes, give back a (2-1)=1/(4-1)=3, else the other way round
-                int oppositeID = IsWaitingForOppositeTouch.TouchCount % 2 == 0 ? IsWaitingForOppositeTouch.TouchCount - 1 : IsWaitingForOppositeTouch.TouchCount + 1;
-                if(touchedID == oppositeID)
-                {
-                    OnCorrectlyTouchedOppositeSides(touchedID);
-                }
-                else
-                {
-                    OnFalselyTouchedSides(touchedID);
-                }
-               
-            }        
+            OnCorrectlyTouchedOppositeSides(touchedID);
+        }
+        else
+        {
+            OnFalselyTouchedSides(touchedID);
         }
     }
 
     private void OnCorrectlyTouchedOppositeSides(int recentlyTouched)
     {
+        IsWaiting = false;
         BoxFaces[recentlyTouched - 1].OnFinalizeCorrectTouch();
-        if (null != IsWaitingForOppositeTouch)
+        if (recentlyTouched < 5)
         {
-            IsWaitingForOppositeTouch.OnFinalizeCorrectTouch();
-            IsWaitingForOppositeTouch = null;
+            int oppositeID = recentlyTouched % 2 == 0 ? recentlyTouched - 1 : recentlyTouched + 1;
+            BoxFaces[oppositeID-1].OnFinalizeCorrectTouch();
         }
         CheckForPuzzleCompletion();
     }
 
     private void OnFalselyTouchedSides(int recentlyTouched)
     {
-        StartCoroutine(BoxFaces[recentlyTouched - 1].OnWrongTouchCount());
-        if (null != IsWaitingForOppositeTouch)
+        IsWaiting = false;
+
+        foreach (PuzzleBoxFace face in BoxFaces)
         {
-            StartCoroutine(IsWaitingForOppositeTouch.OnWrongTouchCount());
-            IsWaitingForOppositeTouch = null;
+            StartCoroutine(face.OnWrongTouchCount());
         }
+
+        /*
+        StartCoroutine(BoxFaces[recentlyTouched - 1].OnWrongTouchCount());
+        if (recentlyTouched < 5)
+        {
+            int oppositeID = recentlyTouched % 2 == 0 ? recentlyTouched - 1 : recentlyTouched + 1;
+            BoxFaces[oppositeID - 1].OnWrongTouchCount();
+        }
+        */
     }
 
     private void CheckForPuzzleCompletion()

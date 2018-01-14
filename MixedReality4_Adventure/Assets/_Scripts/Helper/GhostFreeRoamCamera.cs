@@ -62,7 +62,7 @@ public class GhostFreeRoamCamera : MonoBehaviour
             else currentSpeed = 0f;            
         }
 
-        if (allowRotation)
+        if (allowRotation && Input.GetMouseButton(1))
         {
             Vector3 eulerAngles = transform.eulerAngles;
             eulerAngles.x += -Input.GetAxis("Mouse Y") * 359f * cursorSensitivity;
