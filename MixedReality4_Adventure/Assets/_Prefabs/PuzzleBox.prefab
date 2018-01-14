@@ -567,7 +567,7 @@ Transform:
   m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
   m_Children: []
   m_Father: {fileID: 4569698140413020}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
 --- !u!4 &4176405514873954
 Transform:
@@ -817,11 +817,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4800062808010484}
   - {fileID: 4597110848177690}
   - {fileID: 4805679111840226}
-  - {fileID: 4368889355255562}
   - {fileID: 4124162241166056}
+  - {fileID: 4368889355255562}
+  - {fileID: 4800062808010484}
   m_Father: {fileID: 4566914957935418}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -836,7 +836,7 @@ Transform:
   m_LocalScale: {x: 0.099999994, y: 0.10000005, z: 0.10000005}
   m_Children: []
   m_Father: {fileID: 4569698140413020}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!4 &4660404260177302
 Transform:
@@ -923,7 +923,7 @@ Transform:
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 4569698140413020}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4805679111840226
 Transform:
@@ -936,7 +936,7 @@ Transform:
   m_LocalScale: {x: 0.099999994, y: 0.10000011, z: 0.10000011}
   m_Children: []
   m_Father: {fileID: 4569698140413020}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &4835377125830996
 Transform:
@@ -1922,8 +1922,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6aaed72d8fd8642bf4011ede98b59e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  touchCount: 1
-  image: {fileID: 2800000, guid: 1774d0b5a572d6b44b2509ee4dd2fa50, type: 3}
+  touchCount: 3
+  puzzleMasterIcon: {fileID: 2800000, guid: e758d3538a0cfdc42a5734ac422fe26d, type: 3}
+  image: {fileID: 2800000, guid: c34d2765de7a9664c9cf307e428ffbe9, type: 3}
 --- !u!114 &114191708433587442
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1936,6 +1937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   touchCount: 5
+  puzzleMasterIcon: {fileID: 2800000, guid: e758d3538a0cfdc42a5734ac422fe26d, type: 3}
   image: {fileID: 2800000, guid: d78a983c1fab104438e85af662dd21ad, type: 3}
 --- !u!114 &114624583255557174
 MonoBehaviour:
@@ -1948,8 +1950,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6aaed72d8fd8642bf4011ede98b59e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  touchCount: 2
-  image: {fileID: 2800000, guid: fb684c886b7c0844dac81ddf24796593, type: 3}
+  touchCount: 1
+  puzzleMasterIcon: {fileID: 2800000, guid: e758d3538a0cfdc42a5734ac422fe26d, type: 3}
+  image: {fileID: 2800000, guid: 1774d0b5a572d6b44b2509ee4dd2fa50, type: 3}
 --- !u!114 &114790215620161972
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1961,8 +1964,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6aaed72d8fd8642bf4011ede98b59e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  touchCount: 3
-  image: {fileID: 2800000, guid: c34d2765de7a9664c9cf307e428ffbe9, type: 3}
+  touchCount: 2
+  puzzleMasterIcon: {fileID: 2800000, guid: e758d3538a0cfdc42a5734ac422fe26d, type: 3}
+  image: {fileID: 2800000, guid: fb684c886b7c0844dac81ddf24796593, type: 3}
 --- !u!114 &114947715825984628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1977,11 +1981,12 @@ MonoBehaviour:
   DebugText: {fileID: 0}
   Loot: {fileID: 1360042234225152}
   BoxFaces:
-  - {fileID: 114191708433587442}
   - {fileID: 114624583255557174}
   - {fileID: 114790215620161972}
-  - {fileID: 114973543567773034}
   - {fileID: 114168224985263902}
+  - {fileID: 114973543567773034}
+  - {fileID: 114191708433587442}
+  clientBehaviour: {fileID: 0}
 --- !u!114 &114973543567773034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1994,4 +1999,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   touchCount: 4
+  puzzleMasterIcon: {fileID: 2800000, guid: e758d3538a0cfdc42a5734ac422fe26d, type: 3}
   image: {fileID: 2800000, guid: 1fe59cdb7f4a3034f975307008027edc, type: 3}

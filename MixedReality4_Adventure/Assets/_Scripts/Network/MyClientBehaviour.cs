@@ -20,12 +20,14 @@ public class MyClientBehaviour : MonoBehaviour {
 
     public class ClickedPuzzleMessage : MessageBase
     {
-
+        public int FaceID;
     }
 
     public class MyMsgType
     {
         public static short ChooseClass = MsgType.Highest + 1;
+        public static short ClickedPuzzle = MsgType.Highest + 2;
+
     };
 
     public void SetClient(NetworkClient client, bool isHost)
@@ -36,10 +38,11 @@ public class MyClientBehaviour : MonoBehaviour {
         Client.RegisterHandler(MsgType.Error, OnError);
         Client.RegisterHandler(MsgType.Disconnect, OnDisconnect);
         Client.RegisterHandler(MyMsgType.ChooseClass, OnChooseClass);
+        Client.RegisterHandler(MyMsgType.ClickedPuzzle, OnClickedPuzzle);
 
         if (IsHost)
         {
-            //NetworkServer.RegisterHandler(MyMsgType.ChooseClass, OnPOIVote);
+            NetworkServer.RegisterHandler(MyMsgType.ClickedPuzzle, OnHostRegisteredClickedPuzzleMessage);
         }
         else
         {
@@ -49,6 +52,8 @@ public class MyClientBehaviour : MonoBehaviour {
         DebugText.text = "Was Set";
     }
 
+    
+
     /// <summary>
     /// Called by Button
     /// </summary>
@@ -57,12 +62,35 @@ public class MyClientBehaviour : MonoBehaviour {
         if (IsHost)
         {
             NetworkServer.SendToAll(MyMsgType.ChooseClass, new EmptyMessage());
+            
         }
+    }
+
+    // Using the touchCount as face ID
+    // 1 and 2 lie opposite to each other and
+    // 3 and 4 lie opposite to each other
+    public void ClientTouchedBoxFace(int ID)
+    {
+        ClickedPuzzleMessage msg = new ClickedPuzzleMessage();
+        msg.FaceID = ID;
+        if(null != Client)
+            Client.Send(MyMsgType.ClickedPuzzle, msg);
+    }
+
+    private void OnHostRegisteredClickedPuzzleMessage(NetworkMessage netMsg)
+    {
+        NetworkServer.SendToAll(MyMsgType.ClickedPuzzle, netMsg.ReadMessage<ClickedPuzzleMessage>());
     }
 
     private void OnChooseClass(NetworkMessage netMsg)
     {
-        Player.OnChooseClass();
+        Player.OnStartClassDecision();
+    }
+
+    private void OnClickedPuzzle(NetworkMessage netMsg)
+    {
+        ClickedPuzzleMessage msg = netMsg.ReadMessage<ClickedPuzzleMessage>();
+        Player.OnRegisteredPuzzleClick(msg.FaceID);
     }
 
     private void OnError(NetworkMessage msg)

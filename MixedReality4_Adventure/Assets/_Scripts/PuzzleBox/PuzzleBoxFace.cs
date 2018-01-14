@@ -6,10 +6,15 @@ using System.Collections;
 [RequireComponent(typeof(Renderer))]
 public class PuzzleBoxFace : MonoBehaviour {
 
+    public UnityAction<PuzzleBoxFace> OnCorrectTouchDetected;
+
     [SerializeField]
     private int touchCount;
 
     public int TouchCount { get { return touchCount; } }
+
+    [SerializeField]
+    private Texture2D puzzleMasterIcon;
 
     [SerializeField]
     private Texture2D image;
@@ -22,14 +27,12 @@ public class PuzzleBoxFace : MonoBehaviour {
     private Color WaitingColor = Color.yellow;
     private Color NeutralColor = Color.white;
 
-    public UnityAction OnCorrectTouchDetected;
 
 	// Use this for initialization
 	void Start () {
         faceMaterial = GetComponent<Renderer>().material;
         WasCorrectlyTouched = false;
-        if (null != image)
-            faceMaterial.mainTexture = image;
+        
 	}
 
     private void OnMouseDown()
@@ -52,17 +55,18 @@ public class PuzzleBoxFace : MonoBehaviour {
 
     private void OnCorrectTouchCount()
     {
-        WasCorrectlyTouched = true;
-        faceMaterial.color = CorrectColor;
+        //WasCorrectlyTouched = true;
+        //faceMaterial.color = WaitingColor;
 
         if (null != OnCorrectTouchDetected)
         {
-            OnCorrectTouchDetected.Invoke();
+            OnCorrectTouchDetected.Invoke(this);
         }  
     }
 
     public IEnumerator OnWrongTouchCount()
     {
+        WasCorrectlyTouched = false;
         float elapsedTime = 0.0f;
         float allertedTime = 0.5f;
         faceMaterial.color = WrongColor;
@@ -73,7 +77,7 @@ public class PuzzleBoxFace : MonoBehaviour {
         }
 
         if (!WasCorrectlyTouched)
-            faceMaterial.color = NeutralColor;
+            ResetTouchable();
 
         yield return null;
     }
@@ -81,6 +85,33 @@ public class PuzzleBoxFace : MonoBehaviour {
     public void ResetTouchable()
     {
         WasCorrectlyTouched = false;
-        faceMaterial.color = Color.white;
+        faceMaterial.color = NeutralColor;
+    }
+
+    public void OnRegisterNetworkCorrectTouch()
+    {
+        WasCorrectlyTouched = true;
+        faceMaterial.color = WaitingColor;
+    }
+
+    public void OnFinalizeCorrectTouch()
+    {
+        WasCorrectlyTouched = true;
+        faceMaterial.color = CorrectColor;
+    }
+
+    public void SetNumberVisibility(bool visible)
+    {
+        if (null == faceMaterial)
+            faceMaterial = GetComponent<Renderer>().material;
+
+        if (visible)
+        {
+            faceMaterial.mainTexture = image;
+        }
+        else
+        {
+            faceMaterial.mainTexture = puzzleMasterIcon;
+        }
     }
 }
