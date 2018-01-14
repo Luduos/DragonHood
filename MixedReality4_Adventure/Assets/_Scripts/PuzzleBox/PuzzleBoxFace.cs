@@ -21,6 +21,7 @@ public class PuzzleBoxFace : MonoBehaviour {
 
     private Material faceMaterial;
     public bool WasCorrectlyTouched { get; private set; }
+    public bool WasFinalized { get; private set; }
 
     private Color CorrectColor = Color.green;
     private Color WrongColor = Color.red;
@@ -32,8 +33,8 @@ public class PuzzleBoxFace : MonoBehaviour {
 	void Start () {
         faceMaterial = GetComponent<Renderer>().material;
         WasCorrectlyTouched = false;
-        
-	}
+        WasFinalized = false;
+    }
 
     private void OnMouseDown()
     {
@@ -64,6 +65,7 @@ public class PuzzleBoxFace : MonoBehaviour {
     {
         Debug.Log("Wrong: " + touchCount);
         WasCorrectlyTouched = false;
+        WasFinalized = false;
         float elapsedTime = 0.0f;
         float allertedTime = 0.5f;
         faceMaterial.color = WrongColor;
@@ -82,6 +84,7 @@ public class PuzzleBoxFace : MonoBehaviour {
     public void ResetTouchable()
     {
         WasCorrectlyTouched = false;
+        WasFinalized = false;
         faceMaterial.color = NeutralColor;
     }
 
@@ -100,6 +103,7 @@ public class PuzzleBoxFace : MonoBehaviour {
     {
         Debug.Log("Finalize: " + touchCount);
         WasCorrectlyTouched = true;
+        WasFinalized = true;
         faceMaterial.color = CorrectColor;
     }
 

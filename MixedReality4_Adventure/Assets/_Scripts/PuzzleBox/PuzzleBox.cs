@@ -51,7 +51,7 @@ public class PuzzleBox : MonoBehaviour {
     {
         if (ID == 5)
         {
-            OnCorrectlyTouchedOppositeSides(ID);
+            CheckNoOppositeFace(ID);
         }else if (IsWaiting)
         {
             if(!BoxFaces[ID - 1].WasCorrectlyTouched)
@@ -61,17 +61,43 @@ public class PuzzleBox : MonoBehaviour {
             }
             else
             {
-                // Only check if correct, otherwise ignore
-                int oppositeID = ID % 2 == 0 ? ID - 1 : ID + 1;
-                if (BoxFaces[oppositeID - 1].WasCorrectlyTouched)
-                {
-                    OnCorrectlyTouchedOppositeSides(ID);
-                }
+                // Only check if correct, otherwise ignore,
+                // because this network message came from this client
+                CheckIfCorrect(ID);
             }
         }
         else
         {
             BoxFaces[ID - 1].OnRegisterNetworkCorrectTouch();
+        }
+    }
+
+    // Checks, if any other face was touched, but not finalized,
+    // when the face without any opposite face was touched.
+    // If yes - then player has misclicked and reset follows.
+    // Otherwise, set directly to finalize
+    private void CheckNoOppositeFace(int ID)
+    {
+        foreach (PuzzleBoxFace face in BoxFaces)
+        {
+            if(face.TouchCount != ID)
+            {
+                if(face.WasCorrectlyTouched && !face.WasFinalized)
+                {
+                    clientBehaviour.ClientRegisteredWrongTouch();
+                    return;
+                }
+            }
+        }
+        OnCorrectlyTouchedOppositeSides(ID);
+    }
+
+    private void CheckIfCorrect(int ID)
+    {
+        int oppositeID = ID % 2 == 0 ? ID - 1 : ID + 1;
+        if (BoxFaces[oppositeID - 1].WasCorrectlyTouched)
+        {
+            OnCorrectlyTouchedOppositeSides(ID);
         }
     }
 
