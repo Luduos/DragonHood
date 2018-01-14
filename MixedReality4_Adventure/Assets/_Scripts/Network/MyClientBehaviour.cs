@@ -27,6 +27,7 @@ public class MyClientBehaviour : MonoBehaviour {
     {
         public static short ChooseClass = MsgType.Highest + 1;
         public static short ClickedPuzzle = MsgType.Highest + 2;
+        public static short WrongPuzzleTouch = MsgType.Highest + 3;
 
     };
 
@@ -39,10 +40,12 @@ public class MyClientBehaviour : MonoBehaviour {
         Client.RegisterHandler(MsgType.Disconnect, OnDisconnect);
         Client.RegisterHandler(MyMsgType.ChooseClass, OnChooseClass);
         Client.RegisterHandler(MyMsgType.ClickedPuzzle, OnClickedPuzzle);
+        Client.RegisterHandler(MyMsgType.WrongPuzzleTouch, OnWrongPuzzleTouch);
 
         if (IsHost)
         {
-            NetworkServer.RegisterHandler(MyMsgType.ClickedPuzzle, OnHostRegisteredClickedPuzzleMessage);
+            NetworkServer.RegisterHandler(MyMsgType.ClickedPuzzle, OnHostClickedPuzzleMessage);
+            NetworkServer.RegisterHandler(MyMsgType.WrongPuzzleTouch, OnHostWrongTouch);
         }
         else
         {
@@ -77,9 +80,19 @@ public class MyClientBehaviour : MonoBehaviour {
             Client.Send(MyMsgType.ClickedPuzzle, msg);
     }
 
-    private void OnHostRegisteredClickedPuzzleMessage(NetworkMessage netMsg)
+    public void ClientRegisteredWrongTouch()
+    {
+        Client.Send(MyMsgType.WrongPuzzleTouch, new EmptyMessage());
+    }
+
+    private void OnHostClickedPuzzleMessage(NetworkMessage netMsg)
     {
         NetworkServer.SendToAll(MyMsgType.ClickedPuzzle, netMsg.ReadMessage<ClickedPuzzleMessage>());
+    }
+
+    private void OnHostWrongTouch(NetworkMessage netMsg)
+    {
+        NetworkServer.SendToAll(MyMsgType.WrongPuzzleTouch, new EmptyMessage());
     }
 
     private void OnChooseClass(NetworkMessage netMsg)
@@ -91,6 +104,11 @@ public class MyClientBehaviour : MonoBehaviour {
     {
         ClickedPuzzleMessage msg = netMsg.ReadMessage<ClickedPuzzleMessage>();
         Player.OnRegisteredPuzzleClick(msg.FaceID);
+    }
+
+    private void OnWrongPuzzleTouch(NetworkMessage netMsg)
+    {
+        Player.OnWrongPuzzleTouch();
     }
 
     private void OnError(NetworkMessage msg)

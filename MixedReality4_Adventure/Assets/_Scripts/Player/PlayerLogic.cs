@@ -34,6 +34,11 @@ public class PlayerLogic : MonoBehaviour {
         PuzzleBoxObj.OnRegisteredNetworkPuzzleTouch(ID);
     }
 
+    public void OnWrongPuzzleTouch()
+    {
+        PuzzleBoxObj.OnFalselyTouchedSides();
+    }
+
     // This is dangerous. Only use classtypes <=2
     public void SetClass(int classType)
     {

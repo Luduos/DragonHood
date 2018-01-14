@@ -78,7 +78,7 @@ public class PuzzleBox : MonoBehaviour {
         }
         else
         {
-            OnFalselyTouchedSides(touchedID);
+            clientBehaviour.ClientRegisteredWrongTouch();
         }
     }
 
@@ -94,7 +94,7 @@ public class PuzzleBox : MonoBehaviour {
         CheckForPuzzleCompletion();
     }
 
-    private void OnFalselyTouchedSides(int recentlyTouched)
+    public void OnFalselyTouchedSides()
     {
         IsWaiting = false;
 
