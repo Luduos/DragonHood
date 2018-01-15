@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 5484ba2421ac69a489f13249a39d15ae, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -972,11 +972,11 @@ RectTransform:
   m_Father: {fileID: 582362237}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 200}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 1, y: 0}
 --- !u!114 &663973038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1247,7 +1247,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Marker-00Material
+  m_Name: DragonqrcodeMaterial
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -1260,7 +1260,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b185729929df4c569958253464207dc7, type: 3}
+        m_Texture: {fileID: 2800000, guid: cb072134e8f346659f37d5f278edcaaa, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
@@ -1272,7 +1272,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: PuzzleBoxCodeMaterial
+  m_Name: PuzzleBoxQRCodeMaterial
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -1285,7 +1285,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 4b8d592013734af19ffc492784344c9c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7869acc08ec64332b20eb92321041f1e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
@@ -1505,7 +1505,7 @@ MonoBehaviour:
   m_Script: {fileID: -1631628248, guid: bab6fa851cf5a1a4bba3cec5f191cb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTrackableName: Marker-00
+  mTrackableName: Dragonqrcode
   mPreserveChildSize: 0
   mInitializedInEditor: 1
   mDataSetPath: Vuforia/MixedReality4.xml
@@ -1866,7 +1866,7 @@ MonoBehaviour:
   m_Script: {fileID: -1631628248, guid: bab6fa851cf5a1a4bba3cec5f191cb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTrackableName: PuzzleBoxCode
+  mTrackableName: PuzzleBoxQRCode
   mPreserveChildSize: 0
   mInitializedInEditor: 1
   mDataSetPath: Vuforia/MixedReality4.xml
@@ -2072,22 +2072,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d239beec7665d114a96daf400b147ff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InfoDisplay: {fileID: 0}
-  ARCamera: {fileID: 0}
-  Player: {fileID: 0}
+  InfoDisplay: {fileID: 52349077}
+  ARCamera: {fileID: 1893454092}
+  Player: {fileID: 1093224955}
   MotionDisplay: {fileID: 134170499}
-  FailureSprite: {fileID: 2800000, guid: 6d6ad68d2b112a644b3b3f2f4c916d87, type: 3}
-  CorrectSprite: {fileID: 2800000, guid: 57d9b8d7850730e44b53c45503513353, type: 3}
+  FailureSprite: {fileID: 21300000, guid: 6d6ad68d2b112a644b3b3f2f4c916d87, type: 3}
+  CorrectSprite: {fileID: 21300000, guid: 57d9b8d7850730e44b53c45503513353, type: 3}
+  MotionPrecision: 0.5
   Motions:
   - TouchCount: 2
     StrokeDirection: {x: 0, y: -1}
-    Icon: {fileID: 2800000, guid: 5484ba2421ac69a489f13249a39d15ae, type: 3}
+    Icon: {fileID: 21300000, guid: 5484ba2421ac69a489f13249a39d15ae, type: 3}
   - TouchCount: 2
     StrokeDirection: {x: 1, y: 0}
-    Icon: {fileID: 2800000, guid: 5484ba2421ac69a489f13249a39d15ae, type: 3}
+    Icon: {fileID: 21300000, guid: 5484ba2421ac69a489f13249a39d15ae, type: 3}
   - TouchCount: 3
-    StrokeDirection: {x: -1, y: 0}
-    Icon: {fileID: 2800000, guid: bd5f4fc1deca75749828b52f8abbb33a, type: 3}
+    StrokeDirection: {x: -1, y: 1}
+    Icon: {fileID: 21300000, guid: bd5f4fc1deca75749828b52f8abbb33a, type: 3}
 --- !u!65 &1485320437
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2457,7 +2458,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1792441911}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.99777794, y: 13.19, z: -32.11}
+  m_LocalPosition: {x: -66.5, y: 6, z: -32.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1564597685}
@@ -2504,7 +2505,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1893454089
 MonoBehaviour:
   m_ObjectHideFlags: 0
