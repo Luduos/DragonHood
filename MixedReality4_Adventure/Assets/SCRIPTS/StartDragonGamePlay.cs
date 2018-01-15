@@ -10,12 +10,7 @@ public class StartDragonGamePlay : MonoBehaviour {
 
 	}
 
-	void Update()
-	{
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			StartDragonGamePlayFunction ();
-		}
-	}
+
 	
 	public void StartDragonGamePlayFunction()
 	{

@@ -3,7 +3,7 @@ guid: c158f326581f96f4491ef1fbbe5d56ae
 timeCreated: 1458868103
 licenseType: Free
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 22
   fileIDToRecycleName:
     100000: ACT_neck_1
     100002: ACT_neck_2
@@ -381,41 +381,63 @@ ModelImporter:
     7400004: Armature|Run_New
     7400006: Armature|Walk_New
     7400008: Armature|Walk_New.001
+    7400010: Armature|Fly_New (1)
     9500000: //RootNode
     13700000: Dragon_Mesh
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EYES.001
+    second: {fileID: 2100000, guid: 1bd0410e620bcdb4dbc2b573c9a58516, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Game_dragon.002
+    second: {fileID: 2100000, guid: 1bd0410e620bcdb4dbc2b573c9a58516, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Game_dragon.003
+    second: {fileID: 2100000, guid: 1bd0410e620bcdb4dbc2b573c9a58516, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
       name: Armature|Fly_New
       takeName: Armature|Fly_New
       firstFrame: 0
-      lastFrame: 181
+      lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -1996,13 +2018,414 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|Fly_New (1)
+      takeName: Armature|Fly_New
+      firstFrame: 0
+      lastFrame: 181
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/back_food_L
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_1_L
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_1_L/back_S_1_L
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_1_L/back_S_1_L/back_S_2_L
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_1_L/back_S_1_L/back_S_2_L/back_S_3_L
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_1_L/back_S_1_L/back_S_2_L/back_S_3_L/back_S_3_L_end
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_2_L
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_2_L/back_M_1_L
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_2_L/back_M_1_L/back_M_2_L
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_2_L/back_M_1_L/back_M_2_L/back_M_3_L
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_2_L/back_M_1_L/back_M_2_L/back_M_3_L/back_M_3_L_end
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_3_L
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_3_L/back_Z_1_L
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_3_L/back_Z_1_L/back_Z_2_L
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_3_L/back_Z_1_L/back_Z_2_L/back_Z_3_L
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_3_L/back_Z_1_L/back_Z_2_L/back_Z_3_L/back_Z_3_L_end
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_4_L
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_4_L/back_D_1_L
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_4_L/back_D_1_L/back_D_2_L
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_4_L/back_D_1_L/back_D_2_L/back_D_3_L
+        weight: 1
+      - path: Armature/back_food_L/back_food_C_4_L/back_D_1_L/back_D_2_L/back_D_3_L/back_D_3_L_end
+        weight: 1
+      - path: Armature/back_food_R
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_1_R
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_1_R/back_S_1_R
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_1_R/back_S_1_R/back_S_2_R
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_1_R/back_S_1_R/back_S_2_R/back_S_3_R
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_1_R/back_S_1_R/back_S_2_R/back_S_3_R/back_S_3_R_end
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_2_R
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_2_R/back_M_1_R
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_2_R/back_M_1_R/back_M_2_R
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_2_R/back_M_1_R/back_M_2_R/back_M_3_R
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_2_R/back_M_1_R/back_M_2_R/back_M_3_R/back_M_3_R_end
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_3_R
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_3_R/back_Z_1_R
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_3_R/back_Z_1_R/back_Z_2_R
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_3_R/back_Z_1_R/back_Z_2_R/back_Z_3_R
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_3_R/back_Z_1_R/back_Z_2_R/back_Z_3_R/back_Z_3_R_end
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_4_R
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_4_R/back_D_1_R
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_4_R/back_D_1_R/back_D_2_R
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_4_R/back_D_1_R/back_D_2_R/back_D_3_R
+        weight: 1
+      - path: Armature/back_food_R/back_food_C_4_R/back_D_1_R/back_D_2_R/back_D_3_R/back_D_3_R_end
+        weight: 1
+      - path: Armature/Hand_L
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_1_L
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_1_L/front_S_1_L
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_1_L/front_S_1_L/front_S_2_L
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_1_L/front_S_1_L/front_S_2_L/front_S_3_L
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_1_L/front_S_1_L/front_S_2_L/front_S_3_L/front_S_3_L_end
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_2_L
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_2_L/front_M_1_L
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_2_L/front_M_1_L/front_M_2_L
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_2_L/front_M_1_L/front_M_2_L/front_M_3_L
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_2_L/front_M_1_L/front_M_2_L/front_M_3_L/front_M_3_L_end
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_3_L
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_3_L/front_Z_1_L
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_3_L/front_Z_1_L/front_Z_2_L
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_3_L/front_Z_1_L/front_Z_2_L/front_Z_3_L
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_3_L/front_Z_1_L/front_Z_2_L/front_Z_3_L/front_Z_3_L_end
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_4_L
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_4_L/front_D_1_L
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_4_L/front_D_1_L/front_D_2_L
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_4_L/front_D_1_L/front_D_2_L/front_D_3_L
+        weight: 1
+      - path: Armature/Hand_L/front_food_C_4_L/front_D_1_L/front_D_2_L/front_D_3_L/front_D_3_L_end
+        weight: 1
+      - path: Armature/Hand_R
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_1_R
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_1_R/front_S_1_R
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_1_R/front_S_1_R/front_S_2_R
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_1_R/front_S_1_R/front_S_2_R/front_S_3_R
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_1_R/front_S_1_R/front_S_2_R/front_S_3_R/front_S_3_R_end
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_2_R
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_2_R/front_M_1_R
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_2_R/front_M_1_R/front_M_2_R
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_2_R/front_M_1_R/front_M_2_R/front_M_3_R
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_2_R/front_M_1_R/front_M_2_R/front_M_3_R/front_M_3_R_end
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_3_R
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_3_R/front_Z_1_R
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_3_R/front_Z_1_R/front_Z_2_R
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_3_R/front_Z_1_R/front_Z_2_R/front_Z_3_R
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_3_R/front_Z_1_R/front_Z_2_R/front_Z_3_R/front_Z_3_R_end
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_4_R
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_4_R/front_D_1_R
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_4_R/front_D_1_R/front_D_2_R
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_4_R/front_D_1_R/front_D_2_R/front_D_3_R
+        weight: 1
+      - path: Armature/Hand_R/front_food_C_4_R/front_D_1_R/front_D_2_R/front_D_3_R/front_D_3_R_end
+        weight: 1
+      - path: Armature/pelvic_2
+        weight: 1
+      - path: Armature/pelvic_2/Oberschenkel_L
+        weight: 1
+      - path: Armature/pelvic_2/Oberschenkel_L/lowerleg_L
+        weight: 1
+      - path: Armature/pelvic_2/Oberschenkel_L/lowerleg_L/kneecap_Act_L
+        weight: 1
+      - path: Armature/pelvic_2/Oberschenkel_L/lowerleg_L/kneecap_Act_L/kneecap_Act_L_end
+        weight: 1
+      - path: Armature/pelvic_2/Oberschenkel_L/lowerleg_L/lowerleg_muscle_L
+        weight: 1
+      - path: Armature/pelvic_2/Oberschenkel_L/lowerleg_L/lowerleg_muscle_L/lowerleg_muscle_L_end
+        weight: 1
+      - path: Armature/pelvic_2/Oberschenkel_R
+        weight: 1
+      - path: Armature/pelvic_2/Oberschenkel_R/lowerleg_R
+        weight: 1
+      - path: Armature/pelvic_2/Oberschenkel_R/lowerleg_R/kneecap_Act_R
+        weight: 1
+      - path: Armature/pelvic_2/Oberschenkel_R/lowerleg_R/kneecap_Act_R/kneecap_Act_R_end
+        weight: 1
+      - path: Armature/pelvic_2/Oberschenkel_R/lowerleg_R/lowerleg_muscle_R
+        weight: 1
+      - path: Armature/pelvic_2/Oberschenkel_R/lowerleg_R/lowerleg_muscle_R/lowerleg_muscle_R_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/ACT_neck_skin
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/ACT_neck_skin/ACT_neck_skin_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Augenbraue_L
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Augenbraue_L/Augenbraue_L_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Augenbraue_R
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Augenbraue_R/Augenbraue_R_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Augenlid_oben_L
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Augenlid_oben_L/Augenlid_oben_L_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Augenlid_oben_R
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Augenlid_oben_R/Augenlid_oben_R_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Augenlid_unten_L
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Augenlid_unten_L/Augenlid_unten_L_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Augenlid_unten_R
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Augenlid_unten_R/Augenlid_unten_R_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Bone
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Bone/lower_lip
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Bone/lower_lip/lower_lip_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Bone/tongue_2
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Bone/tongue_2/tongue_1
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Bone/tongue_2/tongue_1/ik_tongue
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Bone/tongue_2/tongue_1/ik_tongue/ik_tongue_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/cheek_muscle_L
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/cheek_muscle_L/cheek_muscle_L_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/cheek_muscle_R
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/cheek_muscle_R/cheek_muscle_R_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/IK_Auge_L
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/IK_Auge_L/Auge_Lens_L
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/IK_Auge_L/Auge_Lens_L/Auge_Lens_L_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/IK_Auge_R
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/IK_Auge_R/Auge_Lens_R
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/IK_Auge_R/Auge_Lens_R/Auge_Lens_R_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Nase_L
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Nase_L/Nase_L_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Nase_R
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/Nase_R/Nase_R_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/upper_lip
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/ACT_neck_4/ACT_neck_3/ACT_neck_2/ACT_neck_1/head/IK_head/upper_lip/upper_lip_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/paunch.002
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/paunch.002/paunch.002_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/upper_arm_L
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/upper_arm_L/ik_underarm_L
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/upper_arm_L/ik_underarm_L/ik_underarm_L_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/upper_arm_R
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/upper_arm_R/ik_underarm_R
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/upper_arm_R/ik_underarm_R/ik_underarm_R_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_L
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_L/w1_L
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_L/w1_L/w2_L
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_L/w1_L/w2_L/w3_L
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_L/w1_L/w2_L/w3_L/w3_L_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_L/w4_L
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_L/w4_L/w5_L
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_L/w4_L/w5_L/w6_L
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_L/w4_L/w5_L/w6_L/w6_L_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_L/w7_L
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_L/w7_L/w8_L
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_L/w7_L/w8_L/w9_L
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_L/w7_L/w8_L/w9_L/w9_L_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_R
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_R/w1_R
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_R/w1_R/w2_R
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_R/w1_R/w2_R/w3_R
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_R/w1_R/w2_R/w3_R/w3_R_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_R/w4_R
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_R/w4_R/w5_R
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_R/w4_R/w5_R/w6_R
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_R/w4_R/w5_R/w6_R/w6_R_end
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_R/w7_R
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_R/w7_R/w8_R
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_R/w7_R/w8_R/w9_R
+        weight: 1
+      - path: Armature/pelvic_2/pelvic_1/paunch/breast/w_C_R/w7_R/w8_R/w9_R/w9_R_end
+        weight: 1
+      - path: Armature/pelvic_2/tail_1
+        weight: 1
+      - path: Armature/pelvic_2/tail_1/tail_2
+        weight: 1
+      - path: Armature/pelvic_2/tail_1/tail_2/tail_3
+        weight: 1
+      - path: Armature/pelvic_2/tail_1/tail_2/tail_3/ik_ACT_tail_5
+        weight: 1
+      - path: Armature/pelvic_2/tail_1/tail_2/tail_3/ik_ACT_tail_5/ik_ACT_tail_5_end
+        weight: 1
+      - path: Dragon_Mesh
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 2
     meshCompression: 0
     addColliders: 0
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -2018,9 +2441,11 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
+    serializedVersion: 2
     human: []
     skeleton: []
     armTwist: 0.5
@@ -2031,7 +2456,10 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   humanoidOversampling: 1

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
+    <ImageTarget name="DragonMarker" size="1.000000 0.657682" />
+    <ImageTarget name="question_marks-wallpaper-1440x900" size="1.000000 0.625000" />
     <ImageTarget name="PuzzleBoxQRCode" size="1.000000 1.000000" />
     <ImageTarget name="Dragonqrcode" size="1.000000 1.000000" />
-    <ImageTarget name="Marker-00" size="1.000000 1.000000" />
-    <ImageTarget name="PuzzleBoxCode" size="1.000000 1.000000" />
   </Tracking>
 </QCARConfig>

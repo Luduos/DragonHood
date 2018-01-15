@@ -40,7 +40,7 @@ public class Weapon : MonoBehaviour {
         float elapsedTime = 0.0f;
         float allertedTime = 2.0f;
 
-        InfoDisplay.text = "Fighters only!";
+        InfoDisplay.text = "For Fighters only!";
 
         while (elapsedTime < allertedTime)
         {
@@ -50,7 +50,7 @@ public class Weapon : MonoBehaviour {
 
         InfoDisplay.text = "";
         Mesh.gameObject.SetActive(true);
-        this.gameObject.SetActive(false);
+        //this.gameObject.SetActive(false);
         yield return null;
     }
 }

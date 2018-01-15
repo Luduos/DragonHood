@@ -20,6 +20,7 @@ public class FromBehindTheDragon : MonoBehaviour {
 			youAreBehind = true;
 			Debug.Log ("you are behind !!");
 		} else {
+			youAreBehind = false;
 			Debug.Log("you are in front !!");
 		}
 	}
