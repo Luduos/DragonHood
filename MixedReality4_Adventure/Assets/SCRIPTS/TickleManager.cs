@@ -122,12 +122,10 @@ public class TickleManager : MonoBehaviour {
 				resultStage3 = TickledCrazy ();
 			}
 			if (resultStage3 == true) { //TickleCrazy
-				//Debug.Log ("Dragon Disappears !!");
+				Debug.Log ("Dragon Disappears!!");
 				text.text="";
-                //Destroy (imageInstruction);
-                imageInstruction.enabled = false;
-
-            }
+				Destroy (imageInstruction);
+			}
 
 		} 
 	}
@@ -136,12 +134,16 @@ public class TickleManager : MonoBehaviour {
 
 	{ 
 		if (mistaken == false) {
-			text.text = "Lets tickle!Do the gesture slow.";
+			text.text = "Lets tickle! Do the gesture slow.";
 			imageInstruction.texture = right;
 		}
 		TickleManager.done = false;
 
 		Touch[] myTouches = Input.touches;
+		if (Input.touchCount > 2 || (Input.touchCount < 2 && Input.touchCount > 0)) {
+			animator.SetBool ("mistake", true);
+			text.text = "You see those 2 arrows, what could they mean?";
+		}
 
 		if (Input.touchCount == 2) {
 
@@ -180,38 +182,33 @@ public class TickleManager : MonoBehaviour {
 				if (swipedDistanceX1 > minSwipeDistanceX1 && speedOfSwipe1 > minSpeedX1 && speedOfSwipe1 < maxSpeedX1 && Mathf.Sign (endPos1 - startPos1) == 1) {
 
 					//Debug.Log ("The speed in the right direction is " + speedOfSwipe1);
-					mistaken=false;
+					mistaken = false;
 					TickleManager.done = true;
 					return TickleManager.done;
-				} else if ( speedOfSwipe1 > maxSpeedX1 && swipedDistanceX1 > minSwipeDistanceX1)
-				{
-					animator.SetBool("mistake",true);
+				}  else if (speedOfSwipe1 > maxSpeedX1 && swipedDistanceX1 > minSwipeDistanceX1) {
+					animator.SetBool ("mistake", true);
 					mistaken = true;
 					text.text = "Be Gentle! Too quick!";
 
 					//Debug.Log ("Be Gentle");
-				}else if ( speedOfSwipe1 > maxSpeedX1 && swipedDistanceX1 > minSwipeDistanceX1 && mistaken==true)
-				{
-					animator.SetBool("mistake",true);
-					valu =animator.GetBool ("mistake");
+				} else if (speedOfSwipe1 > maxSpeedX1 && swipedDistanceX1 > minSwipeDistanceX1 && mistaken == true) {
+					animator.SetBool ("mistake", true);
+					valu = animator.GetBool ("mistake");
 					Debug.Log (valu);
 					text.text = "Be Gentle! Too quick!";
-
+					break;
 					//Debug.Log ("Be Gentle");
-				} 
-				else if(speedOfSwipe1 < minSpeedX1 && swipedDistanceX1 > minSwipeDistanceX1)
-				{
-					animator.SetBool("mistake",true);
+				} else if (speedOfSwipe1 < minSpeedX1 && swipedDistanceX1 > minSwipeDistanceX1) {
+					animator.SetBool ("mistake", true);
 					mistaken = true;
 					text.text = "Too slow!";
 					//Debug.Log("Didnt even feel that , Come on !!");
-				}
-				else if(speedOfSwipe1 < minSpeedX1 && swipedDistanceX1 > minSwipeDistanceX1 && mistaken==true)
-				{
-					animator.SetBool("mistake",true);
+				} else if (speedOfSwipe1 < minSpeedX1 && swipedDistanceX1 > minSwipeDistanceX1 && mistaken == true) {
+					animator.SetBool ("mistake", true);
 					text.text = "Too slow!";
 					//Debug.Log("Didnt even feel that , Come on !!");
-				}
+				} 
+
 
 
 
@@ -227,7 +224,7 @@ public class TickleManager : MonoBehaviour {
 		Debug.Log (this.transform.rotation);
 
 		if (mistaken == false) {
-			text.text = "It works YAY !\n Do the gesture slow";
+			text.text = "It works!\n Do the gesture slow";
 			imageInstruction.texture = left;
 		}
 
@@ -236,7 +233,10 @@ public class TickleManager : MonoBehaviour {
 		TickleManager.done = false;
 		animator.SetBool ("mistake", false);
 		Touch[] myTouches = Input.touches;
-
+		if (Input.touchCount > 3 || (Input.touchCount < 3 && Input.touchCount > 0)) {
+			animator.SetBool ("mistake", true);
+			text.text = "You see those 3 arrows , what could they mean?";
+		}
 		if (Input.touchCount == 3) {
 
 
@@ -270,46 +270,39 @@ public class TickleManager : MonoBehaviour {
 
 
 
-				if (swipedDistanceX2 > minSwipeDistanceX2 && speedOfSwipe2 > minSpeedX2 && speedOfSwipe2 < maxSpeedX2 && Mathf.Sign (endPos2 - startPos2) == -1) 
-				{
+				if (swipedDistanceX2 > minSwipeDistanceX2 && speedOfSwipe2 > minSpeedX2 && speedOfSwipe2 < maxSpeedX2 && Mathf.Sign (endPos2 - startPos2) == -1) {
 
-					Debug.Log ("The speed in left direction is " + speedOfSwipe2);
+					//Debug.Log ("The speed in left direction is " + speedOfSwipe2);
 					mistaken = false;
 					TickleManager.done = true;
 					return TickleManager.done;
-				} 
-				else if ( speedOfSwipe2 > maxSpeedX2 && swipedDistanceX2 > minSwipeDistanceX2)
-				{
+				} else if (speedOfSwipe2 > maxSpeedX2 && swipedDistanceX2 > minSwipeDistanceX2) {
 					text.text = "Be Gentle! Too quick!";
 					mistaken = true;
-					//Debug.Log ("Be Gentle");
-					animator.SetBool("mistake",true);
-				} 
 
-				else if ( speedOfSwipe2 > maxSpeedX2 && swipedDistanceX2 > minSwipeDistanceX2 && mistaken==true)
-				{
+					//Debug.Log ("Be Gentle");
+					animator.SetBool ("mistake", true);
+					break;
+				} else if (speedOfSwipe2 > maxSpeedX2 && swipedDistanceX2 > minSwipeDistanceX2 && mistaken == true) {
 					text.text = "Be Gentle! Too quick!";
 					//Debug.Log ("Be Gentle");
-					animator.SetBool("mistake",true);
+					animator.SetBool ("mistake", true);
+					break;
 
-				} 
-
-				else if(speedOfSwipe2 < minSpeedX2 && swipedDistanceX2 > minSwipeDistanceX2)
-				{
+				} else if (speedOfSwipe2 < minSpeedX2 && swipedDistanceX2 > minSwipeDistanceX2) {
 					
 					//Debug.Log("Didnt even feel that , Come on !!");
-					animator.SetBool("mistake",true);
+					animator.SetBool ("mistake", true);
 					mistaken = true;
 
 					//text.text = "Too slow didnt even feel that , Come on !! Long And Slow to the left";
-				}
-				else if(speedOfSwipe2 < minSpeedX2 && swipedDistanceX2 > minSwipeDistanceX2 &&mistaken ==true)
-				{
+				} else if (speedOfSwipe2 < minSpeedX2 && swipedDistanceX2 > minSwipeDistanceX2 && mistaken == true) {
 					
 					//Debug.Log("Didnt even feel that , Come on !!");
-					animator.SetBool("mistake",true);
+					animator.SetBool ("mistake", true);
 					//text.text = "Too slow didnt even feel that , Come on !! Long And Slow to the left!";
-				}
+				} 
+
 
 
 
@@ -330,6 +323,13 @@ public class TickleManager : MonoBehaviour {
 		TickleManager.done = false;
 		animator.SetBool ("mistake", false);
 		Touch[] myTouches = Input.touches;
+
+
+		if (Input.touchCount > 2 || (Input.touchCount < 2 && Input.touchCount > 0)) {
+			animator.SetBool ("mistake", true);
+			text.text = "You see those 2 arrows, what could they mean?";
+		}
+
 
 		if (Input.touchCount == 2) {
 
@@ -376,12 +376,12 @@ public class TickleManager : MonoBehaviour {
 				} else if (swipedDistanceY3 > minSwipeDistanceY3 && speedOfSwipe3 < minSpeedY3) {
 					//Debug.Log ("Too slow Come on !!");
 					mistaken = true;
-					text.text="Not Fast enough :/";
+					text.text="Not fast enough :/";
 					animator.SetBool("mistake",true);
 				}else if (swipedDistanceY3 > minSwipeDistanceY3 && speedOfSwipe3 < minSpeedY3 && mistaken==true) {
 					//Debug.Log ("Too slow Come on !!");
 
-					text.text="Not Fast enough :/";
+					text.text="Not fast enough :/";
 					animator.SetBool("mistake",true);
 				}
 
