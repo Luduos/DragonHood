@@ -1405,18 +1405,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4300e584eb74a314e82d9796c3a4f409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PuzzleBoxObj: {fileID: 1104933790}
+  PuzzleBoxObj: {fileID: 1177775339}
   ClassDecisionUI: {fileID: 801718806}
   ClassIconDisplay: {fileID: 454689956}
   ClassIcons:
   - {fileID: 21300000, guid: 84fc9c4f95deed644b7e5246100e8221, type: 3}
   - {fileID: 21300000, guid: 75471d5eeca977b449deae0f499a6660, type: 3}
---- !u!114 &1104933790 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114947715825984628, guid: 7af97e339f58a244ab923be42e78063d,
-    type: 2}
-  m_PrefabInternal: {fileID: 1966531895}
-  m_Script: {fileID: 11500000, guid: 7105db2c9b553844081869133628be2b, type: 3}
 --- !u!1 &1168798379
 GameObject:
   m_ObjectHideFlags: 0
@@ -1625,6 +1619,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7af97e339f58a244ab923be42e78063d, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1177775339 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114947715825984628, guid: 7af97e339f58a244ab923be42e78063d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1177775338}
+  m_Script: {fileID: 11500000, guid: 7105db2c9b553844081869133628be2b, type: 3}
 --- !u!1 &1215419991
 GameObject:
   m_ObjectHideFlags: 0
@@ -2504,7 +2504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1893454089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2725,6 +2725,10 @@ Prefab:
     - target: {fileID: 4566914957935418, guid: 7af97e339f58a244ab923be42e78063d, type: 2}
       propertyPath: m_LocalScale.z
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1962906013097748, guid: 7af97e339f58a244ab923be42e78063d, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7af97e339f58a244ab923be42e78063d, type: 2}
