@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 
 public class POI : MonoBehaviour {
-
-    public static int s_IDCounter;
-
     public int ID { get; set; }
 
     [SerializeField]
@@ -15,11 +12,6 @@ public class POI : MonoBehaviour {
     private TextMesh NameText;
 
     private Camera MainCamera;
-
-    POI()
-    {
-        ID = ++s_IDCounter;
-    }
 
     private void Start()
     {

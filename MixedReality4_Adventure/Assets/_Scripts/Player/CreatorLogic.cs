@@ -5,34 +5,48 @@ using UnityEngine.UI;
 
 public class CreatorLogic : MonoBehaviour {
 
+    /**  Inspector variables   **/
+
+
+    [Header("Desktop Movement variables")]
     [SerializeField]
-    private float RotationSpeed = 5.0f;
-    [SerializeField]
-    private float RotationThreshold = 0.5f;
+    private POITypeInfo[] TypeInfos;
+
+    [Header("Debug")]
     [SerializeField]
     private Text DebugText;
     [SerializeField]
     private Vector2 GPSPosition;
 
+
+    [Header("Desktop Movement variables")]
+    [SerializeField]
+    private float RotationSpeed = 5.0f;
+    [SerializeField]
+    private float RotationThreshold = 0.5f;
     [SerializeField]
     private float ZoomSpeed = 1.0f;
 
-    public Vector2 GetGPSPosition { get { return GPSPosition; }  set{ GPSPosition = value; } }
+
+
+    [Header("Prefabs and access")]
 
     [SerializeField]
     private GameObject CreatorModel;
-
     [SerializeField]
     private SpriteRenderer CreatorSprite;
-
+    [SerializeField]
+    private POI POIPrefab;
     [SerializeField]
     private POIPointer PointerPrefab;
-    private List<POIPointer> pointers = new List<POIPointer>();
 
+    /** Other class members **/
+    private List<POIPointer> pointers = new List<POIPointer>();
+    private Camera MainCamera;
+
+    public Vector2 GetGPSPosition { get { return GPSPosition; } set { GPSPosition = value; } }
     public bool IsVotingTime { get; set; }
     public bool IsZooming { get; set; }
-
-    private Camera MainCamera;
 
     private void Start()
     {
@@ -59,9 +73,6 @@ public class CreatorLogic : MonoBehaviour {
             SetLookAt(CreatorModel.transform.up);
 
         }
-
-        
-
         float verticalInput = Input.GetAxis("Vertical");
         if(verticalInput != 0)
         {
@@ -89,8 +100,6 @@ public class CreatorLogic : MonoBehaviour {
         }
     }
 
-
-
     public void SetGPSPosition(Vector2 gpsPosition)
     {
         GPSPosition = gpsPosition;
@@ -113,22 +122,38 @@ public class CreatorLogic : MonoBehaviour {
 
     public void OnMapInfoLoaded()
     {
-        Vector3 CurrentPos = MapInfo.instance.GetGPSAsUnityPosition(GPSPosition);
-        foreach (POIInfo poi in MapInfo.instance.GetPointsOfInterest())
-        {
-            POIPointer pointer = Instantiate(PointerPrefab);
-            pointer.transform.SetParent(this.transform, false);
-
-            pointer.POIName = poi.Name;
-            pointer.UnityTarget = poi.UnityPosition;
-            pointer.ID = poi.ID;
-            pointer.poiObject = poi.poiObject;
-            pointer.OnPlayerPositionChanged(CurrentPos);
-            
-            pointers.Add(pointer);
-
-        }
         MapInfo.instance.RefreshMapCenter();
     }
 
+    public void OnCreateNewPOI(int PointerTypeID)
+    {
+        // get info from the info types
+        POITypeInfo info = TypeInfos[PointerTypeID];
+
+        // instantiate the actual poi object in unity space
+        POI poiObject = Instantiate(POIPrefab);
+        poiObject.ID = info.ID;
+        poiObject.SetGPSPosition(GPSPosition);
+        poiObject.SetName(info.Name);
+        
+        // create a pointer pointing toward the poi object
+        POIPointer pointer = Instantiate(PointerPrefab);
+        pointer.transform.SetParent(this.transform, false);
+
+        pointer.POIName = info.Name;
+        pointer.UnityTarget = poiObject.transform.position;
+        pointer.ID = poiObject.ID;
+        pointer.poiObject = poiObject;
+        Vector2 CurrentPos = MapInfo.instance.GetGPSAsUnityPosition(GPSPosition);
+        pointer.OnPlayerPositionChanged(CurrentPos);
+        pointers.Add(pointer);
+    }
+
+}
+
+[System.Serializable]
+public struct POITypeInfo
+{
+    public int ID;
+    public string Name;
 }

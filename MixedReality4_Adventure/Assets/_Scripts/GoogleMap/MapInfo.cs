@@ -8,15 +8,6 @@ public class MapInfo : MonoBehaviour {
     private GoogleMap MapScript;
 
     [SerializeField]
-    private POIInfo[] PointsOfInterest;
-
-    [SerializeField]
-    private POI POIPrefab;
-
-    [SerializeField]
-    public UnityEvent OnFinishedInit;
-
-    [SerializeField]
     public Text DebugText;
 
     public static MapInfo instance = null;
@@ -41,32 +32,15 @@ public class MapInfo : MonoBehaviour {
     {
         if(null == CreatorObject)
             CreatorObject = FindObjectOfType<CreatorLogic>();
-        for (int i = 0; i < PointsOfInterest.Length; ++i)
-        {
-            POI poi = Instantiate(POIPrefab);
-            poi.gameObject.name = PointsOfInterest[i].Name;
-            poi.SetName(PointsOfInterest[i].Name);
-            poi.SetGPSPosition(PointsOfInterest[i].GPSPosition);
-            PointsOfInterest[i].UnityPosition = GetGPSAsUnityPosition(PointsOfInterest[i].GPSPosition);
-            PointsOfInterest[i].ID = poi.ID;
-            PointsOfInterest[i].poiObject = poi;
-        }
-        if (null != OnFinishedInit)
-            OnFinishedInit.Invoke();
-
-        RefreshMapCenter();
         if(null != GPS.Instance)
             GPS.Instance.OnInitialized += RefreshMapCenter;
+
+        RefreshMapCenter();
     }
 
     private void Update()
     {
         UpdatePositions();
-    }
-
-    public POIInfo[] GetPointsOfInterest()
-    {
-        return PointsOfInterest;
     }
 
     public Vector2 GetGPSMapCenter()
@@ -98,10 +72,6 @@ public class MapInfo : MonoBehaviour {
 
     public void UpdatePositions()
     {
-        for (int i = 0; i < PointsOfInterest.Length; ++i)
-        {
-            PointsOfInterest[i].UnityPosition = GetGPSAsUnityPosition(PointsOfInterest[i].GPSPosition);
-        }
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer && LocationServiceStatus.Running == Input.location.status)
         {
             CreatorObject.SetGPSPosition(new Vector2(Input.location.lastData.latitude, Input.location.lastData.longitude));
@@ -110,7 +80,6 @@ public class MapInfo : MonoBehaviour {
         }
         else
         {
-            // doing this for some updating.
             CreatorObject.SetGPSPosition(CreatorObject.GetGPSPosition);
         }
     }
@@ -135,15 +104,4 @@ public class MapInfo : MonoBehaviour {
         return new Vector2((float)posY, (float)posX);
     }
 
-}
-
-[System.Serializable]
-public struct POIInfo
-{
-    public int ID;
-    public string Name;
-    public Vector2 GPSPosition;
-    public Vector2 UnityPosition;
-
-    public POI poiObject;
 }
