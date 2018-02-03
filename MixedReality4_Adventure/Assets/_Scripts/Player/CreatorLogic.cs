@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CreatorLogic : MonoBehaviour {
 
     /**  Inspector variables   **/
-
-
     [Header("Desktop Movement variables")]
     [SerializeField]
     private POITypeInfo[] TypeInfos;
@@ -16,7 +13,7 @@ public class CreatorLogic : MonoBehaviour {
     [SerializeField]
     private Text DebugText;
     [SerializeField]
-    private Vector2 GPSPosition;
+    private Vector2 GPSPos;
 
 
     [Header("Desktop Movement variables")]
@@ -27,10 +24,7 @@ public class CreatorLogic : MonoBehaviour {
     [SerializeField]
     private float ZoomSpeed = 1.0f;
 
-
-
     [Header("Prefabs and access")]
-
     [SerializeField]
     private GameObject CreatorModel;
     [SerializeField]
@@ -39,23 +33,30 @@ public class CreatorLogic : MonoBehaviour {
     private POI POIPrefab;
     [SerializeField]
     private POIPointer PointerPrefab;
+    [SerializeField]
+    private Button SaveButton;
 
     /** Other class members **/
     private List<POIPointer> pointers = new List<POIPointer>();
+    private List<POI> pointsOfInterest = new List<POI>();
+    public List<POI> GetPointsOfInterest() { return pointsOfInterest; }
+
     private Camera MainCamera;
 
-    public Vector2 GetGPSPosition { get { return GPSPosition; } set { GPSPosition = value; } }
+    public Vector2 GPSPosition { get { return GPSPos; } set { GPSPos = value; } }
     public bool IsVotingTime { get; set; }
     public bool IsZooming { get; set; }
 
     private void Start()
     {
         MainCamera = Camera.main;
-        this.transform.position = MapInfo.instance.GetGPSAsUnityPosition(GPSPosition) ;
-        this.transform.position += new Vector3(0.0f, 0.0f, -0.1f);
+        this.transform.localPosition = MapInfo.instance.GetGPSAsUnityPosition(GPSPos) ;
+        this.transform.localPosition += new Vector3(0.0f, 0.0f, -0.1f);
 
         Input.gyro.updateInterval = 0.03f;
-        Input.gyro.enabled = true; 
+        Input.gyro.enabled = true;
+        if(null != SaveButton)
+            SaveButton.interactable = false;
     }
 
     private void Update()
@@ -63,21 +64,21 @@ public class CreatorLogic : MonoBehaviour {
         float horizontalInput = Input.GetAxis("Horizontal");
         if(horizontalInput != 0)
         {
-            CreatorModel.transform.rotation = CreatorModel.transform.rotation * Quaternion.AngleAxis(Time.deltaTime * RotationSpeed * horizontalInput, -Vector3.forward);
+            CreatorModel.transform.localRotation = CreatorModel.transform.localRotation * Quaternion.AngleAxis(Time.deltaTime * RotationSpeed * horizontalInput, -Vector3.forward);
             SetLookAt(CreatorModel.transform.up);
         }
 
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
         {
-            CreatorModel.transform.rotation = new Quaternion(0.0f, 0.0f, -Input.gyro.attitude.z, -Input.gyro.attitude.w);
+            CreatorModel.transform.localRotation = new Quaternion(0.0f, 0.0f, -Input.gyro.attitude.z, -Input.gyro.attitude.w);
             SetLookAt(CreatorModel.transform.up);
 
         }
         float verticalInput = Input.GetAxis("Vertical");
         if(verticalInput != 0)
         {
-            GPSPosition += new Vector2(Time.deltaTime * 0.001f * verticalInput, 0.0f);
-            SetGPSPosition(GPSPosition);
+            GPSPos += new Vector2(Time.deltaTime * 0.001f * verticalInput, 0.0f);
+            SetGPSPosition(GPSPos);
         }
  
         if (IsZooming)
@@ -102,10 +103,10 @@ public class CreatorLogic : MonoBehaviour {
 
     public void SetGPSPosition(Vector2 gpsPosition)
     {
-        GPSPosition = gpsPosition;
+        GPSPos = gpsPosition;
         Vector2 UnityPosition = MapInfo.instance.GetGPSAsUnityPosition(gpsPosition);
-        this.transform.position = UnityPosition;
-        this.transform.position += new Vector3(0.0f, 0.0f, -0.1f);
+        this.transform.localPosition = UnityPosition;
+        this.transform.localPosition += new Vector3(0.0f, 0.0f, -0.1f);
         foreach(POIPointer poi in pointers)
         {
             poi.OnPlayerPositionChanged(UnityPosition);
@@ -133,20 +134,64 @@ public class CreatorLogic : MonoBehaviour {
         // instantiate the actual poi object in unity space
         POI poiObject = Instantiate(POIPrefab);
         poiObject.ID = info.ID;
-        poiObject.SetGPSPosition(GPSPosition);
+        poiObject.SetGPSPosition(GPSPos);
         poiObject.SetName(info.Name);
-        
+        pointsOfInterest.Add(poiObject);
+
         // create a pointer pointing toward the poi object
         POIPointer pointer = Instantiate(PointerPrefab);
         pointer.transform.SetParent(this.transform, false);
 
         pointer.POIName = info.Name;
-        pointer.UnityTarget = poiObject.transform.position;
+        pointer.UnityTarget = poiObject.transform.localPosition;
         pointer.ID = poiObject.ID;
         pointer.poiObject = poiObject;
-        Vector2 CurrentPos = MapInfo.instance.GetGPSAsUnityPosition(GPSPosition);
+        Vector2 CurrentPos = MapInfo.instance.GetGPSAsUnityPosition(GPSPos);
         pointer.OnPlayerPositionChanged(CurrentPos);
         pointers.Add(pointer);
+
+        // Check if we have created all POIs and activate Save Button, if that is the case
+        if(null != SaveButton && pointers.Count == TypeInfos.Length)
+        {
+            SaveButton.interactable = true;
+        }
+    }
+
+    public void CreatePOIs(List<SaveAdventure.POISaveInfo> poiInfos)
+    {
+        foreach(POI poi in pointsOfInterest)
+        {
+            Destroy(poi);
+        }
+        pointsOfInterest.Clear();
+        foreach (POIPointer pointer in pointers)
+        {
+            Destroy(pointer);
+        }
+        pointers.Clear();
+
+        foreach (SaveAdventure.POISaveInfo info in poiInfos)
+        {
+            // instantiate the actual poi object in unity space
+            POI poiObject = Instantiate(POIPrefab);
+            poiObject.ID = info.ID;
+            poiObject.transform.SetParent(this.transform, false);
+            poiObject.SetGPSPosition(new Vector2(info.XGPSPos, info.YGPSPos));
+            poiObject.SetName(info.Name);
+            pointsOfInterest.Add(poiObject);
+
+            // create a pointer pointing toward the poi object
+            POIPointer pointer = Instantiate(PointerPrefab);
+            pointer.transform.SetParent(this.transform, false);
+
+            pointer.POIName = info.Name;
+            pointer.UnityTarget = poiObject.transform.localPosition;
+            pointer.ID = poiObject.ID;
+            pointer.poiObject = poiObject;
+            Vector2 CurrentPos = MapInfo.instance.GetGPSAsUnityPosition(GPSPos);
+            pointer.OnPlayerPositionChanged(CurrentPos);
+            pointers.Add(pointer);
+        }
     }
 
 }

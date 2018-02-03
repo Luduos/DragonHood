@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
-
 
 public class MapInfo : MonoBehaviour {
     [SerializeField]
@@ -16,21 +14,13 @@ public class MapInfo : MonoBehaviour {
 
     MapInfo()
     {
-        if (instance != null)
-        {
-            Debug.Log("There can't be multiple MapInfo objects, destroying this object");
-            Destroy(this);
-        }
-        else
-        {
-            instance = this;
-        }
-        
+        instance = this;
     }
 
     private void Start()
     {
-        if(null == CreatorObject)
+
+        if (null == CreatorObject)
             CreatorObject = FindObjectOfType<CreatorLogic>();
         if(null != GPS.Instance)
             GPS.Instance.OnInitialized += RefreshMapCenter;
@@ -50,8 +40,8 @@ public class MapInfo : MonoBehaviour {
 
     public void RefreshMapCenter()
     {
-        MapScript.centerLocation.longitude = CreatorObject.GetGPSPosition.x;
-        MapScript.centerLocation.latitude = CreatorObject.GetGPSPosition.y;
+        MapScript.centerLocation.longitude = CreatorObject.GPSPosition.x;
+        MapScript.centerLocation.latitude = CreatorObject.GPSPosition.y;
         MapScript.Refresh();  
         UpdatePositions();
     }
@@ -67,12 +57,12 @@ public class MapInfo : MonoBehaviour {
     public void IncreaseZoom()
     {
         MapScript.zoom = MapScript.zoom + 1;
-        //UpdatePositions();
+        UpdatePositions();
     }
 
     public void UpdatePositions()
     {
-        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer && LocationServiceStatus.Running == Input.location.status)
+        if (LocationServiceStatus.Running == Input.location.status)
         {
             CreatorObject.SetGPSPosition(new Vector2(Input.location.lastData.latitude, Input.location.lastData.longitude));
             
@@ -80,7 +70,16 @@ public class MapInfo : MonoBehaviour {
         }
         else
         {
-            CreatorObject.SetGPSPosition(CreatorObject.GetGPSPosition);
+            string status = "Unknown";
+            if (LocationServiceStatus.Stopped == Input.location.status)
+                status = "Stopped";
+            if (LocationServiceStatus.Failed == Input.location.status)
+                status = "Failed";
+            if (LocationServiceStatus.Initializing == Input.location.status)
+                status = "Initializing";
+            DebugText.text = "Current status: " + status;
+
+            CreatorObject.SetGPSPosition(CreatorObject.GPSPosition);
         }
     }
 
@@ -103,5 +102,4 @@ public class MapInfo : MonoBehaviour {
 
         return new Vector2((float)posY, (float)posX);
     }
-
 }

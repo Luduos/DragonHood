@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArrowInfo : MonoBehaviour {
-	public ArrowProperties arrowsInfo;
+public class PlayNavigationLogic : MonoBehaviour {
+
 	// Use this for initialization
 	void Start () {
 		

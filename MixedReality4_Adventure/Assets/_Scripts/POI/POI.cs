@@ -18,13 +18,25 @@ public class POI : MonoBehaviour {
         MainCamera = Camera.main;
     }
 
+    public string GetName() { return Name; }
+
     public void SetName(string name)
     {
         this.Name = name;
         NameText.text = name;
     }
 
-    // This should be optimized - only updated f.e. if main camera is actually rotating
+    public Vector2 GetGPSPosition()
+    {
+        return GPSPosition;
+    }
+
+    public void SetGPSPosition(Vector2 gpsPosition)
+    {
+        GPSPosition = gpsPosition;
+        this.transform.localPosition = MapInfo.instance.GetGPSAsUnityPosition(gpsPosition);
+    }
+
     private void Update()
     {
         Vector3 nameTextForward = NameText.transform.up;
@@ -35,13 +47,7 @@ public class POI : MonoBehaviour {
         // get the signed difference in these angles
         float angleDiff = Mathf.DeltaAngle(angleA, angleB);
 
-        NameText.transform.RotateAround(this.transform.position, -Vector3.forward, angleDiff);
-        this.transform.position = MapInfo.instance.GetGPSAsUnityPosition(GPSPosition);
-    }
-
-    public void SetGPSPosition(Vector2 gpsPosition)
-    {
-        GPSPosition = gpsPosition;
-        this.transform.position = MapInfo.instance.GetGPSAsUnityPosition(gpsPosition);
+        NameText.transform.RotateAround(this.transform.localPosition, -Vector3.forward, angleDiff);
+        this.transform.localPosition = MapInfo.instance.GetGPSAsUnityPosition(GPSPosition);
     }
 }

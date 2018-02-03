@@ -45,15 +45,11 @@ public class GoogleMap : MonoBehaviour
     public GoogleMapMarker[] markers;
     public GoogleMapPath[] paths;
 
-
     void Start()
     {
-        
         if (loadOnStart)
             Refresh();
     }
-
-
 
     public void Refresh()
     {
@@ -135,8 +131,6 @@ public class GoogleMap : MonoBehaviour
         if (req.error == null)
             req.LoadImageIntoTexture((Texture2D)GetComponent<Renderer>().material.mainTexture);
     }
-
-
 }
 
 public enum GoogleMapColor

@@ -14,6 +14,9 @@ public class POIPointer : MonoBehaviour {
     private float PointerDistanceToPlayer = 2.0f;
 
     [SerializeField]
+    private float DisappearDistance = 2.0f;
+
+    [SerializeField]
     float DirectionMatchPercentage = 0.96f;
 
     private string poiName;
@@ -21,11 +24,9 @@ public class POIPointer : MonoBehaviour {
     public Vector2 UnityTarget { get; set; }
     public bool IsActive { get; set; }
 
-
     public int ID { get; set; }
 
     public POI poiObject { get; set; }
-
 
     private Color normalColor = new Color(0f, 0.462745f, 1f, 0.917648f);
 
@@ -35,14 +36,14 @@ public class POIPointer : MonoBehaviour {
 
     public void OnPlayerPositionChanged(Vector2 PlayerPosition)
     {
-        UnityTarget = poiObject.transform.position;
+        UnityTarget = poiObject.transform.localPosition;
         Vector3 dir = new Vector3(UnityTarget.x - PlayerPosition.x, UnityTarget.y - PlayerPosition.y, 0.0f);
-        if (dir.magnitude > PointerDistanceToPlayer)
+        if (dir.magnitude > DisappearDistance * PointerDistanceToPlayer)
         {
             this.gameObject.SetActive(true);
             dir = PointerDistanceToPlayer * dir.normalized;
             this.transform.localPosition = dir;
-            this.transform.rotation = Quaternion.LookRotation(Vector3.forward, dir);
+            this.transform.localRotation = Quaternion.LookRotation(Vector3.forward, dir);
         }
         else
         {
@@ -90,5 +91,5 @@ public class POIPointer : MonoBehaviour {
         BigSprite.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         poiObject.GetComponent<Renderer>().material.color = Color.red;
     }
-        
+      
 }

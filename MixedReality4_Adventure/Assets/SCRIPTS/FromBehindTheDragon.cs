@@ -18,10 +18,10 @@ public class FromBehindTheDragon : MonoBehaviour {
 
 		if (Vector3.Dot (ARCamDirection, DragonDirection) > 0) {
 			youAreBehind = true;
-			Debug.Log ("you are behind !!");
+			//Debug.Log ("you are behind !!");
 		} else {
 			youAreBehind = false;
-			Debug.Log("you are in front !!");
+			//Debug.Log("you are in front !!");
 		}
 	}
 }
