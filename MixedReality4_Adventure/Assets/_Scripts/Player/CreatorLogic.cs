@@ -157,7 +157,7 @@ public class CreatorLogic : MonoBehaviour {
         }
     }
 
-    public void CreatePOIs(List<SaveAdventure.POISaveInfo> poiInfos)
+    public void CreatePOIs(List<POISaveInfo> poiInfos)
     {
         foreach(POI poi in pointsOfInterest)
         {
@@ -170,7 +170,7 @@ public class CreatorLogic : MonoBehaviour {
         }
         pointers.Clear();
 
-        foreach (SaveAdventure.POISaveInfo info in poiInfos)
+        foreach (POISaveInfo info in poiInfos)
         {
             // instantiate the actual poi object in unity space
             POI poiObject = Instantiate(POIPrefab);

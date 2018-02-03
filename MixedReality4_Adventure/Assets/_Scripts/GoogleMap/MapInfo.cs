@@ -10,6 +10,7 @@ public class MapInfo : MonoBehaviour {
 
     public static MapInfo instance = null;
 
+    [SerializeField]
     private CreatorLogic CreatorObject;
 
     MapInfo()
@@ -25,6 +26,12 @@ public class MapInfo : MonoBehaviour {
         if(null != GPS.Instance)
             GPS.Instance.OnInitialized += RefreshMapCenter;
 
+        RefreshMapCenter();
+    }
+
+    private void OnEnable()
+    {
+        UpdatePositions();
         RefreshMapCenter();
     }
 

@@ -87,12 +87,13 @@ public class SaveAdventure : MonoBehaviour
         DebugText.text = "";
     }
 
-    [System.Serializable]
-    public class POISaveInfo
-    {
-        public int ID;
-        public string Name;
-        public float XGPSPos;
-        public float YGPSPos;
-    }
+    
+}
+[System.Serializable]
+public class POISaveInfo
+{
+    public int ID;
+    public string Name;
+    public float XGPSPos;
+    public float YGPSPos;
 }

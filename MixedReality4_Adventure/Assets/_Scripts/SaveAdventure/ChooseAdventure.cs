@@ -5,16 +5,16 @@ using System.Collections.Generic;
 public class ChooseAdventure : MonoBehaviour {
 
     [SerializeField]
-    private Button AdventureButtonPrefab;
+    private Button AdventureButtonPrefab = null;
 
     [SerializeField]
-    private RectTransform ScrollViewContent;
+    private RectTransform ScrollViewContent = null;
 
     [SerializeField]
-    private SaveAdventure SaveAdventureObj;
+    private SaveAdventure SaveAdventureObj = null;
 
     [SerializeField]
-    private CreatorLogic Creator;
+    private MyClientBehaviour NetworkBehaviour = null;
 
     public void OnShowAdventures()
     {
@@ -34,7 +34,7 @@ public class ChooseAdventure : MonoBehaviour {
 
     private void OnButtonClick(string fileName)
     {
-        Creator.CreatePOIs(SaveAdventureObj.LoadAdventure(fileName));
+        NetworkBehaviour.OnLoadAdventure(SaveAdventureObj.LoadAdventure(fileName));
         this.gameObject.SetActive(false);
     }
 }

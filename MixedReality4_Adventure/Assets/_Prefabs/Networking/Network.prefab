@@ -75,7 +75,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DebugText: {fileID: 0}
-  PlayerComp: {fileID: 0}
+  Player: {fileID: 0}
+  Creator: {fileID: 0}
 --- !u!114 &114674095700213530
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -8,19 +8,27 @@ using UnityEngine.Networking.NetworkSystem;
 public class MyClientBehaviour : MonoBehaviour {
 
     [SerializeField]
-    private Text DebugText;
+    private Text DebugText = null;
 
     [SerializeField]
-    private PlayerLogic Player;
+    private PlayerLogic Player = null;
+
+    [SerializeField]
+    private CreatorLogic Creator = null;
 
     private bool isHost;
     public bool IsHost { get { return isHost; } set { isHost = value; } }
 
-    public NetworkClient Client;
+    public NetworkClient Client = null;
 
     public class ClickedPuzzleMessage : MessageBase
     {
         public int FaceID;
+    }
+
+    public class ChooseAdventureMessage : MessageBase
+    {
+        public POISaveInfo[] poiSaveInfos;
     }
 
     public class MyMsgType
@@ -28,7 +36,7 @@ public class MyClientBehaviour : MonoBehaviour {
         public static short ChooseClass = MsgType.Highest + 1;
         public static short ClickedPuzzle = MsgType.Highest + 2;
         public static short WrongPuzzleTouch = MsgType.Highest + 3;
-
+        public static short ChooseAdventure = MsgType.Highest + 4;
     };
 
     public void SetClient(NetworkClient client, bool isHost)
@@ -41,11 +49,12 @@ public class MyClientBehaviour : MonoBehaviour {
         Client.RegisterHandler(MyMsgType.ChooseClass, OnChooseClass);
         Client.RegisterHandler(MyMsgType.ClickedPuzzle, OnClickedPuzzle);
         Client.RegisterHandler(MyMsgType.WrongPuzzleTouch, OnWrongPuzzleTouch);
-
+        Client.RegisterHandler(MyMsgType.ChooseAdventure, OnReceivedChooseAdventure);
         if (IsHost)
         {
             NetworkServer.RegisterHandler(MyMsgType.ClickedPuzzle, OnHostClickedPuzzleMessage);
             NetworkServer.RegisterHandler(MyMsgType.WrongPuzzleTouch, OnHostWrongTouch);
+            NetworkServer.RegisterHandler(MyMsgType.ChooseAdventure, OnHostReceivedChooseAdventure);
         }
         else
         {
@@ -55,7 +64,34 @@ public class MyClientBehaviour : MonoBehaviour {
         DebugText.text = "Was Set";
     }
 
-    
+    public void OnLoadAdventure(List<POISaveInfo> poiSaveInfos)
+    {
+        ChooseAdventureMessage adventureMessage = new ChooseAdventureMessage();
+        adventureMessage.poiSaveInfos = poiSaveInfos.ToArray();
+
+        if (null != Client)
+            Client.Send(MyMsgType.ChooseAdventure, adventureMessage);
+    }
+
+    /// <summary>
+    /// Called, when client received a "choose adventure" message. Loads the chosen adventure.
+    /// </summary>
+    /// <param name="netMsg"></param>
+    private void OnReceivedChooseAdventure(NetworkMessage netMsg)
+    {
+        ChooseAdventureMessage advMessage =  netMsg.ReadMessage<ChooseAdventureMessage>();
+
+        Creator.CreatePOIs(new List<POISaveInfo>(advMessage.poiSaveInfos));
+    }
+
+    /// <summary>
+    /// Called, when Host received a "choose adventure" message. Delivers the message to all clients
+    /// </summary>
+    /// <param name="netMsg"></param>
+    private void OnHostReceivedChooseAdventure(NetworkMessage netMsg)
+    {
+        NetworkServer.SendToAll(MyMsgType.ChooseAdventure, netMsg.ReadMessage<ChooseAdventureMessage>());
+    }
 
     /// <summary>
     /// Called by Button
