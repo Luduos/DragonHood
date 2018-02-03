@@ -7,11 +7,11 @@ public class CreatorLogic : MonoBehaviour {
     /**  Inspector variables   **/
     [Header("Desktop Movement variables")]
     [SerializeField]
-    private POITypeInfo[] TypeInfos;
+    private POITypeInfo[] TypeInfos = null;
 
     [Header("Debug")]
     [SerializeField]
-    private Text DebugText;
+    private Text DebugText = null;
     [SerializeField]
     private Vector2 GPSPos;
 
@@ -20,21 +20,21 @@ public class CreatorLogic : MonoBehaviour {
     [SerializeField]
     private float RotationSpeed = 5.0f;
     [SerializeField]
-    private float RotationThreshold = 0.5f;
-    [SerializeField]
     private float ZoomSpeed = 1.0f;
 
     [Header("Prefabs and access")]
     [SerializeField]
-    private GameObject CreatorModel;
+    private GameObject CreatorModel = null;
     [SerializeField]
-    private SpriteRenderer CreatorSprite;
+    private SpriteRenderer CreatorSprite = null;
     [SerializeField]
-    private POI POIPrefab;
+    private POI POIPrefab = null;
     [SerializeField]
-    private POIPointer PointerPrefab;
+    private POIPointer PointerPrefab = null;
     [SerializeField]
-    private Button SaveButton;
+    private Button SaveButton = null;
+    [SerializeField]
+    private MapInfo MapPlane = null;
 
     /** Other class members **/
     private List<POIPointer> pointers = new List<POIPointer>();
@@ -133,6 +133,7 @@ public class CreatorLogic : MonoBehaviour {
 
         // instantiate the actual poi object in unity space
         POI poiObject = Instantiate(POIPrefab);
+        poiObject.transform.SetParent(MapPlane.transform, true);
         poiObject.ID = info.ID;
         poiObject.SetGPSPosition(GPSPos);
         poiObject.SetName(info.Name);
@@ -157,7 +158,7 @@ public class CreatorLogic : MonoBehaviour {
         }
     }
 
-    public void CreatePOIs(List<POISaveInfo> poiInfos)
+    public void CreatePOIsFromSaveFile(List<POISaveInfo> poiInfos)
     {
         foreach(POI poi in pointsOfInterest)
         {
@@ -174,11 +175,13 @@ public class CreatorLogic : MonoBehaviour {
         {
             // instantiate the actual poi object in unity space
             POI poiObject = Instantiate(POIPrefab);
+            poiObject.transform.SetParent(MapPlane.transform, true);
             poiObject.ID = info.ID;
-            poiObject.transform.SetParent(this.transform, false);
             poiObject.SetGPSPosition(new Vector2(info.XGPSPos, info.YGPSPos));
             poiObject.SetName(info.Name);
+            //poiObject.ShouldUpdate = true; // to stop rotation 
             pointsOfInterest.Add(poiObject);
+
 
             // create a pointer pointing toward the poi object
             POIPointer pointer = Instantiate(PointerPrefab);

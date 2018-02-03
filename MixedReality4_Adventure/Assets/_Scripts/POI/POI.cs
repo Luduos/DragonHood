@@ -9,13 +9,18 @@ public class POI : MonoBehaviour {
     private Vector2 GPSPosition;
 
     [SerializeField]
-    private TextMesh NameText;
+    private TextMesh NameText = null;
 
     private Camera MainCamera;
+
+    public bool ShouldUpdate { get; set; }
 
     private void Start()
     {
         MainCamera = Camera.main;
+        this.transform.localScale = this.transform.lossyScale;
+        this.transform.localRotation = Quaternion.identity;
+        ShouldUpdate = true;
     }
 
     public string GetName() { return Name; }
@@ -39,15 +44,19 @@ public class POI : MonoBehaviour {
 
     private void Update()
     {
-        Vector3 nameTextForward = NameText.transform.up;
-        Vector3 mainCamForward = MainCamera.transform.up;
-        float angleA = Mathf.Atan2(nameTextForward.x, nameTextForward.y) * Mathf.Rad2Deg;
-        float angleB = Mathf.Atan2(mainCamForward.x, mainCamForward.y) * Mathf.Rad2Deg;
+        if (ShouldUpdate)
+        {
+            Vector3 nameTextForward = NameText.transform.up;
+            Vector3 mainCamForward = (Vector3.Dot(MainCamera.transform.up, this.transform.up) * this.transform.up) ;
+            mainCamForward = mainCamForward.normalized;
+            float angleA = Mathf.Atan2(nameTextForward.x, nameTextForward.y) * Mathf.Rad2Deg;
+            float angleB = Mathf.Atan2(mainCamForward.x, mainCamForward.y) * Mathf.Rad2Deg;
 
-        // get the signed difference in these angles
-        float angleDiff = Mathf.DeltaAngle(angleA, angleB);
+            // get the signed difference in these angles
+            float angleDiff = Mathf.DeltaAngle(angleA, angleB);
 
-        NameText.transform.RotateAround(this.transform.localPosition, -Vector3.forward, angleDiff);
-        this.transform.localPosition = MapInfo.instance.GetGPSAsUnityPosition(GPSPosition);
+            NameText.transform.RotateAround(this.transform.position, -transform.forward, angleDiff);
+            this.transform.localPosition = MapInfo.instance.GetGPSAsUnityPosition(GPSPosition);
+        }      
     }
 }

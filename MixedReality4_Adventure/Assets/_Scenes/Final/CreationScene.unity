@@ -2175,7 +2175,6 @@ MonoBehaviour:
   DebugText: {fileID: 52349077}
   GPSPos: {x: 49.24501, y: 7.021521}
   RotationSpeed: 100
-  RotationThreshold: 1
   ZoomSpeed: 15
   CreatorModel: {fileID: 1991743315}
   CreatorSprite: {fileID: 1991743317}
@@ -2184,6 +2183,7 @@ MonoBehaviour:
   PointerPrefab: {fileID: 114015532972889304, guid: d9cf1c16bf95e314fa6a13a927c44445,
     type: 2}
   SaveButton: {fileID: 757137904}
+  MapPlane: {fileID: 1325940044}
 --- !u!1 &1139748944
 GameObject:
   m_ObjectHideFlags: 0

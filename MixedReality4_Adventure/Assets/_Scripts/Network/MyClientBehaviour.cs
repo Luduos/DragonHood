@@ -81,7 +81,7 @@ public class MyClientBehaviour : MonoBehaviour {
     {
         ChooseAdventureMessage advMessage =  netMsg.ReadMessage<ChooseAdventureMessage>();
 
-        Creator.CreatePOIs(new List<POISaveInfo>(advMessage.poiSaveInfos));
+        Creator.CreatePOIsFromSaveFile(new List<POISaveInfo>(advMessage.poiSaveInfos));
     }
 
     /// <summary>
