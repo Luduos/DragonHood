@@ -25,7 +25,7 @@ public class POIPointer : MonoBehaviour {
     private string poiName;
     public string POIName { get { return poiName; } set { poiName = value; NameMesh.text = value; } }
     public Vector2 UnityTarget { get; set; }
-    public bool IsActive { get; set; }
+    public static bool IsActive { get; set; }
 
     public int ID { get; set; }
 
@@ -54,20 +54,24 @@ public class POIPointer : MonoBehaviour {
         }     
     }
 
-    public void OnPlayerRotationChanged(Vector2 forward)
+    public void OnPlayerRotationChanged(Vector3 forward)
     {
-        float dotForwardTarget = Vector2.Dot(this.transform.up, forward);
+        float dotForwardTarget = Vector3.Dot((this.transform.up).normalized, forward.normalized);
         if(dotForwardTarget > DirectionMatchPercentage)
         {
-            BigSprite.gameObject.SetActive(true);
-            NormalSprite.gameObject.SetActive(false);
-            IsActive = true;
+            if (!IsActive)
+            {
+                BigSprite.gameObject.SetActive(true);
+                NormalSprite.gameObject.SetActive(false);
+                IsActive = true;
+            }
+            
         }
-        else
-        {
+        else if(BigSprite.gameObject.activeSelf)
+        {   
             BigSprite.gameObject.SetActive(false);
             NormalSprite.gameObject.SetActive(true);
-            IsActive = false;
+            IsActive = false;         
         }
     }
 

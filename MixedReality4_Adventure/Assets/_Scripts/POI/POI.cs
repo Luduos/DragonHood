@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 /// <summary>
 /// @author: David Liebemann
+/// 
+/// Point of Interest
 /// </summary>
 public class POI : MonoBehaviour {
     public int ID { get; set; }
@@ -48,6 +50,7 @@ public class POI : MonoBehaviour {
     {
         if (ShouldUpdate)
         {
+            /*
             Vector3 nameTextForward = NameText.transform.up;
             Vector3 mainCamForward = (Vector3.Dot(MainCamera.transform.up, this.transform.up) * this.transform.up) ;
             mainCamForward = mainCamForward.normalized;
@@ -58,6 +61,10 @@ public class POI : MonoBehaviour {
             float angleDiff = Mathf.DeltaAngle(angleA, angleB);
 
             NameText.transform.RotateAround(this.transform.position, -transform.forward, angleDiff);
+            */
+
+            this.transform.localRotation =   new Quaternion(0.0f, 0.0f, -MainCamera.transform.rotation.z, -MainCamera.transform.rotation.w);
+
             this.transform.localPosition = MapInfo.instance.GetGPSAsUnityPosition(GPSPosition);
         }      
     }

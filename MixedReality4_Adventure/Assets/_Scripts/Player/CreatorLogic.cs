@@ -122,7 +122,7 @@ public class CreatorLogic : MonoBehaviour {
         }
     }
 
-    public void SetLookAt(Vector2 lookat)
+    public void SetLookAt(Vector3 lookat)
     {
         foreach (POIPointer poi in pointers)
         {
@@ -171,6 +171,7 @@ public class CreatorLogic : MonoBehaviour {
         }
         numPOIOfSameType++;
 
+
         // instantiate the actual poi object in unity space
         POI poiObject = Instantiate(POIPrefab);
         poiObject.transform.SetParent(MapPlane.transform, true);
@@ -188,7 +189,7 @@ public class CreatorLogic : MonoBehaviour {
         POIPointer pointer = Instantiate(PointerPrefab);
         pointer.transform.SetParent(this.transform, false);
 
-        pointer.POIName = info.Name;
+        pointer.POIName = poiObject.GetName();
         pointer.UnityTarget = poiObject.transform.localPosition;
         pointer.ID = poiObject.ID;
         pointer.poiObject = poiObject;
@@ -223,12 +224,12 @@ public class CreatorLogic : MonoBehaviour {
     {
         foreach(POI poi in pointsOfInterest)
         {
-            Destroy(poi);
+            Destroy(poi.gameObject);
         }
         pointsOfInterest.Clear();
         foreach (POIPointer pointer in pointers)
         {
-            Destroy(pointer);
+            Destroy(pointer.gameObject);
         }
         pointers.Clear();
 
@@ -247,7 +248,7 @@ public class CreatorLogic : MonoBehaviour {
             POIPointer pointer = Instantiate(PointerPrefab);
             pointer.transform.SetParent(this.transform, false);
 
-            pointer.POIName = info.Name;
+            pointer.POIName = poiObject.GetName();
             pointer.UnityTarget = poiObject.transform.localPosition;
             pointer.ID = poiObject.ID;
             pointer.poiObject = poiObject;
