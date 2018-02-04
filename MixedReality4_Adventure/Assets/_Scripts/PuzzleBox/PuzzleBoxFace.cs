@@ -11,20 +11,27 @@ public class PuzzleBoxFace : MonoBehaviour {
     public UnityAction<PuzzleBoxFace> OnCorrectTouchDetected;
 
     [SerializeField]
-    private int id;
+    private int id = 0;
 
     [SerializeField]
-    private int touchCount;
+    private int touchCount = 0;
 
     //public int TouchCount { get { return touchCount; } }
 
     public int ID { get { return id; } }
 
     [SerializeField]
-    private Texture2D puzzleMasterIcon;
+    private Texture2D puzzleMasterIcon = null;
 
     [SerializeField]
-    private Texture2D image;
+    private Texture2D image = null;
+    [SerializeField]
+    private Texture2D normalMap = null;
+    [SerializeField]
+    private Texture2D heightMap = null;
+
+    [SerializeField]
+    private Light Highlight = null;
 
     private Material faceMaterial;
     public bool WasCorrectlyTouched { get; private set; }
@@ -41,6 +48,7 @@ public class PuzzleBoxFace : MonoBehaviour {
         faceMaterial = GetComponent<Renderer>().material;
         WasCorrectlyTouched = false;
         WasFinalized = false;
+        Highlight.gameObject.SetActive(false);
     }
 
     private void OnMouseDown()
@@ -106,6 +114,7 @@ public class PuzzleBoxFace : MonoBehaviour {
         WasCorrectlyTouched = false;
         WasFinalized = false;
         faceMaterial.color = NeutralColor;
+        Highlight.gameObject.SetActive(false);
     }
 
     public void OnRegisterNetworkCorrectTouch()
@@ -116,7 +125,7 @@ public class PuzzleBoxFace : MonoBehaviour {
             WasCorrectlyTouched = true;
             faceMaterial.color = WaitingColor;
         }
-        
+        Highlight.gameObject.SetActive(false);
     }
 
     public void OnFinalizeCorrectTouch()
@@ -125,6 +134,7 @@ public class PuzzleBoxFace : MonoBehaviour {
         WasCorrectlyTouched = true;
         WasFinalized = true;
         faceMaterial.color = CorrectColor;
+        Highlight.gameObject.SetActive(false);
     }
 
     public void SetNumberVisibility(bool visible)
@@ -135,10 +145,17 @@ public class PuzzleBoxFace : MonoBehaviour {
         if (visible)
         {
             faceMaterial.mainTexture = image;
+            faceMaterial.SetTexture("_BumpMap", normalMap);
+            faceMaterial.SetTexture("_ParallaxMap", heightMap);
         }
         else
         {
             faceMaterial.mainTexture = puzzleMasterIcon;
         }
+    }
+
+    public void OnGiveHint()
+    {
+        Highlight.gameObject.SetActive(true);
     }
 }

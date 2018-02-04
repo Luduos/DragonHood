@@ -58,6 +58,7 @@ public class PuzzleBox : MonoBehaviour {
                 IsWaiting = true;
                 touchedFace.OnRegisterNetworkCorrectTouch();
                 clientBehaviour.ClientTouchedBoxFace(touchedFace.ID);
+                ActivateHint(touchedFace.ID);
             }
         }
     }
@@ -71,6 +72,7 @@ public class PuzzleBox : MonoBehaviour {
         {
             if(!BoxFaces[ID - 1].WasCorrectlyTouched)
             {
+                // we are waiting for a correct touch and registered face has not yet been touched
                 BoxFaces[ID - 1].OnRegisterNetworkCorrectTouch();
                 CheckOppositeSide(ID);
             }
@@ -84,7 +86,14 @@ public class PuzzleBox : MonoBehaviour {
         else
         {
             BoxFaces[ID - 1].OnRegisterNetworkCorrectTouch();
+            ActivateHint(ID);
         }
+    }
+
+    private void ActivateHint(int touchedID)
+    {
+        int oppositeID = touchedID % 2 == 0 ? touchedID - 1 : touchedID + 1;
+        BoxFaces[oppositeID - 1].OnGiveHint();
     }
 
     // Checks, if any other face was touched, but not finalized,
