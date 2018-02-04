@@ -21,10 +21,13 @@ public class PlayerLogic : MonoBehaviour {
     public PlayerClassType ClassType { get; set; }
 
     public bool HasFeather { get; set; }
+    public bool HasBell { get; set; }
 
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start () {
         HasFeather = false;
+        HasBell = false;
         ClassType = PlayerClassType.NotChosen;
         ClassDecisionUI.gameObject.SetActive(false);
         UpdateClassAbilities();
