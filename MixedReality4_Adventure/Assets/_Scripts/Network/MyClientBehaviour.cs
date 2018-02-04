@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.Networking.NetworkSystem;
 
+/// <summary>
+/// @author: David Liebemann
+/// </summary>
 public class MyClientBehaviour : MonoBehaviour {
 
     [SerializeField]
@@ -81,7 +84,7 @@ public class MyClientBehaviour : MonoBehaviour {
     {
         ChooseAdventureMessage advMessage =  netMsg.ReadMessage<ChooseAdventureMessage>();
 
-        Creator.CreatePOIsFromSaveFile(new List<POISaveInfo>(advMessage.poiSaveInfos));
+        Creator.LoadPOIsFromSaveFile(new List<POISaveInfo>(advMessage.poiSaveInfos));
     }
 
     /// <summary>

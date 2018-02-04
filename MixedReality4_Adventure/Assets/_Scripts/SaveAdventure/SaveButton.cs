@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-
+/// <summary>
+/// @author: David Liebemann
+/// </summary>
 [RequireComponent(typeof(Button))]
 public class SaveButton : MonoBehaviour {
 

@@ -2,7 +2,9 @@
 using UnityEngine.UI;
 
 using UnityEngine.Events;
-
+/// <summary>
+/// @author: David Liebemann
+/// </summary>
 public class PuzzleBox : MonoBehaviour {
 
     public UnityAction OnPuzzleWasSolved;

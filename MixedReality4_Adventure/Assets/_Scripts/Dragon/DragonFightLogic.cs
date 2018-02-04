@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// @author: David Liebemann
+/// </summary>
 public class DragonFightLogic : MonoBehaviour {
     [SerializeField]
     private Text InfoDisplay;

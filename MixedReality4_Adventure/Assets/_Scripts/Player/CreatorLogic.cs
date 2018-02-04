@@ -1,13 +1,19 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
+/// <summary>
+/// @author: David Liebemann
+/// </summary>
 public class CreatorLogic : MonoBehaviour {
 
     /**  Inspector variables   **/
     [Header("Desktop Movement variables")]
     [SerializeField]
     private POITypeInfo[] TypeInfos = null;
+
+    public POITypeInfo[] GetTypeInfos() { return TypeInfos; }
 
     [Header("Debug")]
     [SerializeField]
@@ -40,6 +46,9 @@ public class CreatorLogic : MonoBehaviour {
     private List<POIPointer> pointers = new List<POIPointer>();
     private List<POI> pointsOfInterest = new List<POI>();
     public List<POI> GetPointsOfInterest() { return pointsOfInterest; }
+
+    // invokes with the ID of the POI type, current amount of pieces and max amount of pieces
+    public UnityAction<int, uint, uint> OnMarkerPieceWasCreated; 
 
     private Camera MainCamera;
 
@@ -126,18 +135,54 @@ public class CreatorLogic : MonoBehaviour {
         MapInfo.instance.RefreshMapCenter();
     }
 
+    /// <summary>
+    /// Sets the amount of pieces for each
+    /// </summary>
+    /// <param name="amounts"></param>
+    public void SetAmountOfPieces(List<uint> amounts)
+    {
+        for(int i = 0; i < TypeInfos.Length; ++i)
+        {
+            TypeInfos[i].NumberOfPieces = amounts[i];
+            if(null != OnMarkerPieceWasCreated)
+                OnMarkerPieceWasCreated.Invoke(i, 0, TypeInfos[i].NumberOfPieces);
+        }
+    }
+
+    /// <summary>
+    /// Called during creation mode to set a new POI marker.
+    /// </summary>
+    /// <param name="PointerTypeID"></param>
     public void OnCreateNewPOI(int PointerTypeID)
     {
         // get info from the info types
         POITypeInfo info = TypeInfos[PointerTypeID];
+
+        uint numPOIOfSameType = 0;
+        foreach (POI currPOI in pointsOfInterest)
+        {
+            if (currPOI.ID == PointerTypeID)
+                numPOIOfSameType++;
+        }
+        if(!(numPOIOfSameType < info.NumberOfPieces))
+        {
+            Debug.Log("Tried to create too many pois of the same type");
+            return;
+        }
+        numPOIOfSameType++;
 
         // instantiate the actual poi object in unity space
         POI poiObject = Instantiate(POIPrefab);
         poiObject.transform.SetParent(MapPlane.transform, true);
         poiObject.ID = info.ID;
         poiObject.SetGPSPosition(GPSPos);
-        poiObject.SetName(info.Name);
+        poiObject.SetName(info.Name + "(" + numPOIOfSameType + ")");
         pointsOfInterest.Add(poiObject);
+  
+        if(null != OnMarkerPieceWasCreated)
+        {
+            OnMarkerPieceWasCreated.Invoke(PointerTypeID, numPOIOfSameType, info.NumberOfPieces);
+        }
 
         // create a pointer pointing toward the poi object
         POIPointer pointer = Instantiate(PointerPrefab);
@@ -151,14 +196,30 @@ public class CreatorLogic : MonoBehaviour {
         pointer.OnPlayerPositionChanged(CurrentPos);
         pointers.Add(pointer);
 
+        CheckSaveButtonActivation();
+    }
+
+    private void CheckSaveButtonActivation()
+    {
         // Check if we have created all POIs and activate Save Button, if that is the case
-        if(null != SaveButton && pointers.Count == TypeInfos.Length)
+        bool allMarkersSet = true;
+        uint[] currentPOIAmounts = new uint[TypeInfos.Length];
+        foreach (POI currPOI in pointsOfInterest)
+        {
+            currentPOIAmounts[currPOI.ID] = currentPOIAmounts[currPOI.ID] + 1;
+        }
+        for(int i = 0; i < TypeInfos.Length; ++i)
+        {
+            allMarkersSet = allMarkersSet && (currentPOIAmounts[i] == TypeInfos[i].NumberOfPieces);
+        }
+
+        if (null != SaveButton && allMarkersSet)
         {
             SaveButton.interactable = true;
         }
     }
 
-    public void CreatePOIsFromSaveFile(List<POISaveInfo> poiInfos)
+    public void LoadPOIsFromSaveFile(List<POISaveInfo> poiInfos)
     {
         foreach(POI poi in pointsOfInterest)
         {
@@ -179,7 +240,6 @@ public class CreatorLogic : MonoBehaviour {
             poiObject.ID = info.ID;
             poiObject.SetGPSPosition(new Vector2(info.XGPSPos, info.YGPSPos));
             poiObject.SetName(info.Name);
-            //poiObject.ShouldUpdate = true; // to stop rotation 
             pointsOfInterest.Add(poiObject);
 
 
@@ -202,6 +262,9 @@ public class CreatorLogic : MonoBehaviour {
 [System.Serializable]
 public struct POITypeInfo
 {
+    /// ID of PuzzleBox: 0, ID of Dragon: 1. I know that this is bad. Need more than two weeks of dev time to do it better. ///
     public int ID;
     public string Name;
+    [HideInInspector]
+    public uint NumberOfPieces;
 }

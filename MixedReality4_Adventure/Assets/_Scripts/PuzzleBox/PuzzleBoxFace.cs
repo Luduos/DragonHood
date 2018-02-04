@@ -2,7 +2,9 @@
 using UnityEngine.Events;
 using System.Collections;
 
-
+/// <summary>
+/// @author: David Liebemann
+/// </summary>
 [RequireComponent(typeof(Renderer))]
 public class PuzzleBoxFace : MonoBehaviour {
 

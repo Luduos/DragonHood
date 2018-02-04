@@ -4,7 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-
+/// <summary>
+/// @author: David Liebemann
+/// </summary>
 public class SaveAdventure : MonoBehaviour
 {
     [SerializeField]

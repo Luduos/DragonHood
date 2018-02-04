@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
-
+/// <summary>
+/// @author: David Liebemann
+/// </summary>
 public class Android : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {

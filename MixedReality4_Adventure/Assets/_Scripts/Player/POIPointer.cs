@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// @author: David Liebemann
+/// </summary>
 public class POIPointer : MonoBehaviour {
     [SerializeField]
     private SpriteRenderer NormalSprite;

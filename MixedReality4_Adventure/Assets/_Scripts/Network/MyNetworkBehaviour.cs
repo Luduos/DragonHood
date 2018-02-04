@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
-
+/// <summary>
+/// @author: David Liebemann
+/// </summary>
 [RequireComponent(typeof(MyClientBehaviour))]
 public class MyNetworkBehaviour : NetworkDiscovery {
 
@@ -69,5 +71,7 @@ public class MyNetworkBehaviour : NetworkDiscovery {
                 clientBehaviour.Client.ReconnectToNewHost(fromAddress, NetworkManager.singleton.networkPort);
             }
         }
+        
     }
+
 }

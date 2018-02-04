@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
-
+/// <summary>
+/// @author: David Liebemann
+/// </summary>
 public class POI : MonoBehaviour {
     public int ID { get; set; }
 

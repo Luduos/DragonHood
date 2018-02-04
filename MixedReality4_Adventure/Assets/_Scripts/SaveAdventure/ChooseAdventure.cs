@@ -2,6 +2,9 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 
+/// <summary>
+/// @author: David Liebemann
+/// </summary>
 public class ChooseAdventure : MonoBehaviour {
 
     [SerializeField]
