@@ -12,7 +12,8 @@ public class FromBehindTheDragon : MonoBehaviour {
 	public static bool youAreBehind;
 
 	void Update()
-	{    youAreBehind = false;
+	{   ARcam = GameObject.Find ("ARCamera(Clone)");
+		youAreBehind = false;
 		ARCamDirection = ARcam.transform.forward;
 		DragonDirection = Dragon.transform.forward;
 
