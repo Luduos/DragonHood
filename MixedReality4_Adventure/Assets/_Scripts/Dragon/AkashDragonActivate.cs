@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-
+/// <summary>
+/// @author: David Liebemann
+/// </summary>
 public class AkashDragonActivate : MonoBehaviour {
 
     [SerializeField]

@@ -28,7 +28,7 @@ public class MyNetworkBehaviour : NetworkDiscovery {
             }
             this.StopBroadcast();
             this.Initialize();
-            this.StartAsServer();
+            StartAsServer();
         }
         else
         {
@@ -72,6 +72,18 @@ public class MyNetworkBehaviour : NetworkDiscovery {
             }
         }
         
+    }
+
+    private void OnDestroy()
+    {
+
+        if (clientBehaviour.IsHost)
+        {
+            NetworkServer.Shutdown();
+            clientBehaviour.IsHost = false;
+            clientBehaviour.Client.Disconnect();
+            this.StopBroadcast();
+        }
     }
 
 }

@@ -52,9 +52,9 @@ public class POI : MonoBehaviour {
         {
             SubMesh = Instantiate(MiniDragonPrefab, this.transform, false);
             NameText.transform.localPosition = new Vector3(0.0f, 1.0f, 0.0f);
+            //SubMesh.transform.Rotate(SubMesh.transform.right, Random.Range(0.0f, 90.0f));
         }
         SubMesh.transform.Rotate(SubMesh.transform.forward, Random.Range(0.0f, 360.0f));
-
     }
 
     public string GetName() { return Name; }

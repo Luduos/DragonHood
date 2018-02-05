@@ -389,17 +389,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: EYES.001
-    second: {fileID: 2100000, guid: 1bd0410e620bcdb4dbc2b573c9a58516, type: 2}
+    second: {fileID: 2100000, guid: c4b0e06039f5cbc47befad5b2db384a1, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Game_dragon.002
-    second: {fileID: 2100000, guid: 1bd0410e620bcdb4dbc2b573c9a58516, type: 2}
+    second: {fileID: 2100000, guid: c4b0e06039f5cbc47befad5b2db384a1, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Game_dragon.003
-    second: {fileID: 2100000, guid: 1bd0410e620bcdb4dbc2b573c9a58516, type: 2}
+    second: {fileID: 2100000, guid: c4b0e06039f5cbc47befad5b2db384a1, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -2420,7 +2420,7 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 2
-    meshCompression: 0
+    meshCompression: 2
     addColliders: 0
     importVisibility: 0
     importBlendShapes: 1
@@ -2432,6 +2432,8 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88

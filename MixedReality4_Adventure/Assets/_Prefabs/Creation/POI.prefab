@@ -172,5 +172,5 @@ MonoBehaviour:
   NameText: {fileID: 102038579832992396}
   MiniBoxPrefab: {fileID: 1962906013097748, guid: 7af97e339f58a244ab923be42e78063d,
     type: 2}
-  MiniDragonPrefab: {fileID: 1371292946086050, guid: 1219a9ee1da033745b88a5983398e3d7,
+  MiniDragonPrefab: {fileID: 1078683770760512, guid: 1219a9ee1da033745b88a5983398e3d7,
     type: 2}
