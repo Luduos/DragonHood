@@ -100,16 +100,23 @@ public class MapInfo : MonoBehaviour {
 
     public Vector2 GetGPSAsUnityPosition(Vector2 gpsLocation)
     {
+        /*
         double posX = MercatorProjection.lonToX(gpsLocation.x);
         double posY = MercatorProjection.latToY(gpsLocation.y);
 
         Vector2 mapCenter = GetUnityMapCenter();
 
+        
+        // 100 units is 1 Miles = 1609.34 meters at zoom level 14
         posX -= mapCenter.x;
-        posX /= GetZoom();
+        posX *= 1.60934f  / 20.0f;
         posY -= mapCenter.y;
-        posY /= GetZoom();
+        posY *= 1.60934f / 20.0f;
+        */
 
+        // 
+        double posX = (gpsLocation.x - GetGPSMapCenter().x) * 9027.977761f * 5.0f; 
+        double posY = (gpsLocation.y - GetGPSMapCenter().y) * 9027.977761f * 3.25f;
         return new Vector2((float)posY, (float)posX);
     }
 }

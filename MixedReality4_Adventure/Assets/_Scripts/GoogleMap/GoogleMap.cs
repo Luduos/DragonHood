@@ -1,4 +1,6 @@
 ﻿/*
+ * https://gist.github.com/derme302/d57a395b711b4ecf100f
+ * 
  * Based on the Google Maps for Unity Asset
  * https://www.assetstore.unity3d.com/en/#!/content/3573
  * However the relience on UniWeb has been removed

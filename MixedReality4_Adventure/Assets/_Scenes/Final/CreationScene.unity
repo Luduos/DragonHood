@@ -3317,7 +3317,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1096949717}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.12, y: 0, z: -0.1}
+  m_LocalPosition: {x: 100, y: 0, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1991743316}
@@ -3345,7 +3345,7 @@ MonoBehaviour:
   DebugText: {fileID: 52349077}
   GPSPos: {x: 49.24501, y: 7.021521}
   RotationSpeed: 100
-  ZoomSpeed: 15
+  ZoomSpeed: 17
   CreatorModel: {fileID: 1991743315}
   CreatorSprite: {fileID: 1991743317}
   POIPrefab: {fileID: 114614108147810292, guid: 3259bc98e3d642f4abe74c20279dddc1,

@@ -89,7 +89,17 @@ public class CreatorLogic : MonoBehaviour {
             GPSPos += new Vector2(Time.deltaTime * 0.001f * verticalInput, 0.0f);
             SetGPSPosition(GPSPos);
         }
- 
+        if (Input.GetKey(KeyCode.Q))
+        {
+            GPSPos += new Vector2(0.0f, -Time.deltaTime * 0.001f);
+            SetGPSPosition(GPSPos);
+        }
+        if (Input.GetKey(KeyCode.E))
+        {
+            GPSPos += new Vector2(0.0f, Time.deltaTime * 0.001f);
+            SetGPSPosition(GPSPos);
+        }
+
         if (IsZooming)
         {
             MainCamera.orthographicSize = MainCamera.orthographicSize - Input.acceleration.y * Time.deltaTime * ZoomSpeed;
