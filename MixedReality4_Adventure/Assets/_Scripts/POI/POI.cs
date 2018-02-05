@@ -5,7 +5,7 @@
 /// Point of Interest
 /// </summary>
 public class POI : MonoBehaviour {
-    public int ID { get; set; }
+    public int ID { get; private set; }
 
     [SerializeField]
     private string Name;
@@ -13,11 +13,21 @@ public class POI : MonoBehaviour {
     private Vector2 GPSPosition;
 
     [SerializeField]
+    private GameObject TextSubObject = null;
+    [SerializeField]
     private TextMesh NameText = null;
+
+    [SerializeField]
+    private GameObject MiniBoxPrefab = null;
+
+    [SerializeField]
+    private GameObject MiniDragonPrefab = null;
 
     private Camera MainCamera;
 
     public bool ShouldUpdate { get; set; }
+
+    private GameObject SubMesh = null;
 
     private void Start()
     {
@@ -25,6 +35,26 @@ public class POI : MonoBehaviour {
         this.transform.localScale = this.transform.lossyScale;
         this.transform.localRotation = Quaternion.identity;
         ShouldUpdate = true;
+    }
+
+    public void SetID(int newID)
+    {
+        ID = newID;
+        if (null != SubMesh)
+            return;
+
+        if(0 ==newID)
+        {
+            SubMesh = Instantiate(MiniBoxPrefab, this.transform, false);
+            NameText.transform.localPosition = new Vector3(0.0f, 1.0f, 0.0f);
+        }
+        else
+        {
+            SubMesh = Instantiate(MiniDragonPrefab, this.transform, false);
+            NameText.transform.localPosition = new Vector3(0.0f, 1.0f, 0.0f);
+        }
+        SubMesh.transform.Rotate(SubMesh.transform.forward, Random.Range(0.0f, 360.0f));
+
     }
 
     public string GetName() { return Name; }
@@ -63,7 +93,7 @@ public class POI : MonoBehaviour {
             NameText.transform.RotateAround(this.transform.position, -transform.forward, angleDiff);
             */
 
-            this.transform.localRotation =   new Quaternion(0.0f, 0.0f, -MainCamera.transform.rotation.z, -MainCamera.transform.rotation.w);
+            TextSubObject.transform.localRotation = new Quaternion(0.0f, 0.0f, -MainCamera.transform.rotation.z, -MainCamera.transform.rotation.w);
 
             this.transform.localPosition = MapInfo.instance.GetGPSAsUnityPosition(GPSPosition);
         }      

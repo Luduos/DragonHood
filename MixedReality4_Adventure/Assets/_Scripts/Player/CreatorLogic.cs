@@ -175,7 +175,7 @@ public class CreatorLogic : MonoBehaviour {
         // instantiate the actual poi object in unity space
         POI poiObject = Instantiate(POIPrefab);
         poiObject.transform.SetParent(MapPlane.transform, true);
-        poiObject.ID = info.ID;
+        poiObject.SetID(info.ID);
         poiObject.SetGPSPosition(GPSPos);
         poiObject.SetName(info.Name + "(" + numPOIOfSameType + ")");
         pointsOfInterest.Add(poiObject);
@@ -238,7 +238,7 @@ public class CreatorLogic : MonoBehaviour {
             // instantiate the actual poi object in unity space
             POI poiObject = Instantiate(POIPrefab);
             poiObject.transform.SetParent(MapPlane.transform, true);
-            poiObject.ID = info.ID;
+            poiObject.SetID(info.ID);
             poiObject.SetGPSPosition(new Vector2(info.XGPSPos, info.YGPSPos));
             poiObject.SetName(info.Name);
             pointsOfInterest.Add(poiObject);
