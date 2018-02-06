@@ -88,8 +88,8 @@ public class TickleManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		ARCam1 = GameObject.Find ("ARCamera(Clone)");
-		ARCam2 = GameObject.Find ("ARCamera2(Clone)");
+		ARCam1 = GameObject.Find ("Camera1(Clone)");
+		ARCam2 = GameObject.Find ("Camera2(Clone)");
 
 		StartTickling ();
 

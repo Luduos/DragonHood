@@ -91,4 +91,13 @@ public class myNetworkManager : NetworkManager {
 
 
 
+	public void CreateHost()
+	{
+		myNetworkManager.singleton.StartHost ();
+	}
+
+	public void CreateClient()
+	{
+		myNetworkManager.singleton.StartClient ();
+	}
 }
