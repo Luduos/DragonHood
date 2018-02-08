@@ -11,6 +11,7 @@ public class myNetworkManager : NetworkManager {
 	public Button playerBellButton;
 	int avatarIndex = 0;
 	public Canvas characterSelectionCanvas;
+	public NetworkClient Client;
 
 
 	// Use this for initialization
@@ -47,7 +48,7 @@ public class myNetworkManager : NetworkManager {
 	public override void OnClientConnect(NetworkConnection conn)
 	{
 
-		characterSelectionCanvas.enabled = false;
+		//characterSelectionCanvas.enabled = false;
 
 		IntegerMessage msg = new IntegerMessage (avatarIndex);
 		if (!clientLoadedScene)
@@ -98,6 +99,6 @@ public class myNetworkManager : NetworkManager {
 
 	public void CreateClient()
 	{
-		myNetworkManager.singleton.StartClient ();
+		 myNetworkManager.singleton.StartClient ();
 	}
 }

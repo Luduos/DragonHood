@@ -1,0 +1,458 @@
+fileFormatVersion: 2
+guid: c62466f7b89644fe7a969926611b0d25
+timeCreated: 1518090259
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Bandana
+    100002: Belt
+    100004: Camera
+    100006: chest
+    100008: Coat
+    100010: Coat Flap
+    100012: Coat Flap_MeshPart0
+    100014: Coat Flap_MeshPart1
+    100016: Coat Flap_MeshPart2
+    100018: Eye
+    100020: Eye Patch
+    100022: f_index.01.L
+    100024: f_index.01.R
+    100026: f_index.02.L
+    100028: f_index.02.R
+    100030: f_index.03.L
+    100032: f_index.03.L_end
+    100034: f_index.03.R
+    100036: f_index.03.R_end
+    100038: f_middle.01.L
+    100040: f_middle.01.R
+    100042: f_middle.02.L
+    100044: f_middle.02.R
+    100046: f_middle.03.L
+    100048: f_middle.03.L_end
+    100050: f_middle.03.R
+    100052: f_middle.03.R_end
+    100054: f_pinky.01.L
+    100056: f_pinky.01.R
+    100058: f_pinky.02.L
+    100060: f_pinky.02.R
+    100062: f_pinky.03.L
+    100064: f_pinky.03.L_end
+    100066: f_pinky.03.R
+    100068: f_pinky.03.R_end
+    100070: f_ring.01.L
+    100072: f_ring.01.R
+    100074: f_ring.02.L
+    100076: f_ring.02.R
+    100078: f_ring.03.L
+    100080: f_ring.03.L_end
+    100082: f_ring.03.R
+    100084: f_ring.03.R_end
+    100086: foot.L
+    100088: foot.R
+    100090: forearm.L
+    100092: forearm.R
+    100094: Hair
+    100096: hand.L
+    100098: hand.R
+    100100: Hand_Armor.009_a8_v74.008
+    100102: head
+    100104: Head band
+    100106: head_end
+    100108: heel.02.L
+    100110: heel.02.L_end
+    100112: heel.02.R
+    100114: heel.02.R_end
+    100116: heel.L
+    100118: heel.R
+    100120: hips
+    100122: Human
+    100124: Kanavi
+    100126: Kanavi Rig
+    100128: //RootNode
+    100130: Lamp
+    100132: neck
+    100134: palm.01.L
+    100136: palm.01.R
+    100138: palm.02.L
+    100140: palm.02.R
+    100142: palm.03.L
+    100144: palm.03.R
+    100146: palm.04.L
+    100148: palm.04.R
+    100150: Point
+    100152: Point.001
+    100154: Point.002
+    100156: Point.003
+    100158: shin.L
+    100160: shin.R
+    100162: shoulder.L
+    100164: shoulder.R
+    100166: spine
+    100168: thigh.L
+    100170: thigh.R
+    100172: thumb.01.L
+    100174: thumb.01.R
+    100176: thumb.02.L
+    100178: thumb.02.R
+    100180: thumb.03.L
+    100182: thumb.03.L_end
+    100184: thumb.03.R
+    100186: thumb.03.R_end
+    100188: toe.L
+    100190: toe.L_end
+    100192: toe.R
+    100194: toe.R_end
+    100196: Trousers
+    100198: upper_arm.L
+    100200: upper_arm.R
+    400000: Bandana
+    400002: Belt
+    400004: Camera
+    400006: chest
+    400008: Coat
+    400010: Coat Flap
+    400012: Coat Flap_MeshPart0
+    400014: Coat Flap_MeshPart1
+    400016: Coat Flap_MeshPart2
+    400018: Eye
+    400020: Eye Patch
+    400022: f_index.01.L
+    400024: f_index.01.R
+    400026: f_index.02.L
+    400028: f_index.02.R
+    400030: f_index.03.L
+    400032: f_index.03.L_end
+    400034: f_index.03.R
+    400036: f_index.03.R_end
+    400038: f_middle.01.L
+    400040: f_middle.01.R
+    400042: f_middle.02.L
+    400044: f_middle.02.R
+    400046: f_middle.03.L
+    400048: f_middle.03.L_end
+    400050: f_middle.03.R
+    400052: f_middle.03.R_end
+    400054: f_pinky.01.L
+    400056: f_pinky.01.R
+    400058: f_pinky.02.L
+    400060: f_pinky.02.R
+    400062: f_pinky.03.L
+    400064: f_pinky.03.L_end
+    400066: f_pinky.03.R
+    400068: f_pinky.03.R_end
+    400070: f_ring.01.L
+    400072: f_ring.01.R
+    400074: f_ring.02.L
+    400076: f_ring.02.R
+    400078: f_ring.03.L
+    400080: f_ring.03.L_end
+    400082: f_ring.03.R
+    400084: f_ring.03.R_end
+    400086: foot.L
+    400088: foot.R
+    400090: forearm.L
+    400092: forearm.R
+    400094: Hair
+    400096: hand.L
+    400098: hand.R
+    400100: Hand_Armor.009_a8_v74.008
+    400102: head
+    400104: Head band
+    400106: head_end
+    400108: heel.02.L
+    400110: heel.02.L_end
+    400112: heel.02.R
+    400114: heel.02.R_end
+    400116: heel.L
+    400118: heel.R
+    400120: hips
+    400122: Human
+    400124: Kanavi
+    400126: Kanavi Rig
+    400128: //RootNode
+    400130: Lamp
+    400132: neck
+    400134: palm.01.L
+    400136: palm.01.R
+    400138: palm.02.L
+    400140: palm.02.R
+    400142: palm.03.L
+    400144: palm.03.R
+    400146: palm.04.L
+    400148: palm.04.R
+    400150: Point
+    400152: Point.001
+    400154: Point.002
+    400156: Point.003
+    400158: shin.L
+    400160: shin.R
+    400162: shoulder.L
+    400164: shoulder.R
+    400166: spine
+    400168: thigh.L
+    400170: thigh.R
+    400172: thumb.01.L
+    400174: thumb.01.R
+    400176: thumb.02.L
+    400178: thumb.02.R
+    400180: thumb.03.L
+    400182: thumb.03.L_end
+    400184: thumb.03.R
+    400186: thumb.03.R_end
+    400188: toe.L
+    400190: toe.L_end
+    400192: toe.R
+    400194: toe.R_end
+    400196: Trousers
+    400198: upper_arm.L
+    400200: upper_arm.R
+    2000000: Camera
+    2300000: Human
+    3300000: Human
+    4300000: Eye
+    4300002: Hand_Armor.009_a8_v74.008
+    4300004: Trousers
+    4300006: Belt
+    4300008: Head band
+    4300010: Eye Patch
+    4300012: Kanavi
+    4300014: Coat Flap_MeshPart0
+    4300016: Coat Flap_MeshPart1
+    4300018: Coat Flap_MeshPart2
+    4300020: Hair
+    4300022: Bandana
+    4300024: Coat
+    4300026: Human
+    9500000: //RootNode
+    10800000: Lamp
+    10800002: Point
+    10800004: Point.001
+    10800006: Point.002
+    10800008: Point.003
+    13700000: Bandana
+    13700002: Belt
+    13700004: Coat
+    13700006: Coat Flap_MeshPart0
+    13700008: Coat Flap_MeshPart1
+    13700010: Coat Flap_MeshPart2
+    13700012: Eye
+    13700014: Eye Patch
+    13700016: Hair
+    13700018: Hand_Armor.009_a8_v74.008
+    13700020: Head band
+    13700022: Kanavi
+    13700024: Trousers
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Base Colour
+    second: {fileID: 2100000, guid: 2fa6e79ea7ad040189ffec11ea515b29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Belt
+    second: {fileID: 2100000, guid: 1c9e9bba50cc2448e8022a9932691908, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Black
+    second: {fileID: 2100000, guid: 1d4d5b0632de24046bcf109d1de67c04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Black Sections
+    second: {fileID: 2100000, guid: 1d4d5b0632de24046bcf109d1de67c04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body
+    second: {fileID: 2100000, guid: 29318b9d50376474aa7b2b2ec3a42add, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boots
+    second: {fileID: 2100000, guid: 1c9e9bba50cc2448e8022a9932691908, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eye
+    second: {fileID: 2100000, guid: bd648f32084264c5a8f1244f790abf2a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EyeLashes
+    second: {fileID: 2100000, guid: 4a46c834e680d484bb667555f94a4af3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyes
+    second: {fileID: 2100000, guid: 1f108bc21f8ee4800bf7f4e8d930853e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GreyStripes
+    second: {fileID: 2100000, guid: 3b0b410cb3ae74ec797487ae1191b9a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ground
+    second: {fileID: 2100000, guid: 5ce597fd126204c31923c669888a6987, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hair
+    second: {fileID: 2100000, guid: f02eda4220a0243aab855d5a1c70a046, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hair.001
+    second: {fileID: 2100000, guid: 943c5bdcba45244f6a89432937c943ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Head Band.001
+    second: {fileID: 2100000, guid: ca980c219781d4a48a6e028464e2f1ec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Joints
+    second: {fileID: 2100000, guid: f7490bf3dac5642ceac76e0a83c2bed3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LoTeeth
+    second: {fileID: 2100000, guid: cc0ab3bca2d1a4baf9e928f4078b4481, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Orange Stripes
+    second: {fileID: 2100000, guid: 1922e62abb82c4e1c95b821797d75161, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Penis
+    second: {fileID: 2100000, guid: d7bb5a327115c4d6782701573e9d2644, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red Stripe
+    second: {fileID: 2100000, guid: bd699ec8499444bf6978294ae4023938, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red Stripes
+    second: {fileID: 2100000, guid: bd699ec8499444bf6978294ae4023938, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin
+    second: {fileID: 2100000, guid: 35c8c08205e4a4e4890c120eefd44393, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skirt
+    second: {fileID: 2100000, guid: 04400decc1710436eb4e66bfe30ffef8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tights
+    second: {fileID: 2100000, guid: f43d43f62b8cf41e6995481144d46a0c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tongue
+    second: {fileID: 2100000, guid: 0a074e0d305754742bedf73c2dccb7f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Trousers
+    second: {fileID: 2100000, guid: 7d42f4824dcc447f1ad24e6f23dcdffc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: UpTeeth
+    second: {fileID: 2100000, guid: d74f898c6793b40a7822b6165d2b38c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: White_
+    second: {fileID: 2100000, guid: b43427b90abd9486bae91b873cb71010, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

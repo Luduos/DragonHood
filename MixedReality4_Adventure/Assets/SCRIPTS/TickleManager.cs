@@ -24,6 +24,7 @@ public class TickleManager : MonoBehaviour {
 	public bool rangBell;
 	public bool rangBellOnce, rangBellTwice, rangeBellThrice;
 	public AudioSource audioSource;
+	public ParticleSystem fire;
 
 
 
@@ -79,17 +80,18 @@ public class TickleManager : MonoBehaviour {
 		text=this.GetComponentInChildren<Text>();
 		imageInstruction = this.GetComponentInChildren<RawImage> ();
 		mistaken = false;
+		fire = FindObjectOfType<ParticleSystem> ();
 
 		//this.transform.rotation = new Quaternion (0, 1, 0, 0);
 		animator = this.GetComponent<Animator> ();
 		animator.SetBool ("mistake", false);
 	}
-	
+
 	// Update is called once per frame
 	void Update () 
 	{
-		ARCam1 = GameObject.Find ("Camera1(Clone)");
-		ARCam2 = GameObject.Find ("Camera2(Clone)");
+		//ARCam1 = GameObject.Find ("Camera1(Clone)");
+		//ARCam2 = GameObject.Find ("Camera2(Clone)");
 
 		StartTickling ();
 
@@ -121,16 +123,17 @@ public class TickleManager : MonoBehaviour {
 			animator.SetBool ("mistake", true);
 
 		} 
-	
+
 
 		if (FromBehindTheDragon.youAreBehind == true) {
 
 			animator.SetBool ("mistake", false);
 
+
 			if (resultStage1 == false) 
 			{Debug.Log (this.transform.rotation);
-				
-					
+
+
 				TickleSwipedRight ();
 				resultStage1 = TickleSwipedRight ();
 
@@ -138,11 +141,11 @@ public class TickleManager : MonoBehaviour {
 			}
 
 			if (resultStage1 == true && resultStage2 == false && rangBellOnce==false ) { //TickleSwipeRight
-				
+
 				rangBell = false;
 
 				rangBellOnce = true;
-					
+
 
 			}
 			if (resultStage1 == true && resultStage2 == false && rangBell==true && rangBellOnce==true) { //TickleSwipeRight
@@ -166,7 +169,7 @@ public class TickleManager : MonoBehaviour {
 				resultStage3 = TickledCrazy ();
 			}
 			if (resultStage2 == true && resultStage3 == false && rangBellTwice==true && rangBell==true) { 
-				
+
 
 				TickledCrazy ();
 				resultStage3 = TickledCrazy ();
@@ -194,6 +197,7 @@ public class TickleManager : MonoBehaviour {
 		Touch[] myTouches = Input.touches;
 		if (Input.touchCount > 2 || (Input.touchCount < 2 && Input.touchCount > 0)) {
 			animator.SetBool ("mistake", true);
+			fire.Play ();
 			text.text = "You see those 2 arrows, what could they mean ?";
 		}
 
@@ -241,6 +245,7 @@ public class TickleManager : MonoBehaviour {
 					animator.SetBool ("mistake", true);
 					mistaken = true;
 					text.text = "Be Gentle! Too quick!";
+					fire.Play ();
 
 					//Debug.Log ("Be Gentle");
 				} else if (speedOfSwipe1 > maxSpeedX1 && swipedDistanceX1 > minSwipeDistanceX1 && mistaken == true) {
@@ -248,16 +253,19 @@ public class TickleManager : MonoBehaviour {
 					valu = animator.GetBool ("mistake");
 					Debug.Log (valu);
 					text.text = "Be Gentle! Too quick!";
+					fire.Play ();
 					break;
 					//Debug.Log ("Be Gentle");
 				} else if (speedOfSwipe1 < minSpeedX1 && swipedDistanceX1 > minSwipeDistanceX1) {
 					animator.SetBool ("mistake", true);
 					mistaken = true;
 					text.text = "Too slow!";
+					fire.Play ();
 					//Debug.Log("Didnt even feel that , Come on !!");
 				} else if (speedOfSwipe1 < minSpeedX1 && swipedDistanceX1 > minSwipeDistanceX1 && mistaken == true) {
 					animator.SetBool ("mistake", true);
 					text.text = "Too slow!";
+					fire.Play ();
 					//Debug.Log("Didnt even feel that , Come on !!");
 				} 
 
@@ -288,6 +296,7 @@ public class TickleManager : MonoBehaviour {
 		if (Input.touchCount > 3 || (Input.touchCount < 3 && Input.touchCount > 0)) {
 			animator.SetBool ("mistake", true);
 			text.text = "You see those 3 arrows , what could they mean?";
+			fire.Play ();
 		}
 		if (Input.touchCount == 3) {
 
@@ -331,6 +340,7 @@ public class TickleManager : MonoBehaviour {
 				} else if (speedOfSwipe2 > maxSpeedX2 && swipedDistanceX2 > minSwipeDistanceX2) {
 					text.text = "Be Gentle! Too quick!";
 					mistaken = true;
+					fire.Play ();
 
 					//Debug.Log ("Be Gentle");
 					animator.SetBool ("mistake", true);
@@ -339,19 +349,22 @@ public class TickleManager : MonoBehaviour {
 					text.text = "Be Gentle! Too quick!";
 					//Debug.Log ("Be Gentle");
 					animator.SetBool ("mistake", true);
+					fire.Play ();
 					break;
 
 				} else if (speedOfSwipe2 < minSpeedX2 && swipedDistanceX2 > minSwipeDistanceX2) {
-					
+
 					//Debug.Log("Didnt even feel that , Come on !!");
 					animator.SetBool ("mistake", true);
 					mistaken = true;
+					fire.Play ();
 
 					//text.text = "Too slow didnt even feel that , Come on !! Long And Slow to the left";
 				} else if (speedOfSwipe2 < minSpeedX2 && swipedDistanceX2 > minSwipeDistanceX2 && mistaken == true) {
-					
+
 					//Debug.Log("Didnt even feel that , Come on !!");
 					animator.SetBool ("mistake", true);
+					fire.Play ();
 					//text.text = "Too slow didnt even feel that , Come on !! Long And Slow to the left!";
 				} 
 
@@ -380,6 +393,7 @@ public class TickleManager : MonoBehaviour {
 		if (Input.touchCount > 2 || (Input.touchCount < 2 && Input.touchCount > 0)) {
 			animator.SetBool ("mistake", true);
 			text.text = "You see those 2 arrows,what could they mean?";
+			fire.Play ();
 		}
 
 
@@ -430,11 +444,13 @@ public class TickleManager : MonoBehaviour {
 					mistaken = true;
 					text.text="Not Fast enough :/";
 					animator.SetBool("mistake",true);
+					fire.Play ();
 				}else if (swipedDistanceY3 > minSwipeDistanceY3 && speedOfSwipe3 < minSpeedY3 && mistaken==true) {
 					//Debug.Log ("Too slow Come on !!");
 
 					text.text="Not Fast enough :/";
 					animator.SetBool("mistake",true);
+					fire.Play ();
 				}
 
 
