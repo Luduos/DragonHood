@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.Events;
 /// <summary>
 /// @author: David Liebemann
 /// </summary>
@@ -23,6 +23,7 @@ public class PlayerLogic : MonoBehaviour {
     public bool HasFeather { get; set; }
     public bool HasBell { get; set; }
 
+    public UnityAction<PlayerClassType> OnClassSelected;
 
     // Use this for initialization
     void Start () {
@@ -58,6 +59,8 @@ public class PlayerLogic : MonoBehaviour {
         ClassIconDisplay.sprite = ClassIcons[classType - 1];
 
         UpdateClassAbilities();
+        if (null != OnClassSelected)
+            OnClassSelected.Invoke(ClassType);
     }
 
     private void UpdateClassAbilities()

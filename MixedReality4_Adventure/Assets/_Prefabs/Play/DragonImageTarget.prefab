@@ -2984,7 +2984,7 @@ Transform:
   m_GameObject: {fileID: 1925233084458540}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0033333336, y: 0.0033333336, z: 0.0033333336}
+  m_LocalScale: {x: 0.006, y: 0.006, z: 0.006}
   m_Children:
   - {fileID: 4734816345485604}
   - {fileID: 4230690374624052}
@@ -4371,8 +4371,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1083276344526732}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -415.1, y: -15, z: 6}
   m_LocalScale: {x: 15.204917, y: 15.204917, z: 15.204917}
   m_Children:
   - {fileID: 4040173051922508}
@@ -5592,6 +5592,15 @@ MonoBehaviour:
   right: {fileID: 2800000, guid: 3706e5c9edfca4297b5ebd33964e58da, type: 3}
   left: {fileID: 2800000, guid: a908d8727cc5240e8b045f9ded992d54, type: 3}
   upAndDown: {fileID: 2800000, guid: 81f73f5f9f8274d8ca4786a6e1ed7a7f, type: 3}
+  hasBell: 0
+  hasFeather: 0
+  ARCam1: {fileID: 0}
+  ARCam2: {fileID: 0}
+  rangBell: 0
+  rangBellOnce: 0
+  rangBellTwice: 0
+  rangeBellThrice: 0
+  audioSource: {fileID: 0}
 --- !u!114 &114365140505040538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5675,7 +5684,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: e761aa8d419fb49d98149cbea5a9ab71, type: 3}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0

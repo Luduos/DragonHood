@@ -2,40 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.UI;
 using UnityEngine.Networking.NetworkSystem;
 
-public class myNetworkManager : NetworkManager {
+public class MyNetworkManager : NetworkManager {
 
-	public Button playerFeatherButton;
-	public Button playerBellButton;
 	int avatarIndex = 0;
-	public Canvas characterSelectionCanvas;
 
+    [SerializeField]
+    private PlayerLogic player = null;
 
 	// Use this for initialization
 	void Start () {
-
-		playerFeatherButton.onClick.AddListener (delegate {
-																AvatarPicker (playerFeatherButton.name);
-															});
-
-		playerBellButton.onClick.AddListener (delegate {
-																AvatarPicker (playerBellButton.name);
-															});
-
+        if(null == player)
+        {
+            player = FindObjectOfType<PlayerLogic>();
+        }
+        player.OnClassSelected += AvatarPicker;
 	}
-	
 
-
-	void AvatarPicker(string buttonName)
+	private void AvatarPicker(PlayerClassType classType)
 	{
-		switch (buttonName) 
+		switch (classType) 
 		{
-		case "PlayerFeather":
-			avatarIndex = 0;
+		case PlayerClassType.PuzzleMaster:
+            avatarIndex = 0;
 			break;
-		case "PlayerBell":
+		case PlayerClassType.Fighter:
 			avatarIndex = 1;
 			break;
 		}
@@ -43,12 +35,8 @@ public class myNetworkManager : NetworkManager {
 		playerPrefab = spawnPrefabs [avatarIndex];
 	}
 
-
 	public override void OnClientConnect(NetworkConnection conn)
 	{
-
-		characterSelectionCanvas.enabled = false;
-
 		IntegerMessage msg = new IntegerMessage (avatarIndex);
 		if (!clientLoadedScene)
 		{
@@ -60,7 +48,6 @@ public class myNetworkManager : NetworkManager {
 			}
 		}
 	}
-
 
 	public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
 	{
@@ -87,17 +74,5 @@ public class myNetworkManager : NetworkManager {
 		}
 
 		NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
-	}
-
-
-
-	public void CreateHost()
-	{
-		myNetworkManager.singleton.StartHost ();
-	}
-
-	public void CreateClient()
-	{
-		myNetworkManager.singleton.StartClient ();
 	}
 }
