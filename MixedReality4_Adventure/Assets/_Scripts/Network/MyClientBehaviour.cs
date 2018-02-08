@@ -46,7 +46,7 @@ public class MyClientBehaviour : MonoBehaviour {
     {
         this.IsHost = isHost;
         Client = client;
-        Client.RegisterHandler(MsgType.Connect, OnConnected);
+        Client.RegisterHandler(MsgType.Connect, OnConnected); // shouldn't activate this, otherwise the OnConnected in MyNetworkManager will not get called
         Client.RegisterHandler(MsgType.Error, OnError);
         Client.RegisterHandler(MsgType.Disconnect, OnDisconnect);
         Client.RegisterHandler(MyMsgType.ChooseClass, OnChooseClass);
@@ -163,6 +163,7 @@ public class MyClientBehaviour : MonoBehaviour {
     {
         Debug.Log("Connected to Server");
         DebugText.text = "Connected";
+        NetworkManager.singleton.OnClientConnect(Client.connection);
     }
 
     private void OnPlayerConnected(NetworkPlayer player)

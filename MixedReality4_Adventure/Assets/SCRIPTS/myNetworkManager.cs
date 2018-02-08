@@ -9,15 +9,19 @@ public class MyNetworkManager : NetworkManager {
 	int avatarIndex = 0;
 
     [SerializeField]
-    private PlayerLogic player = null;
+    private PlayerLogic playerLogic = null;
+
+    private bool ClassWasSelected = false;
+
 
 	// Use this for initialization
 	void Start () {
-        if(null == player)
+        Time.timeScale = 1.0f;
+        if(null == playerLogic)
         {
-            player = FindObjectOfType<PlayerLogic>();
+            playerLogic = FindObjectOfType<PlayerLogic>();
         }
-        player.OnClassSelected += AvatarPicker;
+        playerLogic.OnClassSelected += AvatarPicker;
 	}
 
 	private void AvatarPicker(PlayerClassType classType)
@@ -33,23 +37,40 @@ public class MyNetworkManager : NetworkManager {
 		}
 
 		playerPrefab = spawnPrefabs [avatarIndex];
-	}
 
+        ClassWasSelected = true;  
+    }
+
+    
 	public override void OnClientConnect(NetworkConnection conn)
 	{
-		IntegerMessage msg = new IntegerMessage (avatarIndex);
-		if (!clientLoadedScene)
-		{
-			// Ready/AddPlayer is usually triggered by a scene load completing. if no scene was loaded, then Ready/AddPlayer it here instead.
-			ClientScene.Ready(conn);
-			if (autoCreatePlayer)
-			{
-				ClientScene.AddPlayer(conn,0,msg);
-			}
-		}
-	}
+        StartCoroutine(WaitingForClassSelection(conn));
+    }
 
-	public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
+    private IEnumerator WaitingForClassSelection(NetworkConnection conn)
+    {
+        while (!ClassWasSelected)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        IntegerMessage msg = new IntegerMessage(avatarIndex);
+
+
+        if (!clientLoadedScene)
+        {
+            // Ready/AddPlayer is usually triggered by a scene load completing. if no scene was loaded, then Ready/AddPlayer it here instead.
+            ClientScene.Ready(conn);
+            if (autoCreatePlayer)
+            {
+                ClientScene.AddPlayer(conn, 0, msg);
+            } 
+        }
+    }
+
+    
+
+    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
 	{
 
 		int id = 0;
@@ -66,7 +87,7 @@ public class MyNetworkManager : NetworkManager {
 		Transform startPos = GetStartPosition();
 		if (startPos != null)
 		{
-			player = (GameObject)Instantiate(playerPrefab, startPos.position, startPos.rotation);
+			player = (GameObject)Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
 		}
 		else
 		{
@@ -75,4 +96,5 @@ public class MyNetworkManager : NetworkManager {
 
 		NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
 	}
+
 }

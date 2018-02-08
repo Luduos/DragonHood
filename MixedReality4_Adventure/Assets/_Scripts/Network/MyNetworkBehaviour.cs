@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using System.Collections;
 /// <summary>
 /// @author: David Liebemann
 /// </summary>
@@ -11,16 +12,21 @@ public class MyNetworkBehaviour : NetworkDiscovery {
     private void Start()
     {
         clientBehaviour = this.gameObject.GetComponent<MyClientBehaviour>();
+        StartCoroutine(DelayedClientStart(0.2f));
+    }
+
+    private IEnumerator DelayedClientStart(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         this.Initialize();
         this.StartAsClient();
-
     }
 
     public void OnServeAsHost()
     {
         if (null == clientBehaviour.Client)
         {
-            clientBehaviour.Client = NetworkManager.singleton.StartHost();
+            clientBehaviour.Client = MyNetworkManager.singleton.StartHost();
             if (clientBehaviour.Client != null)
             {
                 clientBehaviour.SetClient(clientBehaviour.Client, true);
@@ -28,13 +34,13 @@ public class MyNetworkBehaviour : NetworkDiscovery {
             }
             this.StopBroadcast();
             this.Initialize();
-            StartAsServer();
+            this.StartAsServer();
         }
         else
         {
             if (!clientBehaviour.Client.isConnected)
             {
-                NetworkManager.singleton.StartServer();
+                MyNetworkManager.singleton.StartServer();
                 clientBehaviour.IsHost = true;
                 this.StopBroadcast();
                 this.Initialize();
@@ -42,7 +48,7 @@ public class MyNetworkBehaviour : NetworkDiscovery {
             }
             else if (clientBehaviour.IsHost)
             {
-                NetworkServer.Shutdown();
+                MyNetworkManager.singleton.StopHost();
                 clientBehaviour.IsHost = false;
                 clientBehaviour.Client.Disconnect();
                 this.StopBroadcast();
@@ -68,7 +74,7 @@ public class MyNetworkBehaviour : NetworkDiscovery {
         {
             if (!clientBehaviour.Client.isConnected)
             {
-                clientBehaviour.Client.ReconnectToNewHost(fromAddress, NetworkManager.singleton.networkPort);
+                clientBehaviour.Client.Connect(fromAddress, MyNetworkManager.singleton.networkPort);
             }
         }
         
@@ -79,11 +85,14 @@ public class MyNetworkBehaviour : NetworkDiscovery {
 
         if (clientBehaviour.IsHost)
         {
-            NetworkServer.Shutdown();
-            clientBehaviour.IsHost = false;
-            clientBehaviour.Client.Disconnect();
+            MyNetworkManager.singleton.StopHost();
             this.StopBroadcast();
         }
+        else
+        {
+            MyNetworkManager.singleton.StopClient();
+        }
+        MyNetworkManager.singleton.networkAddress = "localHost";
+        clientBehaviour.IsHost = false;
     }
-
 }
