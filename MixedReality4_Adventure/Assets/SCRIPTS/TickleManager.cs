@@ -17,8 +17,13 @@ public class TickleManager : MonoBehaviour {
 	public Texture right;
 	public Texture left;
 	public Texture upAndDown;
-
-
+	public bool hasBell;
+	public bool hasFeather;
+	public GameObject ARCam1;
+	public GameObject ARCam2;
+	public bool rangBell;
+	public bool rangBellOnce, rangBellTwice, rangeBellThrice;
+	public AudioSource audioSource;
 
 
 
@@ -66,6 +71,11 @@ public class TickleManager : MonoBehaviour {
 
 	void Start () {
 		//Debug.Log(this.transform.rotation);
+		rangBell= false;
+		rangBellOnce= false;
+		rangBellTwice= false;
+		rangeBellThrice = false;
+
 		text=this.GetComponentInChildren<Text>();
 		imageInstruction = this.GetComponentInChildren<RawImage> ();
 		mistaken = false;
@@ -78,6 +88,8 @@ public class TickleManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		ARCam1 = GameObject.Find ("Camera1(Clone)");
+		ARCam2 = GameObject.Find ("Camera2(Clone)");
 
 		StartTickling ();
 
@@ -86,8 +98,25 @@ public class TickleManager : MonoBehaviour {
 
 	public void StartTickling()
 	{    //resultStage3 != true && resultStage2!=true && resultStage1!=true && 
-		
+		if ((Input.acceleration.y *1000) > 3000) {
+			Debug.Log (Input.acceleration.y * 3000);
+			audioSource.Play ();
+
+		}
+		if (ARCam2 && (Input.acceleration.y *1000) > 3000)
+		{
+			rangBell = true;
+			audioSource.Play ();
+		}
+		if (rangBell == true) {
+			this.transform.rotation = Quaternion.LookRotation (ARCam2.transform.position);
+		}
+
+		if (rangBell == false) {
+			this.transform.rotation = Quaternion.LookRotation (ARCam1.transform.position);
+		}
 		if ( FromBehindTheDragon.youAreBehind == false ) {
+			imageInstruction.texture = null;
 			text.text = "He can see you ! \n Get Behind!";
 			animator.SetBool ("mistake", true);
 
@@ -100,32 +129,55 @@ public class TickleManager : MonoBehaviour {
 
 			if (resultStage1 == false) 
 			{Debug.Log (this.transform.rotation);
+				
+					
 				TickleSwipedRight ();
 				resultStage1 = TickleSwipedRight ();
 
 
 			}
 
-			if (resultStage1 == true && resultStage2 == false ) { //TickleSwipeRight
-				this.transform.rotation= new Quaternion(0,1,0,0);
+			if (resultStage1 == true && resultStage2 == false && rangBellOnce==false ) { //TickleSwipeRight
+				
+				rangBell = false;
 
-					TickledSwipeLeft ();
+				rangBellOnce = true;
+					
+
+			}
+			if (resultStage1 == true && resultStage2 == false && rangBell==true && rangBellOnce==true) { //TickleSwipeRight
+
+
+
+				TickledSwipeLeft ();
 
 				resultStage2 = TickledSwipeLeft ();
 
 			}
-			if (resultStage2 == true && resultStage3 == false) { 
+
+			if (resultStage2 == true && resultStage3 == false && rangBellTwice==false) { 
 				//TickleSwipeLeft
+
 				resultStage1=false;
-				this.transform.rotation= new Quaternion(0,0,0,1);
+				rangBell = false;
+				rangBellTwice = true;
+
 				TickledCrazy ();
 				resultStage3 = TickledCrazy ();
 			}
-			if (resultStage3 == true) { //TickleCrazy
-				Debug.Log ("Dragon Disappears!!");
+			if (resultStage2 == true && resultStage3 == false && rangBellTwice==true && rangBell==true) { 
+				
+
+				TickledCrazy ();
+				resultStage3 = TickledCrazy ();
+
+			}
+			if (resultStage3 == true && rangeBellThrice==false) { //TickleCrazy
+				Debug.Log ("Dragon Disappears !!");
 				text.text="";
 				Destroy (imageInstruction);
 			}
+
 
 		} 
 	}
@@ -134,7 +186,7 @@ public class TickleManager : MonoBehaviour {
 
 	{ 
 		if (mistaken == false) {
-			text.text = "Lets tickle! Do the gesture slow.";
+			text.text = "Lets tickle!Do the gesture slow.";
 			imageInstruction.texture = right;
 		}
 		TickleManager.done = false;
@@ -142,7 +194,7 @@ public class TickleManager : MonoBehaviour {
 		Touch[] myTouches = Input.touches;
 		if (Input.touchCount > 2 || (Input.touchCount < 2 && Input.touchCount > 0)) {
 			animator.SetBool ("mistake", true);
-			text.text = "You see those 2 arrows, what could they mean?";
+			text.text = "You see those 2 arrows, what could they mean ?";
 		}
 
 		if (Input.touchCount == 2) {
@@ -224,7 +276,7 @@ public class TickleManager : MonoBehaviour {
 		Debug.Log (this.transform.rotation);
 
 		if (mistaken == false) {
-			text.text = "It works!\n Do the gesture slow";
+			text.text = "It works YAY !\n Do the gesture slow";
 			imageInstruction.texture = left;
 		}
 
@@ -272,7 +324,7 @@ public class TickleManager : MonoBehaviour {
 
 				if (swipedDistanceX2 > minSwipeDistanceX2 && speedOfSwipe2 > minSpeedX2 && speedOfSwipe2 < maxSpeedX2 && Mathf.Sign (endPos2 - startPos2) == -1) {
 
-					//Debug.Log ("The speed in left direction is " + speedOfSwipe2);
+					Debug.Log ("The speed in left direction is " + speedOfSwipe2);
 					mistaken = false;
 					TickleManager.done = true;
 					return TickleManager.done;
@@ -327,7 +379,7 @@ public class TickleManager : MonoBehaviour {
 
 		if (Input.touchCount > 2 || (Input.touchCount < 2 && Input.touchCount > 0)) {
 			animator.SetBool ("mistake", true);
-			text.text = "You see those 2 arrows, what could they mean?";
+			text.text = "You see those 2 arrows,what could they mean?";
 		}
 
 
@@ -376,12 +428,12 @@ public class TickleManager : MonoBehaviour {
 				} else if (swipedDistanceY3 > minSwipeDistanceY3 && speedOfSwipe3 < minSpeedY3) {
 					//Debug.Log ("Too slow Come on !!");
 					mistaken = true;
-					text.text="Not fast enough :/";
+					text.text="Not Fast enough :/";
 					animator.SetBool("mistake",true);
 				}else if (swipedDistanceY3 > minSwipeDistanceY3 && speedOfSwipe3 < minSpeedY3 && mistaken==true) {
 					//Debug.Log ("Too slow Come on !!");
 
-					text.text="Not fast enough :/";
+					text.text="Not Fast enough :/";
 					animator.SetBool("mistake",true);
 				}
 
