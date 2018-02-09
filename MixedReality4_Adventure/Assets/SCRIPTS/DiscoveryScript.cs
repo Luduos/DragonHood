@@ -24,4 +24,14 @@ public class DiscoveryScript : NetworkDiscovery {
 	}
 
 
+	public override void OnReceivedBroadcast(string fromAddress, string data)
+	{
+		if (Client == null) {
+			NetworkManager.singleton.networkAddress = fromAddress;
+			Client = NetworkManager.singleton.StartClient ();
+
+		}
+	}
+
+
 }

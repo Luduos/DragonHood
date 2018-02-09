@@ -48,7 +48,7 @@ public class myNetworkManager : NetworkManager {
 	public override void OnClientConnect(NetworkConnection conn)
 	{
 
-		//characterSelectionCanvas.enabled = false;
+		characterSelectionCanvas.enabled = false;
 
 		IntegerMessage msg = new IntegerMessage (avatarIndex);
 		if (!clientLoadedScene)
