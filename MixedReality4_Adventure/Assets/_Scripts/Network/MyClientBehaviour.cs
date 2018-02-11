@@ -59,9 +59,6 @@ public class MyClientBehaviour : MonoBehaviour {
             NetworkServer.RegisterHandler(MyMsgType.WrongPuzzleTouch, OnHostWrongTouch);
             NetworkServer.RegisterHandler(MyMsgType.ChooseAdventure, OnHostReceivedChooseAdventure);
         }
-        else
-        {
-        }
 
         Debug.Log(Client.isConnected);
         DebugText.text = "Was Set";
@@ -163,6 +160,7 @@ public class MyClientBehaviour : MonoBehaviour {
     {
         Debug.Log("Connected to Server");
         DebugText.text = "Connected";
+        NetworkManager.singleton.OnClientConnect(Client.connection);
     }
 
     private void OnPlayerConnected(NetworkPlayer player)

@@ -5,69 +5,157 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.Networking.NetworkSystem;
 
-public class myNetworkManager : NetworkManager {
+public class MyNetworkManager : NetworkManager {
 
-	public Button playerFeatherButton;
-	public Button playerBellButton;
 	int avatarIndex = 0;
-	public Canvas characterSelectionCanvas;
+	public TickleManager tickleManager; 
+    private bool isHost = false;
+
+    [SerializeField]
+    private PlayerLogic playerLogic = null;
+    private bool ClassWasSelected = false;
+
+    // Use this for initialization
+    void Start () {
+        if(null == tickleManager)
+		    tickleManager= FindObjectOfType<TickleManager>(); // TEMPORARY - CHANGE THIS @AKASH!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        Time.timeScale = 1.0f;
+        if (null == playerLogic)
+        {
+            playerLogic = FindObjectOfType<PlayerLogic>();
+        }
+        playerLogic.OnClassSelected += AvatarPicker;
+    }
+
+	void AvatarPicker(PlayerClassType classType)
+	{
+        switch (classType)
+        {
+            case PlayerClassType.PuzzleMaster:
+                avatarIndex = 0;
+                break;
+            case PlayerClassType.Fighter:
+                avatarIndex = 1;
+                break;
+        }
+
+        playerPrefab = spawnPrefabs[avatarIndex];
+
+        ClassWasSelected = true;
+
+    }
 
 
-	// Use this for initialization
-	void Start () {
-
-		playerFeatherButton.onClick.AddListener (delegate {
-																AvatarPicker (playerFeatherButton.name);
-															});
-
-		playerBellButton.onClick.AddListener (delegate {
-																AvatarPicker (playerBellButton.name);
-															});
-
-	}
 	
+	//@david all the bools used
+    public class BellMessage : MessageBase
+    {
+		public bool Rang;
+        public bool RangOnce;
+        public bool RangTwice;
+        public bool RangThrice;
+		public bool ResultStage1;
+		public bool ResultStage2;
+		public bool ResultStage3;
+		public bool Agitate;
+		public bool Disappear;
+    }
 
 
-	void AvatarPicker(string buttonName)
-	{
-		switch (buttonName) 
-		{
-		case "PlayerFeather":
-			avatarIndex = 0;
-			break;
-		case "PlayerBell":
-			avatarIndex = 1;
-			break;
-		}
 
-		playerPrefab = spawnPrefabs [avatarIndex];
-	}
+    public class AkashMessageType
+    {
+        public static short BellMessageID = MsgType.Highest + 5;
+
+    }
+
+    /// <summary>
+    /// Updates TickleMaster, if we receive a bell message
+    /// </summary>
+    /// <param name="netMsg"></param>
+    private void OnClientReceivedBellMessage(NetworkMessage netMsg)
+    {
+        BellMessage msg = netMsg.ReadMessage<BellMessage>();
+        
+		tickleManager.rangBell = msg.Rang;
+		tickleManager.rangBellOnce = msg.RangOnce;
+        tickleManager.rangBellTwice = msg.RangTwice;
+        tickleManager.rangeBellThrice = msg.RangThrice;
+		tickleManager.resultStage1 = msg.ResultStage1;
+		tickleManager.resultStage2 = msg.ResultStage2;
+		tickleManager.resultStage3 = msg.ResultStage3;
+        tickleManager.agitate = msg.Agitate;
+        tickleManager.disappear = msg.Disappear;
+    }
+
+    /// <summary>
+    /// Sends Bell Message to all clients
+    /// </summary>
+    /// <param name="netMsg"></param>
+    private void OnHostReceivedBellMessage(NetworkMessage netMsg)
+    {
+        NetworkServer.SendToAll(AkashMessageType.BellMessageID, netMsg.ReadMessage<BellMessage>());
+    }
+
+    /// <summary>
+    /// Call this, if you want to change the BellStatus of the TickleManager on the network.
+    /// </summary>
+    /// <param name="bellHasBeenRung"></param>
+	public void CommunicateStatus(bool rang, bool rangOnce, bool rangTwice, bool rangThrice, bool resultStage1, bool resultStage2, bool resultStage3,bool agitate,bool disappear)
+    {
+        BellMessage message = new BellMessage();
+		message.Rang = rang;
+        message.RangOnce = rangOnce;
+        message.RangTwice = rangTwice;
+        message.RangThrice = rangThrice;
+		message.ResultStage1 = resultStage1;
+		message.ResultStage2 = resultStage2;
+		message.ResultStage3 = resultStage3;
+		message.Agitate = agitate;
+		message.Disappear = disappear;
+        client.Send(AkashMessageType.BellMessageID, message);
+    }
 
 
-	public override void OnClientConnect(NetworkConnection conn)
-	{
+    public override void OnClientConnect(NetworkConnection conn)
+    {
+        client.RegisterHandler(AkashMessageType.BellMessageID, OnClientReceivedBellMessage);
+        if (isHost)
+        {
+            NetworkServer.RegisterHandler(AkashMessageType.BellMessageID, OnHostReceivedBellMessage);
+        }
+        StartCoroutine(WaitingForClassSelection(conn));
 
-		characterSelectionCanvas.enabled = false;
+        
+    }
 
-		IntegerMessage msg = new IntegerMessage (avatarIndex);
-		if (!clientLoadedScene)
-		{
-			// Ready/AddPlayer is usually triggered by a scene load completing. if no scene was loaded, then Ready/AddPlayer it here instead.
-			ClientScene.Ready(conn);
-			if (autoCreatePlayer)
-			{
-				ClientScene.AddPlayer(conn,0,msg);
-			}
-		}
-	}
+    private IEnumerator WaitingForClassSelection(NetworkConnection conn)
+    {
+        while (!ClassWasSelected)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        IntegerMessage msg = new IntegerMessage(avatarIndex);
 
 
-	public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
+        if (!clientLoadedScene)
+        {
+            // Ready/AddPlayer is usually triggered by a scene load completing. if no scene was loaded, then Ready/AddPlayer it here instead.
+            ClientScene.Ready(conn);
+            if (autoCreatePlayer)
+            {
+                ClientScene.AddPlayer(conn, 0, msg);
+            }
+        }
+    }
+
+    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
 	{
 
 		int id = 0;
 
-		if (extraMessageReader != null) 
+		if (extraMessageReader != null)
 		{
 			IntegerMessage i = extraMessageReader.ReadMessage<IntegerMessage> ();
 			id = i.value;
@@ -87,17 +175,5 @@ public class myNetworkManager : NetworkManager {
 		}
 
 		NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
-	}
-
-
-
-	public void CreateHost()
-	{
-		myNetworkManager.singleton.StartHost ();
-	}
-
-	public void CreateClient()
-	{
-		myNetworkManager.singleton.StartClient ();
 	}
 }

@@ -39,8 +39,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1286390436278676}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.61008, y: -20.303898, z: 57.030582}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -151,6 +151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b5b52c3e890d4372b63ed53670c3750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ARCam: {fileID: 1571707536319766, guid: d86e6abf255014ada9dbc78a5c7da576, type: 2}
+  Dragon: {fileID: 1571707536319766, guid: d86e6abf255014ada9dbc78a5c7da576, type: 2}
 --- !u!124 &124451923889338478
 Behaviour:
   m_ObjectHideFlags: 1

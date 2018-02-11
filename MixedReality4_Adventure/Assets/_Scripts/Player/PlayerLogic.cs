@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.Events;
 /// <summary>
 /// @author: David Liebemann
 /// </summary>
-public class PlayerLogic : MonoBehaviour {
-
+public class PlayerLogic : MonoBehaviour
+{
     [SerializeField]
     private PuzzleBox PuzzleBoxObj;
 
@@ -23,9 +23,11 @@ public class PlayerLogic : MonoBehaviour {
     public bool HasFeather { get; set; }
     public bool HasBell { get; set; }
 
+    public UnityAction<PlayerClassType> OnClassSelected;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         HasFeather = false;
         HasBell = false;
         ClassType = PlayerClassType.NotChosen;
@@ -51,13 +53,15 @@ public class PlayerLogic : MonoBehaviour {
     // This is dangerous. Only use classtypes <=2
     public void SetClass(int classType)
     {
-        ClassType = (PlayerClassType) classType;
+        ClassType = (PlayerClassType)classType;
         ClassDecisionUI.gameObject.SetActive(false);
         Debug.Log("Class set to " + classType);
 
         ClassIconDisplay.sprite = ClassIcons[classType - 1];
 
         UpdateClassAbilities();
+        if (null != OnClassSelected)
+            OnClassSelected.Invoke(ClassType);
     }
 
     private void UpdateClassAbilities()
