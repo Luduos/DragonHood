@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +13,13 @@ public class FromBehindTheDragon : MonoBehaviour {
 	public static bool youAreBehind;
 
 	void Update()
-	{   ARcam = GameObject.Find ("ARCamera(Clone)");
+	{   ARcam = GameObject.Find ("Camera1(Clone)");
 		youAreBehind = false;
+		try{
 		ARCamDirection = ARcam.transform.forward;
+		}
+		catch(Exception e){
+		}
 		DragonDirection = Dragon.transform.forward;
 
 		if (Vector3.Dot (ARCamDirection, DragonDirection) > 0) {

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,9 +12,16 @@ public class CanvasToCamera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		try{
 		cameraToLookAt = GameObject.Find ("Camera1(Clone)");
-
-
-		this.transform.LookAt (cameraToLookAt.transform);
+		}
+		catch(Exception e) {
+			Debug.LogException (e, this);
+		}
+		try{
+			this.transform.LookAt (cameraToLookAt.transform);}
+		catch(Exception e) {
+			Debug.LogException (e, this);
+		}
 	}
 }
