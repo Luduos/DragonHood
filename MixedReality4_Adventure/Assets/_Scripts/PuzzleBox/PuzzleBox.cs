@@ -10,18 +10,15 @@ public class PuzzleBox : MonoBehaviour {
     public UnityAction OnPuzzleWasSolved;
 
     [SerializeField]
-    private Text DebugText;
+    private GameObject Loot = null;
 
     [SerializeField]
-    private GameObject Loot;
-
-    [SerializeField]
-    private PuzzleBoxFace[] BoxFaces;
+    private PuzzleBoxFace[] BoxFaces = null;
 
     private bool IsWaiting;
 
     [SerializeField]
-    private MyClientBehaviour clientBehaviour;
+    private MyClientBehaviour clientBehaviour = null;
 
     public bool PuzzleBoxIsSolved { get; private set; }
 
@@ -185,7 +182,6 @@ public class PuzzleBox : MonoBehaviour {
         {
             PuzzleBoxIsSolved = true;
             Loot.SetActive(true);
-            DebugText.text = "Solved!!!";
             if (null != OnPuzzleWasSolved)
                 OnPuzzleWasSolved.Invoke();
         }
@@ -200,7 +196,6 @@ public class PuzzleBox : MonoBehaviour {
         {
             face.ResetTouchable();
         }
-        DebugText.text = "NotSolved";
     }
 
     public void SetFaceVisibility(bool visible)

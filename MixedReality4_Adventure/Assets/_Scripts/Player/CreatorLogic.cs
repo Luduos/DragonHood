@@ -17,8 +17,6 @@ public class CreatorLogic : MonoBehaviour {
 
     [Header("Debug")]
     [SerializeField]
-    private Text DebugText = null;
-    [SerializeField]
     private Vector2 GPSPos;
 
 
@@ -201,7 +199,7 @@ public class CreatorLogic : MonoBehaviour {
         pointer.POIName = poiObject.GetName();
         pointer.UnityTarget = poiObject.transform.localPosition;
         pointer.ID = poiObject.ID;
-        pointer.poiObject = poiObject;
+        pointer.PoiObject = poiObject;
         Vector2 CurrentPos = MapInfo.instance.GetGPSAsUnityPosition(GPSPos);
         pointer.OnPlayerPositionChanged(CurrentPos);
         pointers.Add(pointer);
@@ -260,7 +258,7 @@ public class CreatorLogic : MonoBehaviour {
             pointer.POIName = poiObject.GetName();
             pointer.UnityTarget = poiObject.transform.localPosition;
             pointer.ID = poiObject.ID;
-            pointer.poiObject = poiObject;
+            pointer.PoiObject = poiObject;
             Vector2 CurrentPos = MapInfo.instance.GetGPSAsUnityPosition(GPSPos);
             pointer.OnPlayerPositionChanged(CurrentPos);
             pointers.Add(pointer);

@@ -8,9 +8,9 @@ using UnityEngine.UI;
 public class AmountOfPiecesDisplay : MonoBehaviour {
 
     [SerializeField]
-    private string BaseMessage;
+    private string BaseMessage = null;
 
-    private Text AmountDisplay;
+    private Text AmountDisplay = null;
 
     private void Start()
     {

@@ -6,15 +6,15 @@ using UnityEngine.UI;
 /// </summary>
 public class MapInfo : MonoBehaviour {
     [SerializeField]
-    private GoogleMap MapScript;
+    private GoogleMap MapScript = null;
 
     [SerializeField]
-    public Text DebugText;
+    public Text DebugText = null;
 
     public static MapInfo instance = null;
 
     [SerializeField]
-    private CreatorLogic CreatorObject;
+    private CreatorLogic CreatorObject = null;
 
     MapInfo()
     {

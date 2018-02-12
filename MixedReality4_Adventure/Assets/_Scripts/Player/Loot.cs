@@ -9,26 +9,24 @@ using System.Collections;
 public class Loot : MonoBehaviour {
 
     [SerializeField]
-    private PlayerLogic Player;
+    private PlayerLogic Player = null;
 
     [Header("Feather Info")]
     [SerializeField]
-    private Sprite FeatherIcon;
+    private Sprite FeatherIcon = null;
     [SerializeField]
-    private GameObject FeatherMesh;
+    private GameObject FeatherMesh = null;
 
     [Header("Bell Info")]
     [SerializeField]
-    private Sprite BellIcon;
+    private Sprite BellIcon = null;
     [SerializeField]
-    private GameObject BellMesh;
+    private GameObject BellMesh = null;
 
 
     [Header("Display")]
     [SerializeField]
-    private Text InfoDisplay;
-    [SerializeField]
-    private Image LootIconDisplay;
+    private Image LootIconDisplay = null;
 
     private void OnEnable()
     {

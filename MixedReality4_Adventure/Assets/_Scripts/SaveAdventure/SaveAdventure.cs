@@ -10,10 +10,10 @@ using System.IO;
 public class SaveAdventure : MonoBehaviour
 {
     [SerializeField]
-    private Text DebugText;
+    private Text DebugText = null;
 
     [SerializeField]
-    private CreatorLogic Creator;
+    private CreatorLogic Creator = null;
 
     public void OnSaveAdventure(string saveName) {
 

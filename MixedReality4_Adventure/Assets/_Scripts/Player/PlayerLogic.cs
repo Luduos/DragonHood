@@ -7,16 +7,16 @@ using UnityEngine.Events;
 public class PlayerLogic : MonoBehaviour
 {
     [SerializeField]
-    private PuzzleBox PuzzleBoxObj;
+    private PuzzleBox PuzzleBoxObj = null;
 
     [SerializeField]
-    private RectTransform ClassDecisionUI;
+    private RectTransform ClassDecisionUI = null;
 
     [SerializeField]
-    private Image ClassIconDisplay;
+    private Image ClassIconDisplay = null;
 
     [SerializeField]
-    private Sprite[] ClassIcons;
+    private Sprite[] ClassIcons = null;
 
     public PlayerClassType ClassType { get; set; }
 

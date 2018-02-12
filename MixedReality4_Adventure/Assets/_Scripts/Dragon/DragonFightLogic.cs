@@ -8,25 +8,25 @@ using UnityEngine.UI;
 /// </summary>
 public class DragonFightLogic : MonoBehaviour {
     [SerializeField]
-    private Text InfoDisplay;
+    private Text InfoDisplay = null;
+    //[SerializeField]
+    //private Camera ARCamera = null;
     [SerializeField]
-    private Camera ARCamera;
-    [SerializeField]
-    private PlayerLogic Player;
+    private PlayerLogic Player = null;
 
     [SerializeField]
-    private Image MotionDisplay;
+    private Image MotionDisplay = null;
 
     [SerializeField]
-    private Sprite FailureSprite;
+    private Sprite FailureSprite = null;
     [SerializeField]
-    private Sprite CorrectSprite;
+    private Sprite CorrectSprite = null;
 
     [SerializeField]
     [Range(0.0f, 1.0f)]
     private float MotionPrecision = 0.5f;
     [SerializeField]
-    private StrokeMotion[] Motions;
+    private StrokeMotion[] Motions = null;
 
     private bool IsDisplayingSymbol;
     private bool DragonIsDead;

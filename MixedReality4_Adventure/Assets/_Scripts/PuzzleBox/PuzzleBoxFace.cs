@@ -22,6 +22,10 @@ public class PuzzleBoxFace : MonoBehaviour {
 
     [SerializeField]
     private Texture2D puzzleMasterIcon = null;
+    [SerializeField]
+    private Texture2D puzzleMasterNormal = null;
+    [SerializeField]
+    private Texture2D puzzleMasterHeight = null;
 
     [SerializeField]
     private Texture2D image = null;
@@ -65,12 +69,13 @@ public class PuzzleBoxFace : MonoBehaviour {
     private IEnumerator TollerantTouchCheck()
     {
         float elapsedTime = 0.0f;
-        float tollerance = 0.3f;
+        float tollerance = 0.5f;
         while(elapsedTime < tollerance)
         {
             if (Input.touchCount == touchCount && !WasCorrectlyTouched)
             {
                 OnCorrectTouchCount();
+                yield break; 
             }
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -100,9 +105,11 @@ public class PuzzleBoxFace : MonoBehaviour {
         Debug.Log("Wrong: " + touchCount);
         WasCorrectlyTouched = false;
         WasFinalized = false;
+        faceMaterial.color = WrongColor;
+        Handheld.Vibrate();
+
         float elapsedTime = 0.0f;
         float allertedTime = 0.5f;
-        faceMaterial.color = WrongColor;
         while (elapsedTime < allertedTime)
         {
             elapsedTime += Time.deltaTime;
@@ -112,17 +119,18 @@ public class PuzzleBoxFace : MonoBehaviour {
         if (!WasCorrectlyTouched)
             ResetTouchable();
         Highlight.gameObject.SetActive(highlightWasActive);
-
         yield return null;
     }
 
     public IEnumerator OnNetworkRegisteredWrongFace()
     {
+        Handheld.Vibrate();
+        faceMaterial.color = WrongColor;
         WasCorrectlyTouched = false;
         WasFinalized = false;
+
         float elapsedTime = 0.0f;
         float allertedTime = 0.5f;
-        faceMaterial.color = WrongColor;
         while (elapsedTime < allertedTime)
         {
             elapsedTime += Time.deltaTime;
@@ -176,6 +184,8 @@ public class PuzzleBoxFace : MonoBehaviour {
         else
         {
             faceMaterial.mainTexture = puzzleMasterIcon;
+            faceMaterial.SetTexture("_BumpMap", puzzleMasterNormal);
+            faceMaterial.SetTexture("_ParallaxMap", puzzleMasterHeight);
         }
     }
 

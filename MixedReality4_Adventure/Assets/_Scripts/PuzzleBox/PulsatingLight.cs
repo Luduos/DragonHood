@@ -11,9 +11,6 @@ public class PulsatingLight : MonoBehaviour {
     [SerializeField]
     private float amplitude = 0.75f;
 
-    [SerializeField]
-    private Color lightColor = new Color(1.0f,0.8f, 0.3f);
-
     private Light pLight = null;
 
 	// Use this for initialization

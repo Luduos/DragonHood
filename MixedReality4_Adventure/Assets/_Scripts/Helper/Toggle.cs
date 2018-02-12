@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class Toggle : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
     [SerializeField]
-	private CreatorLogic CreatorObject;
+	private CreatorLogic CreatorObject = null;
 
     public void OnPointerDown(PointerEventData eventData)
     {

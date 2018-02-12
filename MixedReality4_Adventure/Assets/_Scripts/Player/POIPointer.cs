@@ -5,13 +5,13 @@
 /// </summary>
 public class POIPointer : MonoBehaviour {
     [SerializeField]
-    private SpriteRenderer NormalSprite;
+    private SpriteRenderer NormalSprite = null;
 
     [SerializeField]
-    private SpriteRenderer BigSprite;
+    private SpriteRenderer BigSprite = null;
 
     [SerializeField]
-    private TextMesh NameMesh;
+    private TextMesh NameMesh = null;
 
     [SerializeField]
     private float PointerDistanceToPlayer = 2.0f;
@@ -29,7 +29,7 @@ public class POIPointer : MonoBehaviour {
 
     public int ID { get; set; }
 
-    public POI poiObject { get; set; }
+    public POI PoiObject { get; set; }
 
     private Color normalColor = new Color(0f, 0.462745f, 1f, 0.917648f);
 
@@ -39,7 +39,7 @@ public class POIPointer : MonoBehaviour {
 
     public void OnPlayerPositionChanged(Vector2 PlayerPosition)
     {
-        UnityTarget = poiObject.transform.localPosition;
+        UnityTarget = PoiObject.transform.localPosition;
         Vector3 dir = new Vector3(UnityTarget.x - PlayerPosition.x, UnityTarget.y - PlayerPosition.y, 0.0f);
         if (dir.magnitude > DisappearDistance * PointerDistanceToPlayer)
         {
@@ -87,7 +87,7 @@ public class POIPointer : MonoBehaviour {
         NormalSprite.color = Color.green;
         BigSprite.color = Color.green;
         BigSprite.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
-        poiObject.GetComponent<Renderer>().material.color = Color.green;
+        PoiObject.GetComponent<Renderer>().material.color = Color.green;
     }
 
     public void OnMakeNormal()
@@ -96,7 +96,7 @@ public class POIPointer : MonoBehaviour {
         NormalSprite.color = normalColor;
         BigSprite.color = normalColor;
         BigSprite.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-        poiObject.GetComponent<Renderer>().material.color = Color.red;
+        PoiObject.GetComponent<Renderer>().material.color = Color.red;
     }
       
 }

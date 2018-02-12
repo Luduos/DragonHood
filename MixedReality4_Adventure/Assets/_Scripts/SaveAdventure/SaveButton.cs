@@ -7,10 +7,10 @@ using UnityEngine.UI;
 public class SaveButton : MonoBehaviour {
 
     [SerializeField]
-    private InputField InputField;
+    private InputField InputField = null;
 
     [SerializeField]
-    private SaveAdventure SaveLogic;
+    private SaveAdventure SaveLogic = null;
 
     private void Start()
     {

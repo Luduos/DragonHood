@@ -7,16 +7,13 @@ using System.Collections;
 public class AkashDragonActivate : MonoBehaviour {
 
     [SerializeField]
-    private PlayerLogic Player;
+    private PlayerLogic Player = null;
 
     [SerializeField]
-    private Text InfoDisplay;
+    private TickleManager TickleManager = null;
 
     [SerializeField]
-    private TickleManager TickleManager;
-
-    [SerializeField]
-    private Text DragonFightText;
+    private Text DragonFightText = null;
 
 
     private void Start()

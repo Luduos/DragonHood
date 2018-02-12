@@ -685,7 +685,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 350, y: -421.25}
+  m_AnchoredPosition: {x: 350, y: -398.67502}
   m_SizeDelta: {x: 660, y: 550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &233609686
@@ -3052,7 +3052,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 350, y: -68.75}
+  m_AnchoredPosition: {x: 350, y: -61.225006}
   m_SizeDelta: {x: 660, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &970561071
@@ -3160,8 +3160,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 350, y: -1341.25}
-  m_SizeDelta: {x: 660, y: 80}
+  m_AnchoredPosition: {x: 350, y: -1318.675}
+  m_SizeDelta: {x: 660, y: 140.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1090576364
 MonoBehaviour:
@@ -3321,7 +3321,6 @@ MonoBehaviour:
   - ID: 1
     Name: Dragon
     NumberOfPieces: 0
-  DebugText: {fileID: 52349077}
   GPSPos: {x: 49.24501, y: 7.021521}
   RotationSpeed: 100
   ZoomSpeed: 17
@@ -4031,7 +4030,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 1.5
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -4214,7 +4213,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 350, y: -998.75}
+  m_AnchoredPosition: {x: 350, y: -961.125}
   m_SizeDelta: {x: 660, y: 550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1472281903

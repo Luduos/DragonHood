@@ -7,7 +7,6 @@ using UnityEngine.EventSystems;
 
 public class Accelerometer : MonoBehaviour {
 	public static bool zoomPressed;
-	private float x,y,z;
 	public bool bounds;
 	public float maxZoomIn;
 	public float maxZoomOut;

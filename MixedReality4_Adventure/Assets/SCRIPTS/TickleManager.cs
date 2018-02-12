@@ -21,7 +21,7 @@ public class TickleManager : MonoBehaviour {
 	Text text;
 	private RawImage imageInstruction;
 	public Texture right;
-	public Texture left;
+	public Texture threePoke;
 	public Texture upAndDown;
 
 	public GameObject ARCam1;
@@ -81,9 +81,9 @@ public class TickleManager : MonoBehaviour {
 
 	private float minSwipeDistanceY3 = 10000.0f;
 
-	private float startPos3;
+	//private float startPos3;
 	private float startTime3;
-	private float endPos3;
+	//private float endPos3;
 	private float endTime3;
 	private float swipedDistanceY3;
 	private float speedOfSwipe3 ;
@@ -93,6 +93,8 @@ public class TickleManager : MonoBehaviour {
     private PlayerClassType playerClassType = PlayerClassType.NotChosen;
     [SerializeField]
     private PlayerLogic playerLogic = null;
+    [SerializeField]
+    private GameObject FinalChest = null;
 
 	void Start () {
 		
@@ -176,9 +178,9 @@ public class TickleManager : MonoBehaviour {
 			rangBell = true;
 			audioSource.Play ();
 			myNetworkManager.CommunicateStatus (rangBell,rangBellOnce,rangBellTwice,rangeBellThrice,resultStage1,resultStage2,resultStage3,agitate,disappear);
+            Handheld.Vibrate();
 
-
-		}
+        }
 		if (rangBell == true) {
             if (ARCam2)
             {
@@ -296,7 +298,8 @@ public class TickleManager : MonoBehaviour {
 
     public void ShowFinalScene()
     {
-
+        text.enabled = false;
+        FinalChest.SetActive(true);
     }
 
 	public bool TickledSwipeRight()
@@ -314,7 +317,8 @@ public class TickleManager : MonoBehaviour {
 			myNetworkManager.CommunicateStatus (rangBell, rangBellOnce, rangBellTwice, rangeBellThrice, resultStage1, resultStage2, resultStage3, agitate, disappear);
 
 			text.text = "Using more than two fingers only angers him!";
-		}
+            Handheld.Vibrate();
+        }
 
 		if (Input.touchCount == 2) {
 
@@ -362,30 +366,31 @@ public class TickleManager : MonoBehaviour {
 					myNetworkManager.CommunicateStatus (rangBell, rangBellOnce, rangBellTwice, rangeBellThrice, resultStage1, resultStage2, resultStage3, agitate, disappear);
 					mistaken = true;
 					text.text = "Be Gentle! Too quick!";
+                    Handheld.Vibrate();
 
-
-					//Debug.Log ("Be Gentle");
-				} else if (speedOfSwipe1 > maxSpeedX1 && swipedDistanceX1 > minSwipeDistanceX1 && mistaken == true) {
+                    //Debug.Log ("Be Gentle");
+                } else if (speedOfSwipe1 > maxSpeedX1 && swipedDistanceX1 > minSwipeDistanceX1 && mistaken == true) {
 					agitate = true;
 					myNetworkManager.CommunicateStatus (rangBell, rangBellOnce, rangBellTwice, rangeBellThrice, resultStage1, resultStage2, resultStage3, agitate, disappear);
 					valu = animator.GetBool ("mistake");
 					Debug.Log (valu);
 					text.text = "Be Gentle! Too quick!";
-
-					break;
+                    Handheld.Vibrate();
+                    break;
 					//Debug.Log ("Be Gentle");
 				} else if (speedOfSwipe1 < minSpeedX1 && swipedDistanceX1 > minSwipeDistanceX1) {
 					agitate = true;
 					myNetworkManager.CommunicateStatus (rangBell, rangBellOnce, rangBellTwice, rangeBellThrice, resultStage1, resultStage2, resultStage3, agitate, disappear);
 					mistaken = true;
 					text.text = "Too slow!";
+                    Handheld.Vibrate();
 
-				} else if (speedOfSwipe1 < minSpeedX1 && swipedDistanceX1 > minSwipeDistanceX1 && mistaken == true) {
+                } else if (speedOfSwipe1 < minSpeedX1 && swipedDistanceX1 > minSwipeDistanceX1 && mistaken == true) {
 					agitate = true;
 					myNetworkManager.CommunicateStatus (rangBell, rangBellOnce, rangBellTwice, rangeBellThrice, resultStage1, resultStage2, resultStage3, agitate, disappear);
 					text.text = "Too slow!";
-
-				} 
+                    Handheld.Vibrate();
+                } 
 
 
 
@@ -399,8 +404,9 @@ public class TickleManager : MonoBehaviour {
 
 	public bool TickledPokeThree()
 	{
-		
-		if (mistaken == false) {
+        imageInstruction.texture = threePoke;
+
+        if (mistaken == false) {
 			text.text = "Poke him, three at a time!";
 
 		}
@@ -443,7 +449,7 @@ public class TickleManager : MonoBehaviour {
 			agitate = true;
 			myNetworkManager.CommunicateStatus (rangBell, rangBellOnce, rangBellTwice, rangeBellThrice, resultStage1, resultStage2, resultStage3, agitate, disappear);
 			text.text = "Using more than two fingers only angers him!";
-
+            Handheld.Vibrate();
 		}
 
 
@@ -451,13 +457,13 @@ public class TickleManager : MonoBehaviour {
 
 
 			for (int i = 0; i < Input.touchCount; i++) { 
-				endPos3 = 0;
+				//endPos3 = 0;
 				endTime3 = 0;
 
 
 
 				if (myTouches [i].phase == TouchPhase.Began) {
-					startPos3 = myTouches [i].position.x;
+					//startPos3 = myTouches [i].position.x;
 					startTime3 = Time.time;
 
 				}
@@ -470,7 +476,7 @@ public class TickleManager : MonoBehaviour {
 
 
 				if (myTouches [i].phase == TouchPhase.Ended) {
-					endPos3= myTouches [i].position.x;
+					//endPos3= myTouches [i].position.x;
 					endTime3 = Time.time - startTime3;
 
 				}
