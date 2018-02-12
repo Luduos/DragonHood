@@ -125,10 +125,8 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
-  playerFeatherButton: {fileID: 0}
-  playerBellButton: {fileID: 0}
-  characterSelectionCanvas: {fileID: 0}
   tickleManager: {fileID: 0}
+  playerLogic: {fileID: 0}
 --- !u!114 &114830480298268478
 MonoBehaviour:
   m_ObjectHideFlags: 1

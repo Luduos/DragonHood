@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 81044647496271962}
   - component: {fileID: 114259996732424670}
   - component: {fileID: 114053644773707328}
-  - component: {fileID: 114905614312237336}
+  - component: {fileID: 114546554040304916}
   m_Layer: 0
   m_Name: Camera1
   m_TagString: Untagged
@@ -76,6 +76,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -140,7 +141,7 @@ MonoBehaviour:
     i15: 63
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
---- !u!114 &114905614312237336
+--- !u!114 &114546554040304916
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -151,8 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b5b52c3e890d4372b63ed53670c3750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ARCam: {fileID: 1571707536319766, guid: d86e6abf255014ada9dbc78a5c7da576, type: 2}
-  Dragon: {fileID: 1571707536319766, guid: d86e6abf255014ada9dbc78a5c7da576, type: 2}
+  ARCam: {fileID: 0}
 --- !u!124 &124451923889338478
 Behaviour:
   m_ObjectHideFlags: 1

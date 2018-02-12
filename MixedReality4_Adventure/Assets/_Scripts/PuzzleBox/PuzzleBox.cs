@@ -159,7 +159,7 @@ public class PuzzleBox : MonoBehaviour {
 
         foreach (PuzzleBoxFace face in BoxFaces)
         {
-            StartCoroutine(face.OnWrongTouchCount());
+            StartCoroutine(face.OnNetworkRegisteredWrongFace());
         }
 
         /*

@@ -53,12 +53,16 @@ public class MyClientBehaviour : MonoBehaviour {
         Client.RegisterHandler(MyMsgType.ClickedPuzzle, OnClickedPuzzle);
         Client.RegisterHandler(MyMsgType.WrongPuzzleTouch, OnWrongPuzzleTouch);
         Client.RegisterHandler(MyMsgType.ChooseAdventure, OnReceivedChooseAdventure);
+
         if (IsHost)
         {
             NetworkServer.RegisterHandler(MyMsgType.ClickedPuzzle, OnHostClickedPuzzleMessage);
             NetworkServer.RegisterHandler(MyMsgType.WrongPuzzleTouch, OnHostWrongTouch);
             NetworkServer.RegisterHandler(MyMsgType.ChooseAdventure, OnHostReceivedChooseAdventure);
         }
+        MyNetworkManager currentManager = (MyNetworkManager)MyNetworkManager.singleton;
+        currentManager.IsHost = isHost;
+        currentManager.OnInitHandlers();
 
         Debug.Log(Client.isConnected);
         DebugText.text = "Was Set";

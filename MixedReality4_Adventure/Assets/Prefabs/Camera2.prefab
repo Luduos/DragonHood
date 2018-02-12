@@ -76,6 +76,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -99,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ARCam: {fileID: 1571707536319766, guid: d86e6abf255014ada9dbc78a5c7da576, type: 2}
-  Dragon: {fileID: 1571707536319766, guid: d86e6abf255014ada9dbc78a5c7da576, type: 2}
+  avatarIndex: 1
 --- !u!114 &114431014919847458
 MonoBehaviour:
   m_ObjectHideFlags: 1

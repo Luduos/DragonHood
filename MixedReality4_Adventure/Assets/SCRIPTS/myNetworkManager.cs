@@ -7,17 +7,22 @@ using UnityEngine.Networking.NetworkSystem;
 
 public class MyNetworkManager : NetworkManager {
 
-	int avatarIndex = 0;
+	public int avatarIndex = 0;
 	public TickleManager tickleManager; 
-    private bool isHost = false;
+    public bool IsHost { get; set; }
 
     [SerializeField]
     private PlayerLogic playerLogic = null;
     private bool ClassWasSelected = false;
 
+    MyNetworkManager()
+    {
+        IsHost = false;
+    }
+
     // Use this for initialization
     void Start () {
-        if(null == tickleManager)
+        if (null == tickleManager)
 		    tickleManager= FindObjectOfType<TickleManager>(); // TEMPORARY - CHANGE THIS @AKASH!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         Time.timeScale = 1.0f;
         if (null == playerLogic)
@@ -27,15 +32,24 @@ public class MyNetworkManager : NetworkManager {
         playerLogic.OnClassSelected += AvatarPicker;
     }
 
+    public void OnInitHandlers()
+    {
+        client.RegisterHandler(AkashMessageType.BellMessageID, OnClientReceivedBellMessage);
+        if (IsHost)
+        {
+            NetworkServer.RegisterHandler(AkashMessageType.BellMessageID, OnHostReceivedBellMessage);
+        }
+    }
+
 	void AvatarPicker(PlayerClassType classType)
 	{
         switch (classType)
         {
             case PlayerClassType.PuzzleMaster:
-                avatarIndex = 0;
+                avatarIndex = 1;
                 break;
             case PlayerClassType.Fighter:
-                avatarIndex = 1;
+                avatarIndex = 0;
                 break;
         }
 
@@ -119,14 +133,7 @@ public class MyNetworkManager : NetworkManager {
 
     public override void OnClientConnect(NetworkConnection conn)
     {
-        client.RegisterHandler(AkashMessageType.BellMessageID, OnClientReceivedBellMessage);
-        if (isHost)
-        {
-            NetworkServer.RegisterHandler(AkashMessageType.BellMessageID, OnHostReceivedBellMessage);
-        }
         StartCoroutine(WaitingForClassSelection(conn));
-
-        
     }
 
     private IEnumerator WaitingForClassSelection(NetworkConnection conn)

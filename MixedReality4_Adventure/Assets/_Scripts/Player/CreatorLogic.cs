@@ -31,8 +31,7 @@ public class CreatorLogic : MonoBehaviour {
     [Header("Prefabs and access")]
     [SerializeField]
     private GameObject CreatorModel = null;
-    [SerializeField]
-    private SpriteRenderer CreatorSprite = null;
+
     [SerializeField]
     private POI POIPrefab = null;
     [SerializeField]

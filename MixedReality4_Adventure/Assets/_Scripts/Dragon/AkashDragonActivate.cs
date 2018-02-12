@@ -49,19 +49,29 @@ public class AkashDragonActivate : MonoBehaviour {
         }
         else
         {
-            StartCoroutine(DisplayMessage("Puzzlemasters currently can not fight dragons :/", 2.0f));
+            if (Player.HasBell)
+            {
+                TickleManager.enabled = true;
+                DragonFightText.enabled = true;
+            }
+            else
+            {
+                StartCoroutine(DisplayMessage("You need something to distract the Dragon!", 2.0f));
+            }
         }
     }
 
     private IEnumerator DisplayMessage(string message, float messageDuration)
     {
         float elapsedTime = 0.0f;
-        InfoDisplay.text = message;
+        DragonFightText.enabled = true;
+        DragonFightText.text = message;
         while (elapsedTime < messageDuration)
         {
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        InfoDisplay.text = "";
+        DragonFightText.text = "";
+        DragonFightText.enabled = false;
     }
 }

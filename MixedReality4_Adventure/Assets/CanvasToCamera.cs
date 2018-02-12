@@ -4,25 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CanvasToCamera : MonoBehaviour {
-	public GameObject cameraToLookAt;
+    [SerializeField]
+    private Camera cameraToLookAt = null;
+
 	// Use this for initialization
 	void Start () {
-		
-	}
+        if (!cameraToLookAt)
+        {
+            GameObject arCam = GameObject.Find("ARCamera");
+            if (arCam)
+                cameraToLookAt = arCam.GetComponent<Camera>();
+        }
+    }
 	
+
+
 	// Update is called once per frame
 	void Update () {
-		try{
-		cameraToLookAt = GameObject.Find ("Camera1(Clone)");
-		}
-		catch(Exception e) {
-			Debug.LogException (e, this);
-		}
-		try{
-            if(cameraToLookAt)
-			    this.transform.LookAt (cameraToLookAt.transform);}
-		catch(Exception e) {
-			Debug.LogException (e, this);
-		}
+        if(cameraToLookAt)
+		    this.transform.LookAt (cameraToLookAt.transform);
 	}
 }

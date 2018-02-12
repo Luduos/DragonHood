@@ -7,6 +7,9 @@ using UnityEngine.Networking;
 using UnityEngine.Networking.NetworkSystem;
 
 
+/// <summary>
+/// @author Akash.
+/// </summary>
 public class TickleManager : MonoBehaviour {
 
 
@@ -60,6 +63,7 @@ public class TickleManager : MonoBehaviour {
 	private float minSpeedX2 = 150.0f;
 	private float maxSpeedX2 = 1500.0f;
 	*/
+    /*
 	[SerializeField]
 	private float startPos2;
 	private float startTime2;
@@ -70,7 +74,7 @@ public class TickleManager : MonoBehaviour {
 	private float swipedDistanceX2;
 	[SerializeField]
 	private float speedOfSwipe2 ;
-
+    */
 
 
 	//for TickleCrazy
@@ -86,6 +90,10 @@ public class TickleManager : MonoBehaviour {
 	private float minSpeedY3= 10000.0f;
 
 
+    private PlayerClassType playerClassType = PlayerClassType.NotChosen;
+    [SerializeField]
+    private PlayerLogic playerLogic = null;
+
 	void Start () {
 		
 		rangBell= false;
@@ -96,26 +104,34 @@ public class TickleManager : MonoBehaviour {
 		text=this.GetComponentInChildren<Text>();
 		imageInstruction = this.GetComponentInChildren<RawImage> ();
 		mistaken = false;
-		fire = FindObjectOfType<ParticleSystem> ();
-		myNetworkManager = FindObjectOfType<MyNetworkManager>();
+        if(!fire)
+		    fire = FindObjectOfType<ParticleSystem> ();
+        if(!myNetworkManager)
+		    myNetworkManager = FindObjectOfType<MyNetworkManager>();
 
 
 		animator = this.GetComponent<Animator> ();
 		animator.SetBool ("mistake", false);
-	}
+
+        if (!playerLogic)
+            playerLogic = FindObjectOfType<PlayerLogic>();
+        playerLogic.OnClassSelected += OnClassSelected;
+
+    }
+
+    private void OnClassSelected(PlayerClassType type)
+    {
+        playerClassType = type;
+    }
 
 
 	void Update () 
 	{
-		//finds the cameras
-		try{
-		ARCam1 = GameObject.Find ("Camera1(Clone)");
+        imageInstruction.color = Color.white;
+        //finds the cameras
+        ARCam1 = GameObject.Find ("Camera1(Clone)");
 		ARCam2 = GameObject.Find ("Camera2(Clone)");
-		}
-		catch(Exception e) 
-		{
-			
-		}
+
         if(ARCam1)
 		    ARCamDirection = ARCam1.transform.forward;
 		DragonDirection = this.transform.forward;
@@ -139,7 +155,7 @@ public class TickleManager : MonoBehaviour {
 		} else if (agitate == false)
 		{
 			animator.SetBool ("mistake", false);
-		};
+		}; 
 		if (disappear == true) {
 			animator.SetBool ("disappear", true);
 		} else if (disappear == false)
@@ -154,7 +170,7 @@ public class TickleManager : MonoBehaviour {
 
 	public void StartTickling()
 	{    
-		if ((Input.acceleration.y *1000) > 3000)
+		if (PlayerClassType.PuzzleMaster == playerClassType && (Input.acceleration.y *1000) > 3000)
 		{
 			
 			rangBell = true;
@@ -164,27 +180,32 @@ public class TickleManager : MonoBehaviour {
 
 		}
 		if (rangBell == true) {
-			try{
-			this.transform.rotation = Quaternion.LookRotation (ARCam2.transform.position);
-			}
-			catch(Exception e) {
-			}
-		}
+            if (ARCam2)
+            {
+                Vector3 forward = ARCam2.transform.position - this.transform.position;
+                forward = new Vector3(forward.x, 0.0f, forward.z);
+                this.transform.rotation = Quaternion.LookRotation(forward);
+            }
+        }
 
 		if (rangBell == false) {
-			try{
-			this.transform.rotation = Quaternion.LookRotation (ARCam1.transform.position);
-			}
-			catch(Exception e) {
-			}
-		}
+            if (ARCam1)
+            {
+                Vector3 forward = ARCam1.transform.position - this.transform.position;
+                forward = new Vector3(forward.x, 0.0f, forward.z);
+                this.transform.rotation = Quaternion.LookRotation(forward);
+            }
+        }
+
+        
+
+
 		if ( youAreBehind == false ) {
 			imageInstruction.texture = null;
 			text.text = "He can see you ! \n Get Behind!";
 			animator.SetBool ("mistake", true);
 
 		} 
-
 
 		if (youAreBehind == true) {
 
@@ -244,20 +265,45 @@ public class TickleManager : MonoBehaviour {
 
 			}
 			if (resultStage3 == true && rangeBellThrice==false) { 
-				Debug.Log ("Dragon Disappears !!");
+				//Debug.Log ("Dragon Disappears !!");
 				text.text="";
 				Destroy (imageInstruction);
+
+                ShowFinalScene();
 			}
 
 
-		} 
-	}
+		}
+
+        if (!resultStage3 && PlayerClassType.PuzzleMaster == playerClassType)
+        {
+            ShowPuzzleMasterInfo();
+        }
+    }
+
+    public void ShowPuzzleMasterInfo()
+    {
+        imageInstruction.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+        if (youAreBehind)
+        {
+            text.text = "Get his Attention!";
+        }
+        else
+        {
+            text.text = "Distract him!";
+        }
+    }
+
+    public void ShowFinalScene()
+    {
+
+    }
 
 	public bool TickledSwipeRight()
-
 	{ 
+
 		if (mistaken == false) {
-			text.text = "Lets tickle!Do the gesture slow.";
+			text.text = "Lets tickle, slow and steady!";
 			imageInstruction.texture = right;
 		}
 		bool done = false;
@@ -267,7 +313,7 @@ public class TickleManager : MonoBehaviour {
 			agitate = true;
 			myNetworkManager.CommunicateStatus (rangBell, rangBellOnce, rangBellTwice, rangeBellThrice, resultStage1, resultStage2, resultStage3, agitate, disappear);
 
-			text.text = "You see those 2 arrows, what could they mean ?";
+			text.text = "Using more than two fingers only angers him!";
 		}
 
 		if (Input.touchCount == 2) {
@@ -355,7 +401,7 @@ public class TickleManager : MonoBehaviour {
 	{
 		
 		if (mistaken == false) {
-			text.text = "3 finger Poke!";
+			text.text = "Poke him, three at a time!";
 
 		}
 		bool done = false;
@@ -371,7 +417,7 @@ public class TickleManager : MonoBehaviour {
 		else if (Input.touchCount > 3 || (Input.touchCount < 3 && Input.touchCount > 0)) {
 			agitate = true;
 			myNetworkManager.CommunicateStatus (rangBell, rangBellOnce, rangBellTwice, rangeBellThrice, resultStage1, resultStage2, resultStage3, agitate, disappear);
-			text.text = "Poke with 3";
+			text.text = "Poke with three!";
 		}
 
 
@@ -385,7 +431,7 @@ public class TickleManager : MonoBehaviour {
 	{
 		imageInstruction.texture = upAndDown;
 		if (mistaken == false) {
-			text.text ="Continuously do the gesture\n QUICKLY till he flies";
+			text.text ="Keep scratching him!\n QUICKLY, till he flies.";
 		}
 
 		bool done = false;
@@ -396,7 +442,7 @@ public class TickleManager : MonoBehaviour {
 		if (Input.touchCount > 2 || (Input.touchCount < 2 && Input.touchCount > 0)) {
 			agitate = true;
 			myNetworkManager.CommunicateStatus (rangBell, rangBellOnce, rangBellTwice, rangeBellThrice, resultStage1, resultStage2, resultStage3, agitate, disappear);
-			text.text = "You see those 2 arrows,what could they mean?";
+			text.text = "Using more than two fingers only angers him!";
 
 		}
 

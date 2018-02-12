@@ -65,19 +65,24 @@ public class PuzzleBoxFace : MonoBehaviour {
     private IEnumerator TollerantTouchCheck()
     {
         float elapsedTime = 0.0f;
-        float tollerance = 0.25f;
+        float tollerance = 0.3f;
         while(elapsedTime < tollerance)
         {
+            if (Input.touchCount == touchCount && !WasCorrectlyTouched)
+            {
+                OnCorrectTouchCount();
+            }
             elapsedTime += Time.deltaTime;
             yield return null;
         }
         if (Input.touchCount == touchCount && !WasCorrectlyTouched)
         {
             OnCorrectTouchCount();
-
         }
         else if (Input.touchCount != touchCount && !WasCorrectlyTouched)
+        {
             StartCoroutine(OnWrongTouchCount());
+        }
     }
 
     private void OnCorrectTouchCount()
@@ -91,6 +96,7 @@ public class PuzzleBoxFace : MonoBehaviour {
 
     public IEnumerator OnWrongTouchCount()
     {
+        bool highlightWasActive = Highlight.gameObject.activeSelf;
         Debug.Log("Wrong: " + touchCount);
         WasCorrectlyTouched = false;
         WasFinalized = false;
@@ -105,7 +111,26 @@ public class PuzzleBoxFace : MonoBehaviour {
 
         if (!WasCorrectlyTouched)
             ResetTouchable();
+        Highlight.gameObject.SetActive(highlightWasActive);
 
+        yield return null;
+    }
+
+    public IEnumerator OnNetworkRegisteredWrongFace()
+    {
+        WasCorrectlyTouched = false;
+        WasFinalized = false;
+        float elapsedTime = 0.0f;
+        float allertedTime = 0.5f;
+        faceMaterial.color = WrongColor;
+        while (elapsedTime < allertedTime)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        if (!WasCorrectlyTouched)
+            ResetTouchable();
         yield return null;
     }
 
