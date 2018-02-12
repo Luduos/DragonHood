@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1260,7 +1260,7 @@ Prefab:
     - target: {fileID: 224459544080731546, guid: 6c187ef00c72ca449bead805759da492,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -125
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114543347548013976, guid: 6c187ef00c72ca449bead805759da492,
         type: 2}
@@ -1285,7 +1285,7 @@ Prefab:
     - target: {fileID: 224650954279497968, guid: 6c187ef00c72ca449bead805759da492,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -325
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224459544080731546, guid: 6c187ef00c72ca449bead805759da492,
         type: 2}
@@ -2370,7 +2370,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: PuzzleBoxQRCodeMaterial
+  m_Name: MapMarkerMaterial
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -2383,7 +2383,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: bca26417183243ad8ca876645e237c40, type: 3}
+        m_Texture: {fileID: 2800000, guid: c534ba7ee3b643e78efe052594a5843e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
@@ -2618,7 +2618,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 6b7415fe006a437fac987905aabe92a9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4e45566745224b419be0990b3628e5ad, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
@@ -4094,7 +4094,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8f2eb7b4739a431b9df32c7bbc750d10, type: 3}
+        m_Texture: {fileID: 2800000, guid: 46fa1cfc3e9c4480943cabbbf9af2cfd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
@@ -4878,7 +4878,7 @@ Transform:
   m_GameObject: {fileID: 1242979790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -652.3344, y: 0, z: -0.3621095}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1002274493}
   m_Father: {fileID: 1173484793}
@@ -4958,15 +4958,15 @@ MonoBehaviour:
   m_Script: {fileID: -1631628248, guid: bab6fa851cf5a1a4bba3cec5f191cb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTrackableName: PuzzleBoxQRCode
+  mTrackableName: MapMarker
   mPreserveChildSize: 0
   mInitializedInEditor: 1
   mDataSetPath: Vuforia/MixedReality4.xml
   mExtendedTracking: 0
-  mAspectRatio: 1
+  mAspectRatio: 0.724
   mImageTargetType: 0
-  mWidth: 10
-  mHeight: 10
+  mWidth: 1
+  mHeight: 0.724
 --- !u!1 &1306472871
 GameObject:
   m_ObjectHideFlags: 0
@@ -5307,7 +5307,7 @@ Mesh:
     vertexCount: 4
     localAABB:
       m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 0.5, y: 0, z: 0.5}
+      m_Extent: {x: 0.5, y: 0, z: 0.362}
   m_Shapes:
     vertices: []
     shapes: []
@@ -5360,7 +5360,7 @@ Mesh:
       format: 0
       dimension: 0
     m_DataSize: 128
-    _typelessdata: 000000bf00000000000000bf000000000000803f000000000000000000000000000000bf000000000000003f000000000000803f00000000000000000000803f0000003f00000000000000bf000000000000803f000000000000803f000000000000003f000000000000003f000000000000803f000000000000803f0000803f
+    _typelessdata: 000000bf000000001058b9be000000000000803f000000000000000000000000000000bf000000001058b93e000000000000803f00000000000000000000803f0000003f000000001058b9be000000000000803f000000000000803f000000000000003f000000001058b93e000000000000803f000000000000803f0000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
